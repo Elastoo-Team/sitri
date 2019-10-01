@@ -1,0 +1,22 @@
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  consul:
+    image: bitnami/consul:latest
+    environment:
+      - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
+    ports:
+      - 8500:8500
+
+  redis:
+    image: 'bitnami/redis'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-tier
+    ports:
+      - 34089:6379

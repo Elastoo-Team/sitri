@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "sitri"
+version = "0.3.0"
+description = "Library for one endpoint config and credentials managment"
+authors = ["Alexander Lavrov <egnod@ya.ru>"]
+license = "MIT"
+
+keywords = ["packaging", "poetry"]
+
+repository = "https://github.com/Egnod/sitri"
+homepage = "https://github.com/Egnod/sitri"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pytest = "^5.1"
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | migrations
+  )
+)
+'''
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
