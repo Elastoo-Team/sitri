@@ -21,8 +21,14 @@ jobs:
     - name: Deps
       run: |
         python -m pip install --upgrade pip
-        pip install poetry pre-commit bumpversion
+        pip install poetry pre-commit mypy
         poetry install
+    - name: Pre-commit
+      run: |
+        pre-commit run -a
+    - name: Tests
+      run: |
+        pytest
     - name: Configure git
       run: |
         git config --global user.email "egnod@ya.ru"

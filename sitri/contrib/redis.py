@@ -17,14 +17,13 @@ class RedisConfigProvider(ConfigProvider):
     def prefixize(self, varname: str) -> str:
         return f"{self._project_prefix}_{varname.upper()}"
 
-    def get_variable(self, name: str) -> typing.Union[str, None]:
+    def get_variable(self, name: str) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(name))
 
         if isinstance(result, bytes):
-            try:
-                return result.decode()
-            except Exception:
-                return None
+            return result.decode()
+
+        return None
 
     def get_variables_list(self) -> typing.List[str]:
         var_list = []
@@ -50,8 +49,5 @@ class RedisCredentialProvider(CredentialProvider):
     def get_credential(self, identifier: str) -> typing.Any:
         result = self._redis.get(self.prefixize(identifier))
 
-        if not isinstance(result, bytes):
-            try:
-                return result.decode()
-            except Exception:
-                return None
+        if isinstance(result, bytes):
+            return result.decode()

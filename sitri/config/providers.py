@@ -8,7 +8,7 @@ class ConfigProvider(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def get_variable(self, name: str) -> typing.Union[typing.Any, None]:
+    def get_variable(self, name: str) -> typing.Optional[typing.Any]:
         pass
 
     @abstractmethod
@@ -18,7 +18,8 @@ class ConfigProvider(metaclass=ABCMeta):
 
 class ConfigProviderManager:
     @staticmethod
-    def get_by_code(code: str) -> typing.Union[ConfigProvider, None]:
+    def get_by_code(code: str) -> typing.Optional[typing.Type[ConfigProvider]]:
         for provider in ConfigProvider.__subclasses__():
             if provider.provider_code == code:
                 return provider
+        return None

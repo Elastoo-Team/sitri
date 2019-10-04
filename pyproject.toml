@@ -12,7 +12,22 @@ homepage = "https://github.com/Egnod/sitri"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pytest = "^5.1"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+python-consul = "^1.1"
+redis = "^3.3"
+vedis = "^0.7.1"
+pytest-mock = "^1.11"
+mypy = "^0.730.0"
+bumpversion = "^0.5.3"
+pre-commit = "^1.18"
+coverage = "^4.5"
+pytest-cov = "^2.7"
+vulture = "^1.1"
+radon = "^4.0"
+tidypy = "^0.11.0"
 
 [tool.black]
 line-length = 120
