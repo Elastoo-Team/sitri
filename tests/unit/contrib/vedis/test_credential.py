@@ -3,6 +3,7 @@ def test_metadata(vedis_credential) -> None:
     assert vedis_credential._project_prefix == "TEST"
     assert vedis_credential._hash_name == "test"
 
+
 def test_prefixize(vedis_credential) -> None:
     assert vedis_credential.prefixize("key1") == "TEST_KEY1"
 
