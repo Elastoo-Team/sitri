@@ -49,6 +49,141 @@ exclude = '''
   )
 )
 '''
+
+[tool.tidypy]
+exclude = [".*_cache/", "poetry.lock", "tests/", "stack.yml"]
+merge-issues = true
+workers = 3
+disabled = []
+noqa = true
+extends = []
+ignore-missing-extends = false
+
+[tool.tidypy.2to3]
+use = false
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.bandit]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.bandit.options]
+confidence = "low"
+severity = "low"
+ignore-nosec = false
+
+[tool.tidypy.dlint]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.eradicate]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.jsonlint]
+use = true
+filters = ["\\.json$"]
+disabled = []
+
+[tool.tidypy.manifest]
+use = true
+filters = ["setup\\.py$"]
+disabled = []
+
+[tool.tidypy.mccabe]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.mccabe.options]
+max-complexity = 10
+
+[tool.tidypy.polint]
+use = true
+filters = ["\\.pot?$"]
+disabled = []
+
+[tool.tidypy.polint.options]
+variable-formats = ["python-brace-format", "python-format"]
+
+[tool.tidypy.pycodestyle]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.pycodestyle.options]
+max-line-length = 79
+hang-closing = false
+
+[tool.tidypy.pydiatra]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.pydocstyle]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.pyflakes]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.pylint]
+use = true
+filters = []
+disabled = []
+
+[tool.tidypy.pylint.options]
+plugins = []
+extension-pkg-whitelist = []
+
+[tool.tidypy.pyroma]
+use = true
+filters = ["setup\\.py$"]
+disabled = []
+
+[tool.tidypy.rstlint]
+use = true
+filters = ["\\.rst$"]
+disabled = []
+
+[tool.tidypy.rstlint.options]
+ignore-directives = []
+ignore-roles = []
+#sphinx-extensions = null  # To use: uncomment and replace null with value
+
+[tool.tidypy.rstlint.options.load-directives]
+
+[tool.tidypy.secrets]
+use = true
+filters = []
+disabled = []
+
+[tool.tidypy.vulture]
+use = true
+filters = ["\\.py$"]
+disabled = []
+
+[tool.tidypy.vulture.options]
+#ignore-names = null  # To use: uncomment and replace null with value
+#ignore-decorators = null  # To use: uncomment and replace null with value
+min-confidence = 0
+whitelist = []
+
+[tool.tidypy.yamllint]
+use = true
+filters = ["\\.yaml$", "\\.yml$"]
+disabled = []
+
+[[tool.tidypy.requested_reports]]
+type = "console"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
