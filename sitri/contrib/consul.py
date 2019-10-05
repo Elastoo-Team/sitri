@@ -25,8 +25,9 @@ class ConsulConfigProvider(ConfigProvider):
         index, data = self._consul.kv.get(self.folder, recurse=True)
         var_list = []
 
-        for var in data:
-            if var["Value"]:
-                var_list.append(var["Key"])
+        if data:
+            for var in data:
+                if var["Value"]:
+                    var_list.append(var["Key"])
 
         return var_list
