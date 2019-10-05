@@ -1,5 +1,6 @@
-import pytest
 import typing
+
+import pytest
 
 from sitri.credentials.providers import CredentialProviderManager
 

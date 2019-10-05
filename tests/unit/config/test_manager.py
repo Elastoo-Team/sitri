@@ -1,7 +1,7 @@
-from sitri.contrib.vedis import VedisConfigProvider
 from sitri.contrib.consul import ConsulConfigProvider
 from sitri.contrib.redis import RedisConfigProvider
 from sitri.contrib.system import SystemConfigProvider
+from sitri.contrib.vedis import VedisConfigProvider
 
 
 def test_get_by_codes(config_manager):

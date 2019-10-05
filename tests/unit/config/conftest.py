@@ -1,5 +1,6 @@
-import pytest
 import typing
+
+import pytest
 
 from sitri.config.providers import ConfigProviderManager
 

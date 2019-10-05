@@ -1,6 +1,6 @@
-from sitri.contrib.vedis import VedisCredentialProvider
 from sitri.contrib.redis import RedisCredentialProvider
 from sitri.contrib.system import SystemCredentialProvider
+from sitri.contrib.vedis import VedisCredentialProvider
 
 
 def test_get_by_codes(credential_manager):
