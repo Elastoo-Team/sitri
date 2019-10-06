@@ -14,11 +14,11 @@ class Sitri:
         self.config_provider = config_provider
 
     def get_credential(self, name: str, default: typing.Any = None) -> typing.Union[typing.Any, None]:
-        variable = self.credential_provider.get_credential(name)
+        variable = self.credential_provider.get(name)
 
         return variable if variable else default
 
     def get_config(self, name: str, default: typing.Any = None) -> typing.Union[typing.Any, None]:
-        variable = self.config_provider.get_variable(name)
+        variable = self.config_provider.get(name)
 
         return variable if variable else default

@@ -1,6 +1,7 @@
 import typing
-from ..base import BaseProvider
 from abc import ABC
+
+from ..base import BaseProvider
 
 
 class CredentialProvider(ABC, BaseProvider):
