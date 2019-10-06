@@ -1,19 +1,10 @@
 import typing
-from abc import ABCMeta, abstractmethod, abstractproperty
+from ..base import BaseProvider
+from abc import ABC
 
 
-class ConfigProvider(metaclass=ABCMeta):
-    @abstractproperty
-    def provider_code(self) -> str:
-        pass
-
-    @abstractmethod
-    def get_variable(self, name: str) -> typing.Optional[typing.Any]:
-        pass
-
-    @abstractmethod
-    def get_variables_list(self) -> typing.List[typing.Any]:
-        pass
+class ConfigProvider(ABC, BaseProvider):
+    pass
 
 
 class ConfigProviderManager:

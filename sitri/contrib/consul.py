@@ -13,15 +13,15 @@ class ConsulConfigProvider(ConfigProvider):
         self._consul = consul_connection
         self.folder = folder
 
-    def get_variable(self, name: str) -> typing.Optional[typing.Any]:
-        index, data = self._consul.kv.get(f"{self.folder}{name}" if self.folder not in name else name)
+    def get(self, key: str) -> typing.Optional[typing.Any]:
+        index, data = self._consul.kv.get(f"{self.folder}{key}" if self.folder not in key else key)
 
         if data and data["Value"]:
             return data["Value"].decode()
 
         return None
 
-    def get_variables_list(self) -> typing.List[typing.Any]:
+    def keys(self) -> typing.List[typing.Any]:
         index, data = self._consul.kv.get(self.folder, recurse=True)
         var_list = []
 

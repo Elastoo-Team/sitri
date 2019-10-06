@@ -15,8 +15,8 @@ class SystemCredentialProvider(CredentialProvider):
     def prefixize(self, varname: str) -> str:
         return f"{self._project_prefix}_{varname.upper()}"
 
-    def get_credential(self, identifier: str) -> typing.Union[str, None]:
-        return os.getenv(self.prefixize(identifier), None)
+    def get(self, key: str) -> typing.Union[str, None]:
+        return os.getenv(self.prefixize(key), None)
 
 
 class SystemConfigProvider(ConfigProvider):
@@ -29,10 +29,10 @@ class SystemConfigProvider(ConfigProvider):
     def prefixize(self, varname: str) -> str:
         return f"{self._project_prefix}_{varname.upper()}"
 
-    def get_variable(self, name: str) -> typing.Union[str, None]:
-        return os.getenv(self.prefixize(name), None)
+    def get(self, key: str) -> typing.Union[str, None]:
+        return os.getenv(self.prefixize(key), None)
 
-    def get_variables_list(self) -> typing.List[str]:
+    def keys(self) -> typing.List[str]:
         var_list = []
 
         for var in os.environ:

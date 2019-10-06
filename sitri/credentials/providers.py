@@ -1,15 +1,10 @@
 import typing
-from abc import ABCMeta, abstractmethod, abstractproperty
+from ..base import BaseProvider
+from abc import ABC
 
 
-class CredentialProvider(metaclass=ABCMeta):
-    @abstractproperty
-    def provider_code(self) -> str:
-        pass
-
-    @abstractmethod
-    def get_credential(self, identifier: str) -> typing.Any:
-        pass
+class CredentialProvider(ABC, BaseProvider):
+    pass
 
 
 class CredentialProviderManager:

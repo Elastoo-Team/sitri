@@ -11,7 +11,7 @@ def test_get_credential(monkeypatch, system_credential) -> None:
     monkeypatch.setenv("TEST_KEY1", "1")
     monkeypatch.setenv("TEST_KEY2", "2")
 
-    assert system_credential.get_credential("key1") == "1"
-    assert system_credential.get_credential("key2") == "2"
+    assert system_credential.get("key1") == "1"
+    assert system_credential.get("key2") == "2"
 
     monkeypatch.undo()

@@ -20,14 +20,14 @@ class VedisConfigProvider(ConfigProvider):
     def prefixize(self, varname: str) -> str:
         return f"{self._project_prefix}_{varname.upper()}"
 
-    def get_variable(self, name: str) -> typing.Optional[str]:
-        result = self._config_hash.get(self.prefixize(name))
+    def get(self, key: str) -> typing.Optional[str]:
+        result = self._config_hash.get(self.prefixize(key))
 
         if isinstance(result, bytes):
             return result.decode()
         return None
 
-    def get_variables_list(self) -> typing.List[str]:
+    def keys(self) -> typing.List[str]:
         var_list = []
         vars = self._config_hash.keys() if self._config_hash.keys() is not None else []
 
@@ -52,8 +52,8 @@ class VedisCredentialProvider(CredentialProvider):
     def prefixize(self, varname: str) -> str:
         return f"{self._project_prefix}_{varname.upper()}"
 
-    def get_credential(self, identifier: str) -> typing.Any:
-        result = self._config_hash.get(self.prefixize(identifier))
+    def get(self, key: str) -> typing.Any:
+        result = self._config_hash.get(self.prefixize(key))
 
         if isinstance(result, bytes):
             try:
