@@ -3,7 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Sitri's documentation!
+.. image:: _static/logo.gif
+   :width: 200
+   :align: center
+
+
+Sitri - configuration library
 =================================
 
 .. toctree::
