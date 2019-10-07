@@ -14,7 +14,7 @@ import os
 import sys
 import typing
 
-sys.path.insert(0, os.path.abspath("../.."))
+sys.path.insert(0, os.path.abspath(".."))
 sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
@@ -46,7 +46,7 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns: typing.List[str] = []
-master_doc = "../index"
+master_doc = "index"
 
 # -- Options for HTML output -------------------------------------------------
 
