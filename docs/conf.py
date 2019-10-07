@@ -61,8 +61,8 @@ html_theme = "alabaster"
 html_static_path = ["_static"]
 
 html_logo = "_static/logo.gif"
-html_favicon = '_static/favicon.png'
+html_favicon = "_static/favicon.png"
 html_theme_options = {
     # Disable showing the sidebar. Defaults to 'false'
-    'nosidebar': True,
+    "nosidebar": True
 }

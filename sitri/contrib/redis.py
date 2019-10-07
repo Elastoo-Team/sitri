@@ -29,6 +29,14 @@ class RedisConfigProvider(ConfigProvider):
         """
         return f"{self._project_prefix}_{key.upper()}"
 
+    def unprefixize(self, var_name: str) -> str:
+        """Remove prefix from variable name
+
+        :param var_name: variable name
+        """
+
+        return var_name.replace(f"{self._project_prefix}_", "").lower()
+
     def get(self, key: str) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
 
@@ -42,7 +50,7 @@ class RedisConfigProvider(ConfigProvider):
 
         for var in self._redis.keys():
             if self._project_prefix in var.decode():
-                var_list.append(var.decode())
+                var_list.append(self.unprefixize(var.decode()))
 
         return var_list
 

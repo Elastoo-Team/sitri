@@ -55,6 +55,14 @@ class SystemConfigProvider(ConfigProvider):
         """
         return f"{self._project_prefix}_{key.upper()}"
 
+    def unprefixize(self, var_name: str) -> str:
+        """Remove prefix from variable name
+
+        :param var_name: variable name
+        """
+
+        return var_name.replace(f"{self._project_prefix}_", "").lower()
+
     def get(self, key: str) -> typing.Union[str, None]:
         """Get value from system env
 
@@ -69,6 +77,6 @@ class SystemConfigProvider(ConfigProvider):
 
         for var in os.environ:
             if self._project_prefix in var:
-                var_list.append(var)
+                var_list.append(self.unprefixize(var))
 
         return var_list
