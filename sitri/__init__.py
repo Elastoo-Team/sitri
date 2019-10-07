@@ -14,6 +14,7 @@ from .credentials.providers import CredentialProvider, CredentialProviderManager
 class Sitri:
     """Class for unite credential and config provider
     """
+
     def __init__(self, credential_provider: CredentialProvider = None, config_provider: ConfigProvider = None):
         """
 

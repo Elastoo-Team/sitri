@@ -8,6 +8,7 @@ from ..config.providers import ConfigProvider
 class ConsulConfigProvider(ConfigProvider):
     """Provider for HashiCorp Consul config storage
     """
+
     provider_code = "consul"
     folder: str
 

@@ -9,6 +9,7 @@ from ..credentials.providers import CredentialProvider
 class RedisConfigProvider(ConfigProvider):
     """Config provider for redis storage
     """
+
     provider_code = "redis"
     _project_prefix = "redis"
 
@@ -49,6 +50,7 @@ class RedisConfigProvider(ConfigProvider):
 class RedisCredentialProvider(CredentialProvider):
     """Credential provider for redis storage
     """
+
     provider_code = "redis"
     project_prefix = "redis"
 

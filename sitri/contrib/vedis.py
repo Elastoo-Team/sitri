@@ -9,6 +9,7 @@ from ..credentials.providers import CredentialProvider
 class VedisConfigProvider(ConfigProvider):
     """Config provider for vedis storage
     """
+
     provider_code = "vedis"
     _hash_name = "sitri_config_hash"
 
@@ -42,6 +43,7 @@ class VedisConfigProvider(ConfigProvider):
 class VedisCredentialProvider(CredentialProvider):
     """Credential provider for vedis storage
     """
+
     provider_code = "vedis"
     project_prefix = "vedis"
     _hash_name = "sitri_config_hash"
