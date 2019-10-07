@@ -1,4 +1,4 @@
-![Sitri][docs/_static/logo.gif]
+![Sitri](docs/_static/logo.gif#center)
 
 #  Sitri Configuration Library
 
