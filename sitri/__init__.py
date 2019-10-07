@@ -24,8 +24,8 @@ class Sitri:
         if not credential_provider or not config_provider:
             raise RuntimeError("Provider not found!")
 
-        self.credential_provider = credential_provider
-        self.config_provider = config_provider
+        self.credential = credential_provider
+        self.config = config_provider
 
     def get_credential(self, key: str, default: typing.Any = None) -> typing.Union[typing.Any, None]:
         """Get value from credential provider
@@ -33,7 +33,7 @@ class Sitri:
         :param key: key for credential provider
         :param default: if provider return None
         """
-        variable = self.credential_provider.get(key)
+        variable = self.credential.get(key)
 
         return variable if variable else default
 
@@ -43,6 +43,6 @@ class Sitri:
         :param key: key for config provider
         :param default: if provider return None
         """
-        variable = self.config_provider.get(key)
+        variable = self.config.get(key)
 
         return variable if variable else default

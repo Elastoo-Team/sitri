@@ -1,6 +1,6 @@
 def test_metadata(redis_credential) -> None:
     assert redis_credential.provider_code == "redis"
-    assert redis_credential._project_prefix == "TEST"
+    assert redis_credential._prefix == "TEST"
 
 
 def test_prefixize(redis_credential) -> None:

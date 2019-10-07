@@ -12,9 +12,9 @@ def redis_connection() -> RedisMock:
 
 @pytest.fixture(scope="module")
 def redis_config(redis_connection) -> RedisConfigProvider:
-    return RedisConfigProvider(project_prefix="test", redis_connection=redis_connection)
+    return RedisConfigProvider(prefix="test", redis_connection=redis_connection)
 
 
 @pytest.fixture(scope="module")
 def redis_credential(redis_connection) -> RedisCredentialProvider:
-    return RedisCredentialProvider(project_prefix="test", redis_connection=redis_connection)
+    return RedisCredentialProvider(prefix="test", redis_connection=redis_connection)

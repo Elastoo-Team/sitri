@@ -1,6 +1,6 @@
 def test_metadata(system_credential) -> None:
     assert system_credential.provider_code == "system"
-    assert system_credential._project_prefix == "TEST"
+    assert system_credential._prefix == "TEST"
 
 
 def test_prefixize(system_credential) -> None:

@@ -1,6 +1,6 @@
 def test_metadata(redis_config) -> None:
     assert redis_config.provider_code == "redis"
-    assert redis_config._project_prefix == "TEST"
+    assert redis_config._prefix == "TEST"
 
 
 def test_prefixize(redis_config) -> None:

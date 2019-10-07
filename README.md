@@ -21,10 +21,10 @@ pip3 install sitri
 from sitri.contrib.system import SystemCredentialProvider, SystemConfigProvider
 from sitri import Sitri
 
-conf = Sitri(config_provider=SystemConfigProvider(project_prefix="basics"),
-             credential_provider=SystemCredentialProvider(project_prefix="basics"))
+conf = Sitri(config_provider=SystemConfigProvider(prefix="basics"),
+             credential_provider=SystemCredentialProvider(prefix="basics"))
 ```
-System provider use system environment for get config and credential data. For unique sitri lookup to "namespace" by project_prefix.
+System provider use system environment for get config and credential data. For unique sitri lookup to "namespace" by prefix.
 
 Example:
 *In console:*

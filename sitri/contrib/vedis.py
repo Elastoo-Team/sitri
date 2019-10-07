@@ -45,10 +45,10 @@ class VedisCredentialProvider(CredentialProvider):
     """
 
     provider_code = "vedis"
-    project_prefix = "vedis"
-    _hash_name = "sitri_config_hash"
+    prefix = "vedis"
+    _hash_name = "vedis"
 
-    def __init__(self, vedis_connection: vedis.Vedis, hash_name: str = "sitri_config_hash"):
+    def __init__(self, vedis_connection: vedis.Vedis, hash_name: str = "vedis"):
         """
 
         :param vedis_connection: connection to vedis

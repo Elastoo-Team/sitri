@@ -11,15 +11,15 @@ class RedisConfigProvider(ConfigProvider):
     """
 
     provider_code = "redis"
-    _project_prefix = "redis"
+    _prefix = "redis"
 
-    def __init__(self, project_prefix: str, redis_connection: redis.Redis):
+    def __init__(self, prefix: str, redis_connection: redis.Redis):
         """
 
-        :param project_prefix: prefix for create "namespace" for project variables in redis
+        :param prefix: prefix for create "namespace" for project variables in redis
         :param redis_connection: connection to your redis server
         """
-        self._project_prefix = project_prefix.upper()
+        self._prefix = prefix.upper()
         self._redis = redis_connection
 
     def prefixize(self, key: str) -> str:
@@ -27,7 +27,7 @@ class RedisConfigProvider(ConfigProvider):
 
         :param key: varname without prefix
         """
-        return f"{self._project_prefix}_{key.upper()}"
+        return f"{self._prefix}_{key.upper()}"
 
     def unprefixize(self, var_name: str) -> str:
         """Remove prefix from variable name
@@ -35,7 +35,7 @@ class RedisConfigProvider(ConfigProvider):
         :param var_name: variable name
         """
 
-        return var_name.replace(f"{self._project_prefix}_", "").lower()
+        return var_name.replace(f"{self._prefix}_", "").lower()
 
     def get(self, key: str) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
@@ -49,7 +49,7 @@ class RedisConfigProvider(ConfigProvider):
         var_list = []
 
         for var in self._redis.keys():
-            if self._project_prefix in var.decode():
+            if self._prefix in var.decode():
                 var_list.append(self.unprefixize(var.decode()))
 
         return var_list
@@ -60,15 +60,15 @@ class RedisCredentialProvider(CredentialProvider):
     """
 
     provider_code = "redis"
-    project_prefix = "redis"
+    prefix = "redis"
 
-    def __init__(self, project_prefix: str, redis_connection: redis.Redis):
+    def __init__(self, prefix: str, redis_connection: redis.Redis):
         """
 
-        :param project_prefix: prefix for create "namespace" for project variables in redis
+        :param prefix: prefix for create "namespace" for project variables in redis
         :param redis_connection: connection to your redis server
         """
-        self._project_prefix = project_prefix.upper()
+        self._prefix = prefix.upper()
         self._redis = redis_connection
 
     def prefixize(self, key: str) -> str:
@@ -76,7 +76,7 @@ class RedisCredentialProvider(CredentialProvider):
 
         :param key: varname without prefix
         """
-        return f"{self._project_prefix}_{key.upper()}"
+        return f"{self._prefix}_{key.upper()}"
 
     def get(self, key: str) -> typing.Any:
         result = self._redis.get(self.prefixize(key))

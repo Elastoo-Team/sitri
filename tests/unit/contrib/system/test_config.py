@@ -1,6 +1,6 @@
 def test_metadata(system_config) -> None:
     assert system_config.provider_code == "system"
-    assert system_config._project_prefix == "TEST"
+    assert system_config._prefix == "TEST"
 
 
 def test_prefixize(system_config) -> None:
