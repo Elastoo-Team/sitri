@@ -14,7 +14,7 @@ import os
 import sys
 import typing
 
-sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("../"))
 sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
