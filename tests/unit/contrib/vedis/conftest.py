@@ -12,9 +12,9 @@ def vedis_connection() -> VedisMock:
 
 @pytest.fixture(scope="module")
 def vedis_config(vedis_connection) -> VedisConfigProvider:
-    return VedisConfigProvider(project_prefix="test", vedis_connection=vedis_connection, hash_name="test")
+    return VedisConfigProvider(vedis_connection=vedis_connection, hash_name="test")
 
 
 @pytest.fixture(scope="module")
 def vedis_credential(vedis_connection) -> VedisCredentialProvider:
-    return VedisCredentialProvider(project_prefix="test", vedis_connection=vedis_connection, hash_name="test")
+    return VedisCredentialProvider(vedis_connection=vedis_connection, hash_name="test")

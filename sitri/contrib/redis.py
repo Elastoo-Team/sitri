@@ -7,15 +7,26 @@ from ..credentials.providers import CredentialProvider
 
 
 class RedisConfigProvider(ConfigProvider):
+    """Config provider for redis storage
+    """
     provider_code = "redis"
-    project_prefix = "redis"
+    _project_prefix = "redis"
 
     def __init__(self, project_prefix: str, redis_connection: redis.Redis):
+        """
+
+        :param project_prefix: prefix for create "namespace" for project variables in redis
+        :param redis_connection: connection to your redis server
+        """
         self._project_prefix = project_prefix.upper()
         self._redis = redis_connection
 
-    def prefixize(self, varname: str) -> str:
-        return f"{self._project_prefix}_{varname.upper()}"
+    def prefixize(self, key: str) -> str:
+        """Get key with prefix
+
+        :param key: varname without prefix
+        """
+        return f"{self._project_prefix}_{key.upper()}"
 
     def get(self, key: str) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
@@ -36,15 +47,26 @@ class RedisConfigProvider(ConfigProvider):
 
 
 class RedisCredentialProvider(CredentialProvider):
+    """Credential provider for redis storage
+    """
     provider_code = "redis"
     project_prefix = "redis"
 
     def __init__(self, project_prefix: str, redis_connection: redis.Redis):
+        """
+
+        :param project_prefix: prefix for create "namespace" for project variables in redis
+        :param redis_connection: connection to your redis server
+        """
         self._project_prefix = project_prefix.upper()
         self._redis = redis_connection
 
-    def prefixize(self, varname: str) -> str:
-        return f"{self._project_prefix}_{varname.upper()}"
+    def prefixize(self, key: str) -> str:
+        """Get key with prefix
+
+        :param key: varname without prefix
+        """
+        return f"{self._project_prefix}_{key.upper()}"
 
     def get(self, key: str) -> typing.Any:
         result = self._redis.get(self.prefixize(key))

@@ -28,6 +28,9 @@ pytest-cov = "^2.7"
 vulture = "^1.1"
 radon = "^4.0"
 tidypy = "^0.11.0"
+Sphinx = "^2.2"
+rinohtype = "^0.3.1"
+sphinx-autodoc-typehints = "^1.8"
 
 [tool.black]
 line-length = 120
