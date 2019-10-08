@@ -1,6 +1,12 @@
-![Sitri](docs/_static/logo.gif#center)
 
-#  Sitri Configuration Library
+<p align="center">
+  <a href="https://github.com/lemegetonx/sitri">
+    <img src="docs/_static/logo.gif">
+  </a>
+  <h1 align="center">
+    Sitri Configuration Library
+  </h1>
+</p>
 
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
 
