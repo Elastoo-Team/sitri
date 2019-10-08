@@ -17,12 +17,13 @@ matrix:
       name: "PYTHON3.7_OSX"
 
 install:
-  - pip install poetry
+  - pip3 install poetry codecov
   - poetry install
 
 script:
   - poetry run pre-commit run -a
   - poetry run pytest --cov=sitri
+  - codecov
 
 before_deploy:
   - poetry config http-basic.pypi __token__ $PYPI_TOKEN
