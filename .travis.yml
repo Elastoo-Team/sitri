@@ -7,7 +7,7 @@ matrix:
   include:
     - os: linux
       sudo: required
-      pytohn: 3.7
+      python: 3.7
       dist: bionic
       name: "PYTHON3.7_LINUX"
 
