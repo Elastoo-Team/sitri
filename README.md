@@ -33,10 +33,12 @@ conf = Sitri(config_provider=SystemConfigProvider(prefix="basics"),
 System provider use system environment for get config and credential data. For unique sitri lookup to "namespace" by prefix.
 
 Example:
+
 *In console:*
 ```bash
 export BASICS_NAME=Huey
 ```
+
 *In code:*
 ```python
 name = conf.get_config("name")
