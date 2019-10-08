@@ -5,16 +5,23 @@ sudo: false
 matrix:
 
   include:
-    - os: linux
-      sudo: required
-      python: 3.7
-      dist: bionic
-      name: "PYTHON3.7_LINUX"
 
     - os: osx
       language: generic
       osx_image: xcode11
       name: "PYTHON3.7_OSX"
+
+    - os: linux
+      sudo: required
+      python: 3.7
+      dist: bionic
+      name: "PYTHON3.7_LINUX"
+      before_deploy:
+        - poetry config http-basic.pypi __token__ $PYPI_TOKEN
+
+      deploy:
+        provider: script
+        script: poetry publish --build
 
 install:
   - pip3 install poetry codecov
@@ -24,10 +31,3 @@ script:
   - poetry run pre-commit run -a
   - poetry run pytest --cov=sitri
   - codecov
-
-before_deploy:
-  - poetry config http-basic.pypi __token__ $PYPI_TOKEN
-
-deploy:
-  provider: script
-  script: poetry publish --build
