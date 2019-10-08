@@ -1,0 +1,33 @@
+language: python
+
+sudo: false
+
+matrix:
+
+  include:
+    - os: linux
+      sudo: required
+      pytohn: "3.7"
+      dist: bionic
+      name: "PYTHON3.7_LINUX"
+
+    - os: osx
+      language: generic
+      env: PYTHON=3.7.0
+      name: "PYTHON3.7_OSX"
+
+install:
+  - pip install poetry
+  - poetry install
+
+script:
+  - poetry run pre-commit run -a
+  - poetry run pytest --cov=sitri
+
+before_deploy:
+  - poetry config http-basic.pypi __token__ $PYPI_TOKEN
+  - poetry build
+
+deploy:
+  provider: script
+  script: poetry publish
