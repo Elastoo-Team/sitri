@@ -9,13 +9,9 @@
 </p>
 
 [![Build Status](https://travis-ci.org/LemegetonX/sitri.svg?branch=master)](https://travis-ci.org/LemegetonX/sitri)
-
 [![codecov](https://codecov.io/gh/LemegetonX/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/LemegetonX/sitri)
-
 ![PyPI](https://img.shields.io/pypi/v/sitri)
-
 ![Read the Docs](https://img.shields.io/readthedocs/sitri)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/lemegetonx/sitri/badge)](https://www.codefactor.io/repository/github/lemegetonx/sitri)
 
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
