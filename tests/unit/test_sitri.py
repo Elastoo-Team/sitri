@@ -1,6 +1,7 @@
 import pytest
+
 from sitri import Sitri
-from sitri.contrib.system import SystemCredentialProvider, SystemConfigProvider
+from sitri.contrib.system import SystemConfigProvider, SystemCredentialProvider
 
 
 def test_sitri_init():
