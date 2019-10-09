@@ -8,6 +8,9 @@
   </h1>
 </p>
 
+[![Build Status](https://travis-ci.org/LemegetonX/sitri.svg?branch=master)](https://travis-ci.org/LemegetonX/sitri)
+[![codecov](https://codecov.io/gh/LemegetonX/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/LemegetonX/sitri)
+
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
 
 #  Installation
