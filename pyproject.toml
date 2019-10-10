@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sitri"
-version = "0.5.2"
+version = "0.5.3"
 description = "Library for one endpoint config and credentials managment"
 authors = ["Alexander Lavrov <egnod@ya.ru>"]
 license = "MIT"
@@ -31,7 +31,7 @@ vulture = "^1.1"
 radon = "^4.0"
 tidypy = "^0.11.0"
 simplejson = "^3.16"
-pytest-lazy-fixture = "^0.5.2"
+pytest-lazy-fixture = "^0.5.3"
 
 [tool.black]
 line-length = 120
