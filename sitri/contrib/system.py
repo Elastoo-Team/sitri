@@ -26,7 +26,7 @@ class SystemCredentialProvider(CredentialProvider):
         """
         return f"{self._prefix}_{key.upper()}"
 
-    def get(self, key: str) -> typing.Union[str, None]:
+    def get(self, key: str, **kwargs) -> typing.Union[str, None]:
         """Get config variable from system env
 
         :param key: key without prefix from env
@@ -63,7 +63,7 @@ class SystemConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
-    def get(self, key: str) -> typing.Union[str, None]:
+    def get(self, key: str, **kwargs) -> typing.Union[str, None]:
         """Get value from system env
 
         :param key: key without prefix from env

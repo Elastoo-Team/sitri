@@ -23,7 +23,7 @@ class VedisConfigProvider(ConfigProvider):
         self._hash_name = hash_name
         self._config_hash = self._vedis.Hash(self._hash_name)
 
-    def get(self, key: str) -> typing.Optional[str]:
+    def get(self, key: str, **kwargs) -> typing.Optional[str]:
         result = self._config_hash.get(key)
 
         if isinstance(result, bytes):
@@ -58,7 +58,7 @@ class VedisCredentialProvider(CredentialProvider):
         self._hash_name = hash_name
         self._config_hash = self._vedis.Hash(self._hash_name)
 
-    def get(self, key: str) -> typing.Any:
+    def get(self, key: str, **kwargs) -> typing.Any:
         result = self._config_hash.get(key)
 
         if isinstance(result, bytes):

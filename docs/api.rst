@@ -39,6 +39,13 @@ System Providers
    :members:
    :show-inheritance:
 
+JSON Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.contrib.json
+   :members:
+   :show-inheritance:
+
+
 Consul Provider
 ~~~~~~~~~~~~~~~~~~~~
 .. automodule:: sitri.contrib.consul

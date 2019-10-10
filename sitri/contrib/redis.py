@@ -37,7 +37,7 @@ class RedisConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
-    def get(self, key: str) -> typing.Optional[str]:
+    def get(self, key: str, **kwargs) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
 
         if isinstance(result, bytes):
@@ -78,7 +78,7 @@ class RedisCredentialProvider(CredentialProvider):
         """
         return f"{self._prefix}_{key.upper()}"
 
-    def get(self, key: str) -> typing.Any:
+    def get(self, key: str, **kwargs) -> typing.Any:
         result = self._redis.get(self.prefixize(key))
 
         if isinstance(result, bytes):
