@@ -12,7 +12,7 @@
 [![codecov](https://codecov.io/gh/LemegetonX/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/LemegetonX/sitri)
 ![PyPI](https://img.shields.io/pypi/v/sitri)
 ![Read the Docs](https://img.shields.io/readthedocs/sitri)
-[![CodeFactor](https://www.codefactor.io/repository/github/lemegetonx/sitri/badge)](https://www.codefactor.io/repository/github/lemegetonx/sitri)
+[![CodeFactor](https://www.codefactor.io/repository/github/lemegetonx/sitri/badge)](https://www.codefactor.io/repository/github/lemegetonx/sitri) [![Join the chat at https://gitter.im/lemegetonx/sitri](https://badges.gitter.im/lemegetonx/sitri.svg)](https://gitter.im/lemegetonx/sitri?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
 
