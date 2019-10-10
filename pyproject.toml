@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sitri"
-version = "0.5.3"
+version = "0.5.4"
 description = "Library for one endpoint config and credentials managment"
 authors = ["Alexander Lavrov <egnod@ya.ru>"]
 license = "MIT"
@@ -23,7 +23,7 @@ redis = "^3.3"
 vedis = "^0.7.1"
 pytest-mock = "^1.11"
 mypy = "^0.730.0"
-bumpversion = "^0.5.3"
+bumpversion = "^0.5.4"
 pre-commit = "^1.18"
 coverage = "^4.5"
 pytest-cov = "^2.7"
