@@ -49,8 +49,10 @@ In code:
     from sitri.contrib.system import SystemConfigProvider, SystemCredentialProvider
     from sitri import Sitri
 
-    conf = Sitri(config_provider=SystemConfigProvider(prefix="test"),
-                credential_provider=SystemCredentialProvider(prefix="test"))
+    conf = Sitri(
+        config_provider=SystemConfigProvider(prefix="test"),
+        credential_provider=SystemCredentialProvider(prefix="test")
+    )
 
 
     print(conf.get_config("host"), conf.get_credential("password"))
@@ -104,8 +106,12 @@ Usage
 
     consul = Consul()
 
-    conf = Sitri(config_provider=ConsulConfigProvider(folder="test/", consul_connection=consul),
-                credential_provider=SystemCredentialProvider(prefix="test"))
+    conf = Sitri(
+        config_provider=ConsulConfigProvider(
+            folder="test/", consul_connection=consul
+        ),
+        credential_provider=SystemCredentialProvider(prefix="test")
+    )
 
     print(conf.get_config("a"), conf.get_config("b"))
     # Output: 1 2
@@ -146,8 +152,14 @@ Usage
 
     redis = Redis(host='localhost', port=6379, db=0)
 
-    conf = Sitri(config_provider=RedisConfigProvider(prefix="test_config", redis_connection=redis),
-                credential_provider=RedisCredentialProvider(prefix="test_credential", redis_connection=redis))
+    conf = Sitri(
+        config_provider=RedisConfigProvider(
+            prefix="test_config", redis_connection=redis
+        ),
+        credential_provider=RedisCredentialProvider(
+            prefix="test_credential", redis_connection=redis
+        )
+    )
 
     print(conf.get_config("a"), conf.get_credential("a"))
     # Output: 1 2
@@ -189,8 +201,13 @@ Usage
 
     vedis = Vedis(":mem:")
 
-    conf = Sitri(config_provider=VedisConfigProvider(hash_name="test", vedis_connection=redis),
-                credential_provider=VedisCredentialProvider(hash_name="test", vedis_connection=redis))
+    conf = Sitri(
+        config_provider=VedisConfigProvider(
+            hash_name="test", vedis_connection=redis
+        ),
+        credential_provider=VedisCredentialProvider(
+            hash_name="test", vedis_connection=redis)
+        )
 
     print(conf.get_config("a"), conf.get_credential("b"))
     # Output: 1 2
