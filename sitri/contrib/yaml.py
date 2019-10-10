@@ -1,28 +1,25 @@
-import json
 import os
 import typing
+
+import yaml
 
 from ..config.providers import ConfigProvider
 from ..credentials.providers import CredentialProvider
 
 
-class JsonConfigProvider(ConfigProvider):
-    """Config provider for JSON"""
+class YamlConfigProvider(ConfigProvider):
+    """Config provider for YAML"""
 
-    provider_code = "json"
+    provider_code = "yaml"
 
-    def __init__(self, json_path: str = "./data.yaml", json_data: str = None, default_separator: str = "."):
+    def __init__(self, yaml_path: str = "./data.yaml", default_separator: str = "."):
         """
 
-        :param json_path: path to json file
-        :param json_data: data of json
+        :param yaml_path: path to yaml file
         :param default_separator: default value separator for path-mode
         """
-        if not json_data:
-            self._json = json.load(open(os.path.abspath(json_path)))
 
-        else:
-            self._json = json.loads(json_data)
+        self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
 
         self.separator = default_separator
 
@@ -31,7 +28,7 @@ class JsonConfigProvider(ConfigProvider):
 
         :param path: string with separated keys
         """
-        dict_local = self._json.copy()
+        dict_local = self._yaml.copy()
         keys = path.split(separator)
 
         for key in keys:
@@ -50,8 +47,8 @@ class JsonConfigProvider(ConfigProvider):
         :param key: key from json
         """
 
-        if key in self._json:
-            return self._json[key]
+        if key in self._yaml:
+            return self._yaml[key]
         else:
             return None
 
@@ -79,28 +76,24 @@ class JsonConfigProvider(ConfigProvider):
         # TODO: implemented path-mode for keys list
 
         if not path_mode:
-            return self._json.keys()
+            return self._yaml.keys()
         else:
             raise NotImplementedError("Path-mode not implemented!")
 
 
-class JsonCredentialProvider(CredentialProvider):
-    """Credential provider for JSON"""
+class YamlCredentialProvider(CredentialProvider):
+    """Credential provider for YAML"""
 
-    provider_code = "json"
+    provider_code = "yaml"
 
-    def __init__(self, json_path: str = "./data.yaml", json_data: str = None, default_separator: str = "."):
+    def __init__(self, yaml_path: str = "./data.yaml", default_separator: str = "."):
         """
 
-        :param json_path: path to json file
-        :param json_data: data of json
+        :param yaml_path: path to yaml file
         :param default_separator: default value separator for path-mode
         """
-        if not json_data:
-            self._json = json.load(open(os.path.abspath(json_path)))
 
-        else:
-            self._json = json.loads(json_data)
+        self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
 
         self.separator = default_separator
 
@@ -109,7 +102,7 @@ class JsonCredentialProvider(CredentialProvider):
 
         :param path: string with separated keys
         """
-        dict_local = self._json.copy()
+        dict_local = self._yaml.copy()
         keys = path.split(separator)
 
         for key in keys:
@@ -125,11 +118,11 @@ class JsonCredentialProvider(CredentialProvider):
     def _get_by_key(self, key: str) -> typing.Any:
         """Retrieve value from a dictionary using a key.
 
-        :param key: key from json
+        :param key: key from yaml
         """
 
-        if key in self._json:
-            return self._json[key]
+        if key in self._yaml:
+            return self._yaml[key]
         else:
             return None
 
@@ -157,6 +150,6 @@ class JsonCredentialProvider(CredentialProvider):
         # TODO: implemented path-mode for keys list
 
         if not path_mode:
-            return self._json.keys()
+            return self._yaml.keys()
         else:
             raise NotImplementedError("Path-mode not implemented!")

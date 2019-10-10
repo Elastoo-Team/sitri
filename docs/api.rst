@@ -45,6 +45,12 @@ JSON Provider
    :members:
    :show-inheritance:
 
+YAML Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.contrib.yaml
+   :members:
+   :show-inheritance:
+
 
 Consul Provider
 ~~~~~~~~~~~~~~~~~~~~
