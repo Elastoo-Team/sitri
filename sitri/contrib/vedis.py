@@ -1,3 +1,4 @@
+import contextlib
 import typing
 
 import vedis
@@ -28,7 +29,6 @@ class VedisConfigProvider(ConfigProvider):
 
         if isinstance(result, bytes):
             return result.decode()
-        return None
 
     def keys(self) -> typing.List[str]:
         var_list = []
@@ -62,7 +62,5 @@ class VedisCredentialProvider(CredentialProvider):
         result = self._config_hash.get(key)
 
         if isinstance(result, bytes):
-            try:
+            with contextlib.suppress(Exception):
                 return result.decode()
-            except Exception:
-                return None

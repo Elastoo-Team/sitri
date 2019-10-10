@@ -43,8 +43,6 @@ class RedisConfigProvider(ConfigProvider):
         if isinstance(result, bytes):
             return result.decode()
 
-        return None
-
     def keys(self) -> typing.List[str]:
         var_list = []
 
