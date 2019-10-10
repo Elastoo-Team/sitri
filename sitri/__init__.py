@@ -27,22 +27,22 @@ class Sitri:
         self.credential = credential_provider
         self.config = config_provider
 
-    def get_credential(self, key: str, default: typing.Any = None) -> typing.Union[typing.Any, None]:
+    def get_credential(self, key: str, default: typing.Any = None, **kwargs) -> typing.Union[typing.Any, None]:
         """Get value from credential provider
 
         :param key: key for credential provider
         :param default: if provider return None
         """
-        variable = self.credential.get(key)
+        variable = self.credential.get(key, **kwargs)
 
         return variable if variable else default
 
-    def get_config(self, key: str, default: typing.Any = None) -> typing.Union[typing.Any, None]:
+    def get_config(self, key: str, default: typing.Any = None, **kwargs) -> typing.Union[typing.Any, None]:
         """Get value from config provider
 
         :param key: key for config provider
         :param default: if provider return None
         """
-        variable = self.config.get(key)
+        variable = self.config.get(key, **kwargs)
 
         return variable if variable else default

@@ -7,7 +7,7 @@ Installation
 ------------
 
 .. attention::
-    Sitri works only on Python 3.7 or higher.
+    Sitri works only on Python 3.5 or higher.
 
     When support will for older Python versions? - Never.
 
@@ -116,6 +116,74 @@ Usage
     print(conf.get_config("a"), conf.get_config("b"))
     # Output: 1 2
 
+JSON
+~~~~~~
+
+Prepare
+*******
+
+For more speed this provider you can install simplejson
+
+.. code-block:: sh
+
+    poetry add simplejson
+
+Usage
+******
+
+.. note::
+    In this example we have *data.json*:
+
+    .. code-block:: json
+
+        {
+           "test":{
+              "test_key1":"1",
+              "test_key2":"2",
+              "test_key3":"3",
+              "test_key4":{
+                 "test_key4_1":"1",
+                 "test_key4_2":"2"
+              }
+           },
+           "test0": "0"
+        }
+
+    In JSON's providers we have two get-modes: basid and path
+
+    Basic mode use as default python dict. If you want get value on sub (non-first) level, you should take first level dictionary by key and get values in this dict as default.
+
+    Path-mode make easy work with nested dictionary. You can type separated keys of nested values. *Example: test.test_key4.test_key4_1*
+
+.. code-block:: python
+
+    from sitri.contrib.json import JsonConfigProvider, JsonCredentialProvider
+    from sitri import Sitri
+
+    conf = Sitri(
+        config_provider=JsonConfigProvider(
+            json_path="./data.json", default_separator="/"
+        ),
+
+        credential_provider=JsonCredentialProvider(
+            json_path="./data.json", default_separator="/"
+        )
+    )
+
+    conf.get_config("test.test_key1", ":(")
+    # Output: :(
+
+    conf.get_config("test.test_key1", ":(", path_mode=True)
+    # Output: :(
+
+    conf.get_config("test.test_key1", ":(", path_mode=True, separator=".")
+    # Output: 1
+
+    conf.get_config("test/test_key1", ":(", path_mode=True)
+    # Output: 1
+
+    conf.get_config("test0")
+    # Output: 0
 
 Redis
 ~~~~~~
