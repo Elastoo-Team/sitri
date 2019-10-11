@@ -1,5 +1,5 @@
-from .base import BaseStrategy
 from ..base import BaseProvider
+from .base import BaseStrategy
 
 
 class SingleStrategy(BaseStrategy):

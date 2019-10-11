@@ -90,4 +90,3 @@ Index Priority Provider
 .. automodule:: sitri.strategy.index_priority
    :members:
    :show-inheritance:
-

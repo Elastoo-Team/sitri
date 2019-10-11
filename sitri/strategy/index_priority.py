@@ -1,6 +1,7 @@
-from .base import BaseStrategy
-from ..base import BaseProvider
 import typing
+
+from ..base import BaseProvider
+from .base import BaseStrategy
 
 
 class IndexPriorityStrategy(BaseStrategy):
