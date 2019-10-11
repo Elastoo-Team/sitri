@@ -69,3 +69,25 @@ Vedis Provider
 .. automodule:: sitri.contrib.vedis
    :members:
    :show-inheritance:
+
+Strategy Providers
+---------------------
+
+Base Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.strategy.base
+   :members:
+   :show-inheritance:
+
+Single Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.strategy.single
+   :members:
+   :show-inheritance:
+
+Index Priority Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.strategy.index_priority
+   :members:
+   :show-inheritance:
+
