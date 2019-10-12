@@ -5,10 +5,10 @@ from sitri.contrib.system import SystemConfigProvider, SystemCredentialProvider
 
 
 def test_sitri_init():
-    with pytest.raises(RuntimeError):
+    with pytest.raises(TypeError):
         Sitri(credential_provider=SystemCredentialProvider(prefix="test"))
 
-    with pytest.raises(RuntimeError):
+    with pytest.raises(TypeError):
         Sitri(config_provider=SystemConfigProvider(prefix="test"))
 
 

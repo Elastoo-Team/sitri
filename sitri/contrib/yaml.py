@@ -6,20 +6,46 @@ import yaml
 from ..config.providers import ConfigProvider
 from ..credentials.providers import CredentialProvider
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 
 class YamlConfigProvider(ConfigProvider):
     """Config provider for YAML"""
 
     provider_code = "yaml"
 
-    def __init__(self, yaml_path: str = "./data.yaml", default_separator: str = "."):
+    def __init__(
+        self,
+        yaml_path: str = "./data.yaml",
+        yaml_data: str = None,
+        default_separator: str = ".",
+        found_file_error: bool = True,
+    ):
         """
 
         :param yaml_path: path to yaml file
+        :param yaml_data: yaml data in string
         :param default_separator: default value separator for path-mode
+        :param found_file_error: if true no file not found error raise on yaml.load
         """
 
-        self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
+        if not yaml_data:
+            try:
+                self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
+
+            except FileNotFoundError:
+                if not found_file_error:
+                    self._yaml = {}
+
+                else:
+                    raise
+
+        else:
+            yaml_data = StringIO(yaml_data)
+            self._yaml = yaml.safe_load(yaml_data)
 
         self.separator = default_separator
 
@@ -86,14 +112,35 @@ class YamlCredentialProvider(CredentialProvider):
 
     provider_code = "yaml"
 
-    def __init__(self, yaml_path: str = "./data.yaml", default_separator: str = "."):
+    def __init__(
+        self,
+        yaml_path: str = "./data.yaml",
+        yaml_data: str = None,
+        default_separator: str = ".",
+        found_file_error: bool = True,
+    ):
         """
 
         :param yaml_path: path to yaml file
+        :param yaml_data: yaml data in string
         :param default_separator: default value separator for path-mode
+        :param found_file_error: if true no file not found error raise on yaml.load
         """
 
-        self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
+        if not yaml_data:
+            try:
+                self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
+
+            except FileNotFoundError:
+                if not found_file_error:
+                    self._yaml = {}
+
+                else:
+                    raise
+
+        else:
+            yaml_data = StringIO(yaml_data)
+            self._yaml = yaml.safe_load(yaml_data)
 
         self.separator = default_separator
 

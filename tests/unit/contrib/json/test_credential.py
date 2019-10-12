@@ -1,5 +1,14 @@
 import pytest
 
+from sitri.contrib.json import JsonCredentialProvider
+
+
+def test_no_file_error():
+    with pytest.raises(FileNotFoundError):
+        JsonCredentialProvider(json_path="_data.json")
+
+    JsonCredentialProvider(json_path="_data.json", found_file_error=False)
+
 
 @pytest.mark.parametrize(
     "json_credential_obj", [pytest.lazy_fixture("json_credential"), pytest.lazy_fixture("json_data_credential")]

@@ -1,5 +1,14 @@
 import pytest
 
+from sitri.contrib.json import JsonConfigProvider
+
+
+def test_no_file_error():
+    with pytest.raises(FileNotFoundError):
+        JsonConfigProvider(json_path="_data.json")
+
+    JsonConfigProvider(json_path="_data.json", found_file_error=False)
+
 
 @pytest.mark.parametrize(
     "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_data_config")]

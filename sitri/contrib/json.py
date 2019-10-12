@@ -11,16 +11,29 @@ class JsonConfigProvider(ConfigProvider):
 
     provider_code = "json"
 
-    def __init__(self, json_path: str = "./data.yaml", json_data: str = None, default_separator: str = "."):
+    def __init__(
+        self,
+        json_path: str = "./data.json",
+        json_data: str = None,
+        default_separator: str = ".",
+        found_file_error: bool = True,
+    ):
         """
 
         :param json_path: path to json file
         :param json_data: data of json
         :param default_separator: default value separator for path-mode
+        :param found_file_error: if true no file not found error raise on json.load
         """
         if not json_data:
-            self._json = json.load(open(os.path.abspath(json_path)))
+            try:
+                self._json = json.load(open(os.path.abspath(json_path)))
 
+            except FileNotFoundError:
+                if not found_file_error:
+                    self._json = {}
+                else:
+                    raise
         else:
             self._json = json.loads(json_data)
 
@@ -89,16 +102,28 @@ class JsonCredentialProvider(CredentialProvider):
 
     provider_code = "json"
 
-    def __init__(self, json_path: str = "./data.yaml", json_data: str = None, default_separator: str = "."):
+    def __init__(
+        self,
+        json_path: str = "./data.json",
+        json_data: str = None,
+        default_separator: str = ".",
+        found_file_error: bool = True,
+    ):
         """
 
         :param json_path: path to json file
         :param json_data: data of json
         :param default_separator: default value separator for path-mode
+        :param found_file_error: if true no file not found error raise on json.load
         """
         if not json_data:
-            self._json = json.load(open(os.path.abspath(json_path)))
-
+            try:
+                self._json = json.load(open(os.path.abspath(json_path)))
+            except FileNotFoundError:
+                if not found_file_error:
+                    self._json = {}
+                else:
+                    raise
         else:
             self._json = json.loads(json_data)
 
