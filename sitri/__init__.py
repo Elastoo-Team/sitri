@@ -9,23 +9,36 @@ import typing
 
 from .config.providers import ConfigProvider, ConfigProviderManager
 from .credentials.providers import CredentialProvider, CredentialProviderManager
+from .strategy.base import BaseStrategy
+from .strategy.single import SingleStrategy
 
 
 class Sitri:
     """Class for unite credential and config provider
     """
 
-    def __init__(self, credential_provider: CredentialProvider = None, config_provider: ConfigProvider = None):
+    def __init__(
+        self,
+        credential_provider: typing.Union[CredentialProvider, BaseStrategy],
+        config_provider: typing.Union[ConfigProvider, BaseStrategy],
+    ):
         """
 
         :param credential_provider: object of credential provider
         :param config_provider: object of config provider
         """
-        if not credential_provider or not config_provider:
-            raise RuntimeError("Provider not found!")
 
-        self.credential = credential_provider
-        self.config = config_provider
+        if isinstance(credential_provider, BaseStrategy):
+            self.credential = credential_provider
+
+        else:
+            self.credential = SingleStrategy(credential_provider)
+
+        if isinstance(config_provider, BaseStrategy):
+            self.config = config_provider
+
+        else:
+            self.config = SingleStrategy(config_provider)
 
     def get_credential(self, key: str, default: typing.Any = None, **kwargs) -> typing.Union[typing.Any, None]:
         """Get value from credential provider

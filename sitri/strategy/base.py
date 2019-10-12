@@ -6,7 +6,7 @@ class BaseStrategy(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def strategy_provider_code(self) -> str:
+    def provider_code(self) -> str:
         """Code for strategy manager"""
 
     @abstractmethod

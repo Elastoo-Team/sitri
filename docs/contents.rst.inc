@@ -13,6 +13,14 @@ Getting Started
    getting_started
 
 
+Advanced usage
+---------------
+
+.. toctree::
+   :maxdepth: 3
+
+   advanced_usage
+
 API Reference
 -------------
 

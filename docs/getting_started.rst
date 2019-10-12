@@ -66,11 +66,16 @@ In code:
 
     Not bug, but future. This behavior is due to the fact that in our example we use providers with the same backend (system environment) and same prefixes for variables (test)
 
+.. note::
+    All kwargs in get_credential or get_config call pipe to get in provider
+
 Contribute Providers
 ---------------------
 
 .. note::
-    In this section most part providers require additional libraries. Install instruction for install dependencies in "Prepare" subsections
+    In this section most part providers require additional libraries. Install instruction for install dependencies in "Prepare" subsections.
+
+    All providers will be considered separately without Sitri class
 
 Consul
 ~~~~~~
@@ -94,26 +99,20 @@ Usage
 
     In this example I create folder "test/" with two vars: "a" = 1 and "b" = 2
 
-    For stub credential provider we use :class:`SystemCredentialProvider <sitri.contrib.system.SystemCredentialProvider>`
-
 .. code-block:: python
 
     from consul import Consul
 
     from sitri.contrib.system import SystemCredentialProvider
     from sitri.contrib.consul import ConsulConfigProvider
-    from sitri import Sitri
 
     consul = Consul()
 
-    conf = Sitri(
-        config_provider=ConsulConfigProvider(
+    conf = ConsulConfigProvider(
             folder="test/", consul_connection=consul
-        ),
-        credential_provider=SystemCredentialProvider(prefix="test")
     )
 
-    print(conf.get_config("a"), conf.get_config("b"))
+    print(conf.get("a"), conf.get("b"))
     # Output: 1 2
 
 JSON
@@ -157,32 +156,26 @@ Usage
 
 .. code-block:: python
 
-    from sitri.contrib.json import JsonConfigProvider, JsonCredentialProvider
-    from sitri import Sitri
+    from sitri.contrib.json import JsonConfigProvider
 
-    conf = Sitri(
-        config_provider=JsonConfigProvider(
-            json_path="./data.json", default_separator="/"
-        ),
 
-        credential_provider=JsonCredentialProvider(
+    conf = JsonConfigProvider(
             json_path="./data.json", default_separator="/"
-        )
     )
 
-    conf.get_config("test.test_key1", ":(")
+    conf.get("test.test_key1", ":(")
     # Output: :(
 
-    conf.get_config("test.test_key1", ":(", path_mode=True)
+    conf.get("test.test_key1", ":(", path_mode=True)
     # Output: :(
 
-    conf.get_config("test.test_key1", ":(", path_mode=True, separator=".")
+    conf.get("test.test_key1", ":(", path_mode=True, separator=".")
     # Output: 1
 
-    conf.get_config("test/test_key1", ":(", path_mode=True)
+    conf.get("test/test_key1", ":(", path_mode=True)
     # Output: 1
 
-    conf.get_config("test0")
+    conf.get("test0")
     # Output: 0
 
 YAML
@@ -220,32 +213,26 @@ Usage
 
 .. code-block:: python
 
-    from sitri.contrib.yaml import YamlConfigProvider, YamlCredentialProvider
-    from sitri import Sitri
+    from sitri.contrib.yaml import YamlConfigProvider
 
-    conf = Sitri(
-        config_provider=YamlConfigProvider(
-            yaml_path="./data.yaml", default_separator="/"
-        ),
 
-        credential_provider=YamlCredentialProvider(
+    conf = YamlConfigProvider(
             yaml_path="./data.yaml", default_separator="/"
-        )
     )
 
-    conf.get_config("test.test_key1", ":(")
+    conf.get("test.test_key1", ":(")
     # Output: :(
 
-    conf.get_config("test.test_key1", ":(", path_mode=True)
+    conf.get("test.test_key1", ":(", path_mode=True)
     # Output: :(
 
-    conf.get_config("test.test_key1", ":(", path_mode=True, separator=".")
+    conf.get("test.test_key1", ":(", path_mode=True, separator=".")
     # Output: 1
 
-    conf.get_config("test/test_key1", ":(", path_mode=True)
+    conf.get("test/test_key1", ":(", path_mode=True)
     # Output: 1
 
-    conf.get_config("test0")
+    conf.get("test0")
     # Output: 0
 
 Redis
@@ -268,7 +255,7 @@ Usage
 .. note::
     :class:`RedisConfigProvider <sitri.contrib.redis.RedisConfigProvider>` and :class:`RedisCredentialProvider <sitri.contrib.redis.RedisCredentialProvider>`  search variables by prefix (as a system providers).
 
-    In this example I export two vars:
+    In this example I set two vars:
         TEST_CONFIG_A = 1
 
         TEST_CREDENTIAL_A = 2
@@ -279,20 +266,18 @@ Usage
     from redis import Redis
 
     from sitri.contrib.redis import RedisConfigProvider, RedisCredentialProvider
-    from sitri import Sitri
+
 
     redis = Redis(host='localhost', port=6379, db=0)
 
-    conf = Sitri(
-        config_provider=RedisConfigProvider(
-            prefix="test_config", redis_connection=redis
-        ),
-        credential_provider=RedisCredentialProvider(
-            prefix="test_credential", redis_connection=redis
-        )
+    conf = RedisConfigProvider(
+        prefix="test_config", redis_connection=redis
+    )
+    cred = RedisCredentialProvider(
+        prefix="test_credential", redis_connection=redis
     )
 
-    print(conf.get_config("a"), conf.get_credential("a"))
+    print(conf.get("a"), cred.get("a"))
     # Output: 1 2
 
 .. note::
@@ -328,19 +313,19 @@ Usage
     from vedis import Vedis
 
     from sitri.contrib.vedis import VedisConfigProvider, VedisCredentialProvider
-    from sitri import Sitri
+
 
     vedis = Vedis(":mem:")
 
-    conf = Sitri(
-        config_provider=VedisConfigProvider(
-            hash_name="test", vedis_connection=redis
-        ),
-        credential_provider=VedisCredentialProvider(
-            hash_name="test", vedis_connection=redis)
-        )
+    conf = VedisConfigProvider(
+        hash_name="test", vedis_connection=redis
+    )
 
-    print(conf.get_config("a"), conf.get_credential("b"))
+    cred = VedisCredentialProvider(
+        hash_name="test", vedis_connection=redis)
+    )
+
+    print(conf.get("a"), cred.get("b"))
     # Output: 1 2
 
 For own provider

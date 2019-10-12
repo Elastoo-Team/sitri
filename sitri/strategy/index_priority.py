@@ -7,7 +7,7 @@ from .base import BaseStrategy
 class IndexPriorityStrategy(BaseStrategy):
     """Get value from providers with priority by index in tuple"""
 
-    strategy_provider_code = "single"
+    provider_code = "single"
 
     def __init__(self, data_providers: typing.Tuple[BaseProvider]) -> None:
         """
@@ -25,5 +25,5 @@ class IndexPriorityStrategy(BaseStrategy):
         for provider in self.providers:
             result = provider.get(*args, **kwargs)
 
-            if result:
+            if result is not None:
                 return result
