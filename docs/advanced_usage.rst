@@ -75,11 +75,9 @@ Example:
     from sitri.contrib.json import JsonConfigProvider
     from sitri.contrib.consul import ConsulConfigProvider
 
-    consul = Consul()
-
     consul_conf = ConsulConfigProvider(
         folder="project/",
-        consul_connection=consul
+        consul_connector=lambda: Consul()
     )
 
     system_conf = SystemConfigProvider(prefix="project")

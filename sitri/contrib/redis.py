@@ -1,6 +1,6 @@
 import typing
 
-import redis
+from loguru import logger
 
 from ..config.providers import ConfigProvider
 from ..credentials.providers import CredentialProvider
@@ -13,14 +13,18 @@ class RedisConfigProvider(ConfigProvider):
     provider_code = "redis"
     _prefix = "redis"
 
-    def __init__(self, prefix: str, redis_connection: redis.Redis):
+    def __init__(self, prefix: str, redis_connector: typing.Callable):
         """
 
         :param prefix: prefix for create "namespace" for project variables in redis
-        :param redis_connection: connection to your redis server
+        :param redis_connector: function return connection to Redis
         """
         self._prefix = prefix.upper()
-        self._redis = redis_connection
+        self._redis_get = redis_connector
+
+    @property
+    def _redis(self):
+        return self._redis_get()
 
     def prefixize(self, key: str) -> str:
         """Get key with prefix
@@ -37,12 +41,14 @@ class RedisConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
+    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
 
         if isinstance(result, bytes):
             return result.decode()
 
+    @logger.catch(level="ERROR")
     def keys(self) -> typing.List[str]:
         var_list = []
 
@@ -60,14 +66,18 @@ class RedisCredentialProvider(CredentialProvider):
     provider_code = "redis"
     prefix = "redis"
 
-    def __init__(self, prefix: str, redis_connection: redis.Redis):
+    def __init__(self, prefix: str, redis_connector: typing.Callable):
         """
 
         :param prefix: prefix for create "namespace" for project variables in redis
-        :param redis_connection: connection to your redis server
+        :param redis_connector: function return connection to Redis
         """
         self._prefix = prefix.upper()
-        self._redis = redis_connection
+        self._redis_get = redis_connector
+
+    @property
+    def _redis(self):
+        return self._redis_get()
 
     def prefixize(self, key: str) -> str:
         """Get key with prefix
@@ -76,6 +86,7 @@ class RedisCredentialProvider(CredentialProvider):
         """
         return f"{self._prefix}_{key.upper()}"
 
+    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Any:
         result = self._redis.get(self.prefixize(key))
 

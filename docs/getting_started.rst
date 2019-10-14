@@ -106,10 +106,8 @@ Usage
     from sitri.contrib.system import SystemCredentialProvider
     from sitri.contrib.consul import ConsulConfigProvider
 
-    consul = Consul()
-
     conf = ConsulConfigProvider(
-            folder="test/", consul_connection=consul
+            folder="test/", consul_connector=lambda: Consul()
     )
 
     print(conf.get("a"), conf.get("b"))
@@ -268,13 +266,11 @@ Usage
     from sitri.contrib.redis import RedisConfigProvider, RedisCredentialProvider
 
 
-    redis = Redis(host='localhost', port=6379, db=0)
-
     conf = RedisConfigProvider(
-        prefix="test_config", redis_connection=redis
+        prefix="test_config", redis_connector=lambda: Redis(host='localhost', port=6379, db=0)
     )
     cred = RedisCredentialProvider(
-        prefix="test_credential", redis_connection=redis
+        prefix="test_credential", redis_connector=lambda: Redis(host='localhost', port=6379, db=0)
     )
 
     print(conf.get("a"), cred.get("a"))
@@ -314,15 +310,12 @@ Usage
 
     from sitri.contrib.vedis import VedisConfigProvider, VedisCredentialProvider
 
-
-    vedis = Vedis(":mem:")
-
     conf = VedisConfigProvider(
-        hash_name="test", vedis_connection=redis
+        hash_name="test", vedis_connector=lambda: Vedis(":mem:")
     )
 
     cred = VedisCredentialProvider(
-        hash_name="test", vedis_connection=redis)
+        hash_name="test", vedis_connector=lambda: Vedis(":mem:")
     )
 
     print(conf.get("a"), cred.get("b"))
