@@ -1,6 +1,6 @@
 import typing
 
-from consul import Consul
+from loguru import logger
 
 from ..config.providers import ConfigProvider
 
@@ -11,15 +11,20 @@ class ConsulConfigProvider(ConfigProvider):
     provider_code = "consul"
     folder: str
 
-    def __init__(self, consul_connection: Consul, folder: str = "sitri/") -> None:
+    def __init__(self, consul_connector: typing.Callable, folder: str = "sitri/") -> None:
         """
 
-        :param consul_connection: consul connection object
+        :param consul_connector: function return connection to Consul
         :param folder: consul folder with config vars
         """
-        self._consul = consul_connection
+        self._consul_get = consul_connector
         self.folder = folder
 
+    @property
+    def _consul(self):
+        return self._consul_get()
+
+    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
         """Get value from consul by key
 
@@ -32,6 +37,7 @@ class ConsulConfigProvider(ConfigProvider):
 
         return None
 
+    @logger.catch(level="ERROR")
     def keys(self) -> typing.List[typing.Any]:
         """Get keys list from consul folder
         """
