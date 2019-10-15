@@ -11,7 +11,7 @@ Practice
    :maxdepth: 3
 
    getting_started
-   
+
    advanced_usage
 
 API Reference
