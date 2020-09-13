@@ -14,7 +14,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.5"
-loguru = "^0.5.2"
+loguru = "^0.5.1"
 
 
 [tool.poetry.dev-dependencies]
