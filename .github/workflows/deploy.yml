@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel poetry
+        pip install setuptools wheel poetry attrs
         poetry config virtualenvs.create false --local && poetry install --no-dev --no-ansi -n
     - name: Test with pre-commit
       run: |
