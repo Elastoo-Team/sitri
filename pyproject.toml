@@ -20,9 +20,6 @@ pytest_cases = "^2.2.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
-python-consul = "^1.1"
-redis = "^3.3"
-vedis = "^0.7.3"
 pytest-mock = "^1.11"
 mypy = "^0.730.0"
 bumpversion = "^0.5.3"
@@ -32,7 +29,6 @@ pytest-cov = "^2.7"
 vulture = "^1.1"
 radon = "^4.0"
 tidypy = "^0.11.0"
-simplejson = "^3.16"
 pytest-lazy-fixture = "^0.5.2"
 
 [tool.black]
