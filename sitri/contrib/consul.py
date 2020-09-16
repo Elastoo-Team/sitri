@@ -6,7 +6,7 @@ from ..config.providers import ConfigProvider
 
 
 class ConsulConfigProvider(ConfigProvider):
-    """Provider for HashiCorp Consul config storage"""
+    """Provider for HashiCorp Consul config storage."""
 
     provider_code = "consul"
     folder: str
@@ -26,7 +26,7 @@ class ConsulConfigProvider(ConfigProvider):
 
     @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
-        """Get value from consul by key
+        """Get value from consul by key.
 
         :param key: key from consul folder
         """
@@ -39,8 +39,7 @@ class ConsulConfigProvider(ConfigProvider):
 
     @logger.catch(level="ERROR")
     def keys(self) -> typing.List[typing.Any]:
-        """Get keys list from consul folder
-        """
+        """Get keys list from consul folder."""
         index, data = self._consul.kv.get(self.folder, recurse=True)
         var_list = []
 

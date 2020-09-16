@@ -7,8 +7,7 @@ from ..credentials.providers import CredentialProvider
 
 
 class RedisConfigProvider(ConfigProvider):
-    """Config provider for redis storage
-    """
+    """Config provider for redis storage."""
 
     provider_code = "redis"
     _prefix = "redis"
@@ -27,14 +26,14 @@ class RedisConfigProvider(ConfigProvider):
         return self._redis_get()
 
     def prefixize(self, key: str) -> str:
-        """Get key with prefix
+        """Get key with prefix.
 
         :param key: varname without prefix
         """
         return f"{self._prefix}_{key.upper()}"
 
     def unprefixize(self, var_name: str) -> str:
-        """Remove prefix from variable name
+        """Remove prefix from variable name.
 
         :param var_name: variable name
         """
@@ -60,8 +59,7 @@ class RedisConfigProvider(ConfigProvider):
 
 
 class RedisCredentialProvider(CredentialProvider):
-    """Credential provider for redis storage
-    """
+    """Credential provider for redis storage."""
 
     provider_code = "redis"
     prefix = "redis"
@@ -80,7 +78,7 @@ class RedisCredentialProvider(CredentialProvider):
         return self._redis_get()
 
     def prefixize(self, key: str) -> str:
-        """Get key with prefix
+        """Get key with prefix.
 
         :param key: varname without prefix
         """

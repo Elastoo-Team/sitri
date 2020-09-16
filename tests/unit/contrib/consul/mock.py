@@ -23,7 +23,7 @@ class ConsulMock:
             return 0, data
 
     def keys(self) -> typing.List[str]:
-        return [key for key in self._env.keys()]
+        return list(self._env.keys())
 
     def __instancecheck__(self, instance):
         return isinstance(instance, consul.Consul)

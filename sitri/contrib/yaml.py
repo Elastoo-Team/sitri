@@ -13,7 +13,7 @@ except ImportError:
 
 
 class YamlConfigProvider(ConfigProvider):
-    """Config provider for YAML"""
+    """Config provider for YAML."""
 
     provider_code = "yaml"
 
@@ -79,7 +79,7 @@ class YamlConfigProvider(ConfigProvider):
             return None
 
     def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
-        """Get value from json
+        """Get value from json.
 
         :param key: key or path for search
         :param path_mode: boolean mode switcher
@@ -94,7 +94,7 @@ class YamlConfigProvider(ConfigProvider):
         return self._get_by_key(key)
 
     def keys(self, path_mode: bool = False, separator: str = None) -> typing.List[str]:
-        """Keys in json
+        """Keys in json.
 
         :param path_mode: [future] path mode for keys list
         :param separator: [future] separators for keys in path mode
@@ -108,7 +108,7 @@ class YamlConfigProvider(ConfigProvider):
 
 
 class YamlCredentialProvider(CredentialProvider):
-    """Credential provider for YAML"""
+    """Credential provider for YAML."""
 
     provider_code = "yaml"
 
@@ -174,7 +174,7 @@ class YamlCredentialProvider(CredentialProvider):
             return None
 
     def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
-        """Get value from json
+        """Get value from json.
 
         :param key: key or path for search
         :param path_mode: boolean mode switcher
@@ -189,7 +189,7 @@ class YamlCredentialProvider(CredentialProvider):
         return self._get_by_key(key)
 
     def keys(self, path_mode: bool = False, separator: str = None) -> typing.List[str]:
-        """Keys in json
+        """Keys in json.
 
         :param path_mode: [future] path mode for keys list
         :param separator: [future] separators for keys in path mode

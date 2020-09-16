@@ -7,7 +7,7 @@ from ..credentials.providers import CredentialProvider
 
 
 class JsonConfigProvider(ConfigProvider):
-    """Config provider for JSON"""
+    """Config provider for JSON."""
 
     provider_code = "json"
 
@@ -69,7 +69,7 @@ class JsonConfigProvider(ConfigProvider):
             return None
 
     def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
-        """Get value from json
+        """Get value from json.
 
         :param key: key or path for search
         :param path_mode: boolean mode switcher
@@ -84,7 +84,7 @@ class JsonConfigProvider(ConfigProvider):
         return self._get_by_key(key)
 
     def keys(self, path_mode: bool = False, separator: str = None) -> typing.List[str]:
-        """Keys in json
+        """Keys in json.
 
         :param path_mode: [future] path mode for keys list
         :param separator: [future] separators for keys in path mode
@@ -98,7 +98,7 @@ class JsonConfigProvider(ConfigProvider):
 
 
 class JsonCredentialProvider(CredentialProvider):
-    """Credential provider for JSON"""
+    """Credential provider for JSON."""
 
     provider_code = "json"
 
@@ -159,7 +159,7 @@ class JsonCredentialProvider(CredentialProvider):
             return None
 
     def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
-        """Get value from json
+        """Get value from json.
 
         :param key: key or path for search
         :param path_mode: boolean mode switcher
@@ -174,7 +174,7 @@ class JsonCredentialProvider(CredentialProvider):
         return self._get_by_key(key)
 
     def keys(self, path_mode: bool = False, separator: str = None) -> typing.List[str]:
-        """Keys in json
+        """Keys in json.
 
         :param path_mode: [future] path mode for keys list
         :param separator: [future] separators for keys in path mode

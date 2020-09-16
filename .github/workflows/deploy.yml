@@ -1,0 +1,31 @@
+name: Deploy sitri
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.6'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel poetry
+        poetry config virtualenvs.create false --local && poetry install --no-dev --no-ansi -n
+    - name: Test with pre-commit
+      run: |
+        pip install pre-commit
+        pre-commit run -a
+    - name: Build and publish
+      run: |
+          poetry config http-basic.pypi __token__ ${{ secrets.PYPI_TOKEN }}
+          poetry publish --build

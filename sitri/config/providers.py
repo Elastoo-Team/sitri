@@ -12,19 +12,15 @@ from ..base import BaseProvider
 
 
 class ConfigProvider(ABC, BaseProvider):
-    """
-        Base class for config providers
-    """
+    """Base class for config providers."""
 
 
 class ConfigProviderManager:
-    """
-        Manager for childeren ConfigProvider classes
-    """
+    """Manager for childeren ConfigProvider classes."""
 
     @staticmethod
     def get_by_code(code: str) -> typing.Optional[typing.Type[ConfigProvider]]:
-        """Get config provider by provider_code
+        """Get config provider by provider_code.
 
         :param code: provider_code for search config provider
         :Example:

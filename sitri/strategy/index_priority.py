@@ -5,7 +5,7 @@ from .base import BaseStrategy
 
 
 class IndexPriorityStrategy(BaseStrategy):
-    """Get value from providers with priority by index in tuple"""
+    """Get value from providers with priority by index in tuple."""
 
     provider_code = "single"
 
@@ -17,7 +17,7 @@ class IndexPriorityStrategy(BaseStrategy):
         self.providers = data_providers
 
     def get(self, *args, **kwargs):
-        """Get value by index priority strategy
+        """Get value by index priority strategy.
 
         :param args: any args for providers
         :param kwargs: any kwargs for providers
