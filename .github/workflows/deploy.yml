@@ -27,5 +27,5 @@ jobs:
         pre-commit run -a
     - name: Build and publish
       run: |
-          poetry config http-basic.pypi __token__ ${{ secrets.PYPI_TOKEN }}
+          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
           poetry publish --build
