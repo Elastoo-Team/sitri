@@ -1,3 +1,5 @@
+import typing
+
 from ..base import BaseProvider
 from .base import BaseStrategy
 
@@ -5,7 +7,7 @@ from .base import BaseStrategy
 class SingleStrategy(BaseStrategy):
     provider_code = "single"
 
-    def __init__(self, data_provider: BaseProvider) -> None:
+    def __init__(self, data_provider: typing.Type[BaseProvider]) -> None:
         self.provider = data_provider
 
     def get(self, *args, **kwargs):

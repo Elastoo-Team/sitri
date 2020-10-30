@@ -7,9 +7,9 @@ from .base import BaseStrategy
 class IndexPriorityStrategy(BaseStrategy):
     """Get value from providers with priority by index in tuple."""
 
-    provider_code = "single"
+    provider_code = "index_priority"
 
-    def __init__(self, data_providers: typing.Tuple[BaseProvider]) -> None:
+    def __init__(self, *data_providers: typing.Type[BaseProvider]) -> None:
         """
         :param data_providers: config or credential providers
         """
