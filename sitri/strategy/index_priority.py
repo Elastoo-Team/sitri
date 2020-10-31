@@ -1,6 +1,6 @@
 import typing
 
-from ..base import BaseProvider
+from .. import ConfigProvider, CredentialProvider
 from .base import BaseStrategy
 
 
@@ -9,7 +9,9 @@ class IndexPriorityStrategy(BaseStrategy):
 
     provider_code = "index_priority"
 
-    def __init__(self, *data_providers: typing.Type[BaseProvider]) -> None:
+    def __init__(
+        self, *data_providers: typing.Union[typing.Type[ConfigProvider], typing.Type[CredentialProvider]]
+    ) -> None:
         """
         :param data_providers: config or credential providers
         """
