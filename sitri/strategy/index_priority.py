@@ -9,9 +9,7 @@ class IndexPriorityStrategy(BaseStrategy):
 
     provider_code = "index_priority"
 
-    def __init__(
-        self, *data_providers: typing.Union[typing.Type[ConfigProvider], typing.Type[CredentialProvider]]
-    ) -> None:
+    def __init__(self, *data_providers: typing.Union[ConfigProvider, CredentialProvider]) -> None:
         """
         :param data_providers: config or credential providers
         """

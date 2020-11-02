@@ -8,7 +8,7 @@ class SingleStrategy(BaseStrategy):
     provider_code = "single"
 
     def __init__(
-        self, data_provider: typing.Union[typing.Type[ConfigProvider], typing.Type[CredentialProvider]]
+        self, data_provider: typing.Union[ConfigProvider, CredentialProvider]
     ) -> None:
         self.provider = data_provider
 
