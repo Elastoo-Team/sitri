@@ -8,7 +8,7 @@
   </h1>
 </p>
 
-[![Build Status](https://travis-ci.org/LemegetonX/sitri.svg?branch=master)](https://travis-ci.org/LemegetonX/sitri)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FLemegetonX%2Fsitri%2Fbadge&style=popout)](https://actions-badge.atrox.dev/LemegetonX/sitri/goto)
 [![codecov](https://codecov.io/gh/LemegetonX/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/LemegetonX/sitri)
 ![PyPI](https://img.shields.io/pypi/v/sitri)
 ![Read the Docs](https://img.shields.io/readthedocs/sitri)
