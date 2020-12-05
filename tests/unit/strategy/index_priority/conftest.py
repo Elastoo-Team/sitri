@@ -17,4 +17,4 @@ def test_mock_provider2():
 
 @pytest.fixture
 def test_index_priority_strategy(test_mock_provider1, test_mock_provider2):
-    return IndexPriorityStrategy((test_mock_provider1, test_mock_provider2))
+    return IndexPriorityStrategy(test_mock_provider1, test_mock_provider2)

@@ -11,7 +11,7 @@ def test_no_file_error():
 
 
 @pytest.mark.parametrize(
-    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_data_config")]
+    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_config_data")]
 )
 def test_metadata(json_config_obj) -> None:
     assert json_config_obj.provider_code == "json"
@@ -19,7 +19,7 @@ def test_metadata(json_config_obj) -> None:
 
 
 @pytest.mark.parametrize(
-    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_data_config")]
+    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_config_data")]
 )
 def test_get_by_other(json_config_obj) -> None:
     assert isinstance(json_config_obj._get_by_path("test", separator=json_config_obj.separator), dict)
@@ -35,7 +35,7 @@ def test_get_by_other(json_config_obj) -> None:
 
 
 @pytest.mark.parametrize(
-    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_data_config")]
+    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_config_data")]
 )
 def test_get(json_config_obj):
     assert isinstance(json_config_obj.get("test"), dict)
@@ -51,7 +51,7 @@ def test_get(json_config_obj):
 
 
 @pytest.mark.parametrize(
-    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_data_config")]
+    "json_config_obj", [pytest.lazy_fixture("json_config"), pytest.lazy_fixture("json_config_data")]
 )
 def test_keys(json_config_obj):
     assert "test" in json_config_obj.keys()

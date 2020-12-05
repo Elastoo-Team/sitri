@@ -1,13 +1,11 @@
-import typing
-
-from .. import ConfigProvider, CredentialProvider
+from .. import ConfigProvider
 from .base import BaseStrategy
 
 
 class SingleStrategy(BaseStrategy):
     provider_code = "single"
 
-    def __init__(self, data_provider: typing.Union[ConfigProvider, CredentialProvider]) -> None:
+    def __init__(self, data_provider: ConfigProvider) -> None:
         self.provider = data_provider
 
     def get(self, *args, **kwargs):

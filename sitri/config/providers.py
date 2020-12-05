@@ -16,7 +16,7 @@ class ConfigProvider(ABC, BaseProvider):
 
 
 class ConfigProviderManager:
-    """Manager for childeren ConfigProvider classes."""
+    """Manager for children ConfigProvider classes."""
 
     @staticmethod
     def get_by_code(code: str) -> typing.Optional[typing.Type[ConfigProvider]]:

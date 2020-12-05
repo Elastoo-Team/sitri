@@ -2,7 +2,7 @@ import typing
 
 import pytest
 
-from sitri.contrib.vedis import VedisConfigProvider, VedisCredentialProvider
+from sitri.contrib.vedis import VedisConfigProvider
 
 from .mock import VedisMock
 
@@ -15,8 +15,3 @@ def vedis_connection() -> typing.Callable:
 @pytest.fixture(scope="module")
 def vedis_config(vedis_connection) -> VedisConfigProvider:
     return VedisConfigProvider(vedis_connector=vedis_connection, hash_name="test")
-
-
-@pytest.fixture(scope="module")
-def vedis_credential(vedis_connection) -> VedisCredentialProvider:
-    return VedisCredentialProvider(vedis_connector=vedis_connection, hash_name="test")

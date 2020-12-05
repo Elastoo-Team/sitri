@@ -3,7 +3,6 @@ import typing
 from loguru import logger
 
 from ..config.providers import ConfigProvider
-from ..credentials.providers import CredentialProvider
 
 
 class RedisConfigProvider(ConfigProvider):
@@ -56,37 +55,3 @@ class RedisConfigProvider(ConfigProvider):
                 var_list.append(self.unprefixize(var.decode()))
 
         return var_list
-
-
-class RedisCredentialProvider(CredentialProvider):
-    """Credential provider for redis storage."""
-
-    provider_code = "redis"
-    prefix = "redis"
-
-    def __init__(self, prefix: str, redis_connector: typing.Callable):
-        """
-
-        :param prefix: prefix for create "namespace" for project variables in redis
-        :param redis_connector: function return connection to Redis
-        """
-        self._prefix = prefix.upper()
-        self._redis_get = redis_connector
-
-    @property
-    def _redis(self):
-        return self._redis_get()
-
-    def prefixize(self, key: str) -> str:
-        """Get key with prefix.
-
-        :param key: varname without prefix
-        """
-        return f"{self._prefix}_{key.upper()}"
-
-    @logger.catch(level="ERROR")
-    def get(self, key: str, **kwargs) -> typing.Any:
-        result = self._redis.get(self.prefixize(key))
-
-        if isinstance(result, bytes):
-            return result.decode()

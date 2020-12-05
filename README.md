@@ -30,13 +30,14 @@ pip3 install sitri
 # Basics with SystemProvider
 
 ```python
-from sitri.contrib.system import SystemCredentialProvider, SystemConfigProvider
+from sitri.contrib.system import SystemConfigProvider
 from sitri import Sitri
 
-conf = Sitri(config_provider=SystemConfigProvider(prefix="basics"),
-             credential_provider=SystemCredentialProvider(prefix="basics"))
+conf = Sitri(
+    config_provider=SystemConfigProvider(prefix="basics"),
+)
 ```
-System provider use system environment for get config and credential data. For unique sitri lookup to "namespace" by prefix.
+System provider use system environment for get config data. For unique - sitri lookup to "namespace" by prefix.
 
 Example:
 
@@ -48,6 +49,7 @@ export BASICS_NAME=Huey
 *In code:*
 ```python
 name = conf.get_config("name")
+
 print(name)  # output: Huey
 ```
 

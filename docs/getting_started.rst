@@ -51,7 +51,7 @@ In code:
 
     conf = Sitri(
         config_provider=SystemConfigProvider(prefix="test"),
-        credential_provider=SystemCredentialProvider(prefix="test")
+        credential_provider=SystemCredentialProvider(prefix="test"),
     )
 
 
@@ -106,9 +106,7 @@ Usage
     from sitri.contrib.system import SystemCredentialProvider
     from sitri.contrib.consul import ConsulConfigProvider
 
-    conf = ConsulConfigProvider(
-            folder="test/", consul_connector=lambda: Consul()
-    )
+    conf = ConsulConfigProvider(folder="test/", consul_connector=lambda: Consul())
 
     print(conf.get("a"), conf.get("b"))
     # Output: 1 2
@@ -157,9 +155,7 @@ Usage
     from sitri.contrib.json import JsonConfigProvider
 
 
-    conf = JsonConfigProvider(
-            json_path="./data.json", default_separator="/"
-    )
+    conf = JsonConfigProvider(json_path="./data.json", default_separator="/")
 
     conf.get("test.test_key1", ":(")
     # Output: :(
@@ -214,9 +210,7 @@ Usage
     from sitri.contrib.yaml import YamlConfigProvider
 
 
-    conf = YamlConfigProvider(
-            yaml_path="./data.yaml", default_separator="/"
-    )
+    conf = YamlConfigProvider(yaml_path="./data.yaml", default_separator="/")
 
     conf.get("test.test_key1", ":(")
     # Output: :(
@@ -267,10 +261,12 @@ Usage
 
 
     conf = RedisConfigProvider(
-        prefix="test_config", redis_connector=lambda: Redis(host='localhost', port=6379, db=0)
+        prefix="test_config",
+        redis_connector=lambda: Redis(host="localhost", port=6379, db=0),
     )
     cred = RedisCredentialProvider(
-        prefix="test_credential", redis_connector=lambda: Redis(host='localhost', port=6379, db=0)
+        prefix="test_credential",
+        redis_connector=lambda: Redis(host="localhost", port=6379, db=0),
     )
 
     print(conf.get("a"), cred.get("a"))
@@ -310,13 +306,9 @@ Usage
 
     from sitri.contrib.vedis import VedisConfigProvider, VedisCredentialProvider
 
-    conf = VedisConfigProvider(
-        hash_name="test", vedis_connector=lambda: Vedis(":mem:")
-    )
+    conf = VedisConfigProvider(hash_name="test", vedis_connector=lambda: Vedis(":mem:"))
 
-    cred = VedisCredentialProvider(
-        hash_name="test", vedis_connector=lambda: Vedis(":mem:")
-    )
+    cred = VedisCredentialProvider(hash_name="test", vedis_connector=lambda: Vedis(":mem:"))
 
     print(conf.get("a"), cred.get("b"))
     # Output: 1 2

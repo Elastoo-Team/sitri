@@ -75,19 +75,12 @@ Example:
     from sitri.contrib.json import JsonConfigProvider
     from sitri.contrib.consul import ConsulConfigProvider
 
-    consul_conf = ConsulConfigProvider(
-        folder="project/",
-        consul_connector=lambda: Consul()
-    )
+    consul_conf = ConsulConfigProvider(folder="project/", consul_connector=lambda: Consul())
 
     system_conf = SystemConfigProvider(prefix="project")
     json_conf = JsonConfigProvider()
 
-    strategy = IndexPriorityStrategy((
-        consul_conf,
-        json_conf,
-        system_conf
-    ))
+    strategy = IndexPriorityStrategy((consul_conf, json_conf, system_conf))
 
     strategy.get("test1")
     # Output: -1

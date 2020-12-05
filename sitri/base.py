@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class BaseProvider(metaclass=ABCMeta):
-    """Base Provider for config and credential providers."""
+    """Base Provider for config providers."""
 
     @property
     @abstractmethod
