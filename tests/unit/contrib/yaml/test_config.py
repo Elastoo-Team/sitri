@@ -1,6 +1,6 @@
 import pytest
 
-from sitri.contrib.yaml import YamlConfigProvider
+from sitri.providers.contrib.yaml import YamlConfigProvider
 
 
 def test_no_file_error():

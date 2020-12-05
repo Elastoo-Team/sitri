@@ -30,7 +30,7 @@ pip3 install sitri
 # Basics with SystemProvider
 
 ```python
-from sitri.contrib.system import SystemConfigProvider
+from sitri.providers.contrib import SystemConfigProvider
 from sitri import Sitri
 
 conf = Sitri(

@@ -1,6 +1,6 @@
 import pytest
 
-from sitri.contrib.system import SystemConfigProvider
+from sitri.providers.contrib.system import SystemConfigProvider
 
 
 @pytest.fixture(scope="module")

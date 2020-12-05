@@ -2,7 +2,7 @@ import typing
 
 from loguru import logger
 
-from ..config.providers import ConfigProvider
+from sitri.providers.base import ConfigProvider
 
 
 class VedisConfigProvider(ConfigProvider):

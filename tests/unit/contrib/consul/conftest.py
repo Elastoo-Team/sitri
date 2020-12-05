@@ -2,7 +2,7 @@ import typing
 
 import pytest
 
-from sitri.contrib.consul import ConsulConfigProvider
+from sitri.providers.contrib.consul import ConsulConfigProvider
 
 from .mock import ConsulMock
 

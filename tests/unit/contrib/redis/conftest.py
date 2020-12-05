@@ -2,7 +2,7 @@ import typing
 
 import pytest
 
-from sitri.contrib.redis import RedisConfigProvider
+from sitri.providers.contrib.redis import RedisConfigProvider
 
 from .mock import RedisMock
 

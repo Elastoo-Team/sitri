@@ -2,7 +2,7 @@ import typing
 
 import pytest
 
-from sitri.contrib.vedis import VedisConfigProvider
+from sitri.providers.contrib.vedis import VedisConfigProvider
 
 from .mock import VedisMock
 

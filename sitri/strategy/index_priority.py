@@ -1,5 +1,5 @@
-from .. import ConfigProvider
-from .base import BaseStrategy
+from sitri.providers.base import ConfigProvider
+from sitri.strategy.base import BaseStrategy
 
 
 class IndexPriorityStrategy(BaseStrategy):

@@ -1,6 +1,6 @@
 import pytest
 
-from sitri.contrib.json import JsonConfigProvider
+from sitri.providers.contrib.json import JsonConfigProvider
 
 
 def test_no_file_error():

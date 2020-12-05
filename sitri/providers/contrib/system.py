@@ -1,7 +1,7 @@
 import os
 import typing
 
-from ..config.providers import ConfigProvider
+from sitri.providers.base import ConfigProvider
 
 
 class SystemConfigProvider(ConfigProvider):

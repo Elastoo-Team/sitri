@@ -3,7 +3,7 @@ import typing
 
 import yaml
 
-from ..config.providers import ConfigProvider
+from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
 try:
     from StringIO import StringIO
@@ -11,7 +11,7 @@ except ImportError:
     from io import StringIO
 
 
-class YamlConfigProvider(ConfigProvider):
+class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
     """Config provider for YAML."""
 
     provider_code = "yaml"
@@ -22,6 +22,7 @@ class YamlConfigProvider(ConfigProvider):
         yaml_data: str = None,
         default_separator: str = ".",
         found_file_error: bool = True,
+        default_path_mode_state: bool = False,
     ):
         """
 
@@ -29,6 +30,7 @@ class YamlConfigProvider(ConfigProvider):
         :param yaml_data: yaml data in string
         :param default_separator: default value separator for path-mode
         :param found_file_error: if true no file not found error raise on yaml.load
+        :param default_path_mode_state: default state for path mode on get value by key
         """
 
         if not yaml_data:
@@ -47,6 +49,7 @@ class YamlConfigProvider(ConfigProvider):
             self._yaml = yaml.safe_load(yaml_data)
 
         self.separator = default_separator
+        self._default_path_mode_state = default_path_mode_state
 
     def _get_by_path(self, path: str, separator: str) -> typing.Any:
         """Retrieve value from a dictionary using a list of keys.
@@ -77,7 +80,9 @@ class YamlConfigProvider(ConfigProvider):
         else:
             return None
 
-    def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
+    def get(
+        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None
+    ) -> typing.Optional[typing.Any]:
         """Get value from json.
 
         :param key: key or path for search
@@ -87,7 +92,7 @@ class YamlConfigProvider(ConfigProvider):
 
         separator = separator if separator else self.separator
 
-        if path_mode:
+        if self._get_path_mode_state(path_mode):
             return self._get_by_path(key, separator=separator)
 
         return self._get_by_key(key)

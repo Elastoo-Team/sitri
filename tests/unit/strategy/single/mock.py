@@ -1,3 +1,3 @@
-from sitri.contrib.json import JsonConfigProvider
+from sitri.providers.contrib.json import JsonConfigProvider
 
 MockProvider = JsonConfigProvider

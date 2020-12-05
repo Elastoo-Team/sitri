@@ -2,10 +2,10 @@ import json
 import os
 import typing
 
-from ..config.providers import ConfigProvider
+from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
 
-class JsonConfigProvider(ConfigProvider):
+class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
     """Config provider for JSON."""
 
     provider_code = "json"
@@ -16,6 +16,7 @@ class JsonConfigProvider(ConfigProvider):
         json_data: str = None,
         default_separator: str = ".",
         found_file_error: bool = True,
+        default_path_mode_state: bool = False,
     ):
         """
 
@@ -23,6 +24,7 @@ class JsonConfigProvider(ConfigProvider):
         :param json_data: data of json
         :param default_separator: default value separator for path-mode
         :param found_file_error: if true no file not found error raise on json.load
+        :param default_path_mode_state: default state for path mode on get value by key
         """
         if not json_data:
             try:
@@ -37,6 +39,7 @@ class JsonConfigProvider(ConfigProvider):
             self._json = json.loads(json_data)
 
         self.separator = default_separator
+        self._default_path_mode_state = default_path_mode_state
 
     def _get_by_path(self, path: str, separator: str) -> typing.Any:
         """Retrieve value from a dictionary using a list of keys.
@@ -67,7 +70,9 @@ class JsonConfigProvider(ConfigProvider):
         else:
             return None
 
-    def get(self, key: str, path_mode: bool = False, separator: str = None) -> typing.Optional[typing.Any]:
+    def get(
+        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None
+    ) -> typing.Optional[typing.Any]:
         """Get value from json.
 
         :param key: key or path for search
@@ -77,7 +82,7 @@ class JsonConfigProvider(ConfigProvider):
 
         separator = separator if separator else self.separator
 
-        if path_mode:
+        if self._get_path_mode_state(path_mode):
             return self._get_by_path(key, separator=separator)
 
         return self._get_by_key(key)

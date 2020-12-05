@@ -6,13 +6,28 @@
 
 
 import typing
-from abc import ABC
-
-from ..base import BaseProvider
+from abc import ABC, abstractmethod
 
 
-class ConfigProvider(ABC, BaseProvider):
+class ConfigProvider(ABC):
     """Base class for config providers."""
+
+    @property
+    @abstractmethod
+    def provider_code(self) -> str:
+        """Provider code property for identity provider in manager."""
+
+    @abstractmethod
+    def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
+        """Get value from storage.
+
+        :param key: key for get value
+        :param kwargs: additional arguments for providers
+        """
+
+    def keys(self, **kwargs) -> typing.List[str]:
+        """Get keys list in storage."""
+        raise NotImplementedError("keys method not impl for this provider!")
 
 
 class ConfigProviderManager:

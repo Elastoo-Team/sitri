@@ -2,7 +2,7 @@ import typing
 
 import pytest
 
-from sitri.config.providers import ConfigProviderManager
+from sitri.providers.base import ConfigProviderManager
 
 
 @pytest.fixture(scope="module")

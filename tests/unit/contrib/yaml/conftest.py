@@ -1,7 +1,7 @@
 import pytest
 import yaml
 
-from sitri.contrib.yaml import YamlConfigProvider
+from sitri.providers.contrib.yaml import YamlConfigProvider
 
 try:
     from StringIO import StringIO

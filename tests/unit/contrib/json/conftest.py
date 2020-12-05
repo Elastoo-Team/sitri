@@ -1,6 +1,8 @@
+import json
+
 import pytest
 
-from sitri.contrib.json import JsonConfigProvider, json
+from sitri.providers.contrib.json import JsonConfigProvider
 
 
 @pytest.fixture(scope="module")

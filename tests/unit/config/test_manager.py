@@ -1,8 +1,8 @@
-from sitri.contrib.consul import ConsulConfigProvider
-from sitri.contrib.json import JsonConfigProvider
-from sitri.contrib.redis import RedisConfigProvider
-from sitri.contrib.system import SystemConfigProvider
-from sitri.contrib.vedis import VedisConfigProvider
+from sitri.providers.contrib.consul import ConsulConfigProvider
+from sitri.providers.contrib.json import JsonConfigProvider
+from sitri.providers.contrib.redis import RedisConfigProvider
+from sitri.providers.contrib.system import SystemConfigProvider
+from sitri.providers.contrib.vedis import VedisConfigProvider
 
 
 def test_get_by_codes(config_manager):
