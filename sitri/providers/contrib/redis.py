@@ -19,10 +19,14 @@ class RedisConfigProvider(ConfigProvider):
         """
         self._prefix = prefix.upper()
         self._redis_get = redis_connector
+        self._redis_instance = None
 
     @property
     def _redis(self):
-        return self._redis_get()
+        if not self._redis_instance:
+            self._redis_instance = self._redis_get()
+
+        return self._redis_instance
 
     def prefixize(self, key: str) -> str:
         """Get key with prefix.
