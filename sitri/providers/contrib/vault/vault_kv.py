@@ -1,5 +1,6 @@
 import typing
 
+import hvac
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
@@ -15,7 +16,7 @@ class VaultKVConfigProvider(ConfigProvider):
 
     def __init__(
         self,
-        vault_connector: typing.Callable,
+        vault_connector: typing.Callable[[], hvac.Client],
         mount_point: typing.Optional[str] = None,
         secret_path: typing.Optional[str] = None,
     ):
@@ -31,7 +32,7 @@ class VaultKVConfigProvider(ConfigProvider):
         self._secret_path = secret_path
 
     @property
-    def _vault(self):
+    def _vault(self) -> hvac.Client:
         if not self._vault_hvac_instance:
             self._vault_hvac_instance = self._vault_get()
 

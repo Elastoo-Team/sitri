@@ -7,7 +7,7 @@ from sitri.providers.contrib.json import JsonConfigProvider
 
 @pytest.fixture(scope="module")
 def path_to_json() -> str:
-    return "tests/unit/contrib/json/data.json"
+    return "tests/unit/configs/json/data.json"
 
 
 @pytest.fixture(scope="module")

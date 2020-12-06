@@ -1,5 +1,6 @@
 import typing
 
+import redis
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
@@ -11,7 +12,7 @@ class RedisConfigProvider(ConfigProvider):
     provider_code = "redis"
     _prefix = "redis"
 
-    def __init__(self, prefix: str, redis_connector: typing.Callable):
+    def __init__(self, prefix: str, redis_connector: typing.Callable[[], redis.Redis]):
         """
 
         :param prefix: prefix for create "namespace" for project variables in redis
@@ -22,7 +23,7 @@ class RedisConfigProvider(ConfigProvider):
         self._redis_instance = None
 
     @property
-    def _redis(self):
+    def _redis(self) -> redis.Redis:
         if not self._redis_instance:
             self._redis_instance = self._redis_get()
 

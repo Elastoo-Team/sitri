@@ -1,5 +1,6 @@
 import typing
 
+import vedis
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
@@ -11,7 +12,7 @@ class VedisConfigProvider(ConfigProvider):
     provider_code = "vedis"
     _hash_name = "sitri_config_hash"
 
-    def __init__(self, vedis_connector: typing.Callable, hash_name: str = "sitri_config_hash"):
+    def __init__(self, vedis_connector: typing.Callable[[], vedis.Vedis], hash_name: str = "sitri_config_hash"):
         """
 
         :param vedis_connector: return connection to vedis
@@ -22,7 +23,7 @@ class VedisConfigProvider(ConfigProvider):
         self._vedis_instance = None
 
     @property
-    def _vedis(self):
+    def _vedis(self) -> vedis.Vedis:
         if not self._vedis_instance:
             self._vedis_instance = self._vedis_get()
 

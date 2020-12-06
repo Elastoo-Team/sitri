@@ -1,5 +1,6 @@
 import typing
 
+import consul
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
@@ -11,7 +12,7 @@ class ConsulConfigProvider(ConfigProvider):
     provider_code = "consul"
     folder: str
 
-    def __init__(self, consul_connector: typing.Callable, folder: str = "sitri/") -> None:
+    def __init__(self, consul_connector: typing.Callable[[], consul.Consul], folder: str = "sitri/") -> None:
         """
         :param consul_connector: function return connection to Consul
         :param folder: consul folder with config vars
@@ -21,7 +22,7 @@ class ConsulConfigProvider(ConfigProvider):
         self._consul_instance = None
 
     @property
-    def _consul(self):
+    def _consul(self) -> consul.Consul:
         if not self._consul_instance:
             self._consul_instance = self._consul_get()
 

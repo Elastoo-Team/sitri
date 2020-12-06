@@ -22,7 +22,7 @@ def yaml_data() -> str:
 
 @pytest.fixture(scope="module")
 def path_to_yaml() -> str:
-    return "tests/unit/contrib/yaml/data.yaml"
+    return "tests/unit/configs/yaml/data.yaml"
 
 
 @pytest.fixture(scope="module")

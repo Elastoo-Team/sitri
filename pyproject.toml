@@ -16,6 +16,7 @@ readme = "README.md"
 python = "^3.6"
 loguru = "^0.5.1"
 pytest_cases = "^2.2.2"
+pydantic = "^1.7.3"
 
 
 [tool.poetry.dev-dependencies]
