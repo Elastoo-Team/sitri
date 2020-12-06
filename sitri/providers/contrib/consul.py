@@ -18,10 +18,14 @@ class ConsulConfigProvider(ConfigProvider):
         """
         self._consul_get = consul_connector
         self.folder = folder
+        self._consul_instance = None
 
     @property
     def _consul(self):
-        return self._consul_get()
+        if not self._consul_instance:
+            self._consul_instance = self._consul_get()
+
+        return self._consul_instance
 
     @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:

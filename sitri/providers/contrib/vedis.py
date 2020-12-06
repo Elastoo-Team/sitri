@@ -19,10 +19,14 @@ class VedisConfigProvider(ConfigProvider):
         """
         self._vedis_get = vedis_connector
         self._hash_name = hash_name
+        self._vedis_instance = None
 
     @property
     def _vedis(self):
-        return self._vedis_get()
+        if not self._vedis_instance:
+            self._vedis_instance = self._vedis_get()
+
+        return self._vedis_instance
 
     @property
     def _config_hash(self):
