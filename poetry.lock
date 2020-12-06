@@ -344,6 +344,21 @@ gitdb = ">=4.0.1,<5"
 
 [[package]]
 category = "dev"
+description = "HashiCorp Vault API client"
+name = "hvac"
+optional = false
+python-versions = "*"
+version = "0.10.5"
+
+[package.dependencies]
+requests = ">=2.21.0"
+six = ">=1.5.0"
+
+[package.extras]
+parser = ["pyhcl (>=0.3.10)"]
+
+[[package]]
+category = "dev"
 description = "File identification library for Python"
 name = "identify"
 optional = false
@@ -1092,7 +1107,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "97ad9a508a12d6291d9e75db0577da17767d1e05527961db37593a29717344f9"
+content-hash = "9e3e4f066fe4dee73672226b0d5317f0e7e07feff60e9d8583d6f33b85dd60a2"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -1284,6 +1299,10 @@ gitdb = [
 gitpython = [
     {file = "GitPython-3.1.11-py3-none-any.whl", hash = "sha256:6eea89b655917b500437e9668e4a12eabdcf00229a0df1762aabd692ef9b746b"},
     {file = "GitPython-3.1.11.tar.gz", hash = "sha256:befa4d101f91bad1b632df4308ec64555db684c360bd7d2130b4807d49ce86b8"},
+]
+hvac = [
+    {file = "hvac-0.10.5-py2.py3-none-any.whl", hash = "sha256:9eb929ba0f00f5886f49f31513eb274fd8adf54607864afd6e71b59243a34e0d"},
+    {file = "hvac-0.10.5.tar.gz", hash = "sha256:87dc2a3183c1d4595990203e752b430155d7582a60850dfe0756189a233d4b57"},
 ]
 identify = [
     {file = "identify-1.5.10-py2.py3-none-any.whl", hash = "sha256:cc86e6a9a390879dcc2976cef169dd9cc48843ed70b7380f321d1b118163c60e"},
