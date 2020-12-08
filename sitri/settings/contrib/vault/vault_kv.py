@@ -49,7 +49,7 @@ class VaultKVSettings(BaseSettings):
                     f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
                 )
 
-            if field.is_complex():
+            if field.is_complex() and (isinstance(vault_val, str) or isinstance(vault_val, bytes)):
                 try:
                     vault_val = self.__config__.json_loads(vault_val)  # type: ignore
                 except ValueError as e:
