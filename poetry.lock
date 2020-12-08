@@ -774,7 +774,7 @@ description = "Separate test code from test cases in pytest."
 name = "pytest-cases"
 optional = false
 python-versions = "*"
-version = "2.7.1"
+version = "2.7.2"
 
 [package.dependencies]
 decopatch = "*"
@@ -1530,8 +1530,8 @@ pytest = [
     {file = "pytest-6.1.2.tar.gz", hash = "sha256:c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e"},
 ]
 pytest-cases = [
-    {file = "pytest-cases-2.7.1.tar.gz", hash = "sha256:a94f8e4269b50089da86bdf8646d1a055e81f2d873e3342ae62c7c31fe2d68cc"},
-    {file = "pytest_cases-2.7.1-py2.py3-none-any.whl", hash = "sha256:e38cd38092fb06a7074fe0dfc93932bb6c7fc9aedce4b2d23efd562bc2bcb039"},
+    {file = "pytest-cases-2.7.2.tar.gz", hash = "sha256:682c1dca0c01afad180dc978d931e425f235f4c28499233b7ba5f96989a464c4"},
+    {file = "pytest_cases-2.7.2-py2.py3-none-any.whl", hash = "sha256:3ca7792afb78ecdaaa0343f487ed6398c67d72b00ae3f89e72fe047e82c069e4"},
 ]
 pytest-cov = [
     {file = "pytest-cov-2.10.1.tar.gz", hash = "sha256:47bd0ce14056fdd79f93e1713f88fad7bdcc583dcd7783da86ef2f085a0bb88e"},
