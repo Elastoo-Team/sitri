@@ -18,6 +18,10 @@ loguru = "^0.5.1"
 pytest_cases = "^2.2.2"
 pydantic = "^1.7.3"
 
+redis = { version = "^2.7", optional = true }
+vedis = { version = "^0.7.1", optional = true }
+pyyaml = { version = "^5.3.1", optional = true }
+hvac = { version = "^0.7.1", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.2"
