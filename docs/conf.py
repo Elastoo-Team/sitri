@@ -24,8 +24,8 @@ copyright = "2019-2020, Aleksander Lavrov"
 author = "Aleksander Lavrov"
 
 # The full version, including alpha/beta/rc tags
-release = "0.10.8"
-version = "0.10.8"
+release = "0.10.9"
+version = "0.10.9"
 
 # -- General configuration ---------------------------------------------------
 
