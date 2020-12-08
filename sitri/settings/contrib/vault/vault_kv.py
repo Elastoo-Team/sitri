@@ -19,7 +19,7 @@ class VaultKVSettings(BaseSettings):
         _secrets_dir: Union[Path, str, None] = None,
     ) -> Dict[str, Any]:
         return deep_update(
-            deep_update(self._build_vault(), self._build_environ(_env_file)),
+            deep_update(self._build_vault()),
             init_kwargs,
         )
 
@@ -36,7 +36,7 @@ class VaultKVSettings(BaseSettings):
             vault_secret_key = field.field_info.extra.get("vault_secret_key")
 
             if vault_secret_key is None:
-                vault_secret_key = field.name
+                vault_secret_key = field.alias
 
             try:
                 vault_val = provider.get(
