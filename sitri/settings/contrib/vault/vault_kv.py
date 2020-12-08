@@ -42,7 +42,7 @@ class VaultKVSettings(BaseSettings):
                 vault_val = provider.get(
                     key=vault_secret_key,
                     secret_path=vault_secret_path if vault_secret_path else self.__config__.default_secret_path,
-                    vault_mount_point=vault_mount_point if vault_mount_point else self.__config__.default_mount_path,
+                    vault_mount_point=vault_mount_point if vault_mount_point else self.__config__.default_mount_point,
                 )
             except VaultError:
                 logger.opt(exception=True).warning(
@@ -64,6 +64,6 @@ class VaultKVSettings(BaseSettings):
     class Config(BaseMetaConfig):
         provider: VaultKVConfigProvider
         default_secret_path: Optional[str] = None
-        default_mount_path: Optional[str] = None
+        default_mount_point: Optional[str] = None
 
     __config__: Config
