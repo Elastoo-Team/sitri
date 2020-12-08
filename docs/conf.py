@@ -20,12 +20,12 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = "Sitri"
-copyright = "2019, Aleksander Lavrov"
+copyright = "2019-2020, Aleksander Lavrov"
 author = "Aleksander Lavrov"
 
 # The full version, including alpha/beta/rc tags
-release = "0.10.2"
-version = "0.10.2"
+release = "0.10.0"
+version = "0.10.0"
 
 # -- General configuration ---------------------------------------------------
 
@@ -53,7 +53,7 @@ master_doc = "index"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_material"
+html_theme = "alabaster"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -64,3 +64,5 @@ html_logo = "_static/logo.gif"
 html_favicon = "_static/favicon.png"
 
 html_sidebars = {"index": ["sidebar.html"]}
+
+html_theme_options = {"page_width": "50%"}

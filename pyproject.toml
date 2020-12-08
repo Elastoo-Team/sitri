@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sitri"
 version = "0.10.2"
-description = "Library for one endpoint config and credentials managment"
+description = "Library for one endpoint config managment"
 authors = ["Alexander Lavrov <egnod@ya.ru>"]
 license = "MIT"
 
@@ -36,6 +36,7 @@ vedis = "^0.7.1"
 python-consul = "^1.1.0"
 pyyaml = "^5.3.1"
 hvac = "^0.10.5"
+pydantic = "^1.7.3"
 
 [tool.black]
 line-length = 120
