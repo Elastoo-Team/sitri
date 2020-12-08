@@ -5,68 +5,68 @@ API References
 
 Sitri Class
 --------------
-.. automodule:: sitri.__init__
+.. automodule:: sitri.configurator
    :members:
    :show-inheritance:
 
 Base Provider
 --------------
-.. automodule:: sitri.base
-   :members:
-   :show-inheritance:
-
-Config Base
--------------
-.. automodule:: sitri.config.providers
-   :members:
-   :show-inheritance:
-
-Credential Base
-----------------
-.. automodule:: sitri.credentials.providers
+.. automodule:: sitri.providers.base.base_config_provider
    :members:
    :show-inheritance:
 
 Contribute Providers
 ---------------------
-.. automodule:: sitri.contrib.__init__
+.. automodule:: sitri.providers.contrib.__init__
    :members:
    :show-inheritance:
 
 System Providers
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.system
+.. automodule:: sitri.providers.contrib.system
    :members:
    :show-inheritance:
 
 JSON Provider
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.json
+.. automodule:: sitri.providers.contrib.json
    :members:
    :show-inheritance:
 
 YAML Provider
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.yaml
+.. automodule:: sitri.providers.contrib.yaml
    :members:
    :show-inheritance:
 
 
 Consul Provider
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.consul
+.. automodule:: sitri.providers.contrib.consul
    :members:
    :show-inheritance:
 
 Redis Provider
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.redis
+.. automodule:: sitri.providers.contrib.redis
    :members:
    :show-inheritance:
 
 Vedis Provider
 ~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.contrib.vedis
+.. automodule:: sitri.providers.contrib.vedis
+   :members:
+   :show-inheritance:
+
+Vault Providers
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.providers.contrib.vault.__init__
+   :members:
+   :show-inheritance:
+
+Vault KV
+""""""""""""""""""
+.. automodule:: sitri.providers.contrib.vault.vault_kv
    :members:
    :show-inheritance:
 
@@ -88,5 +88,26 @@ Single Provider
 Index Priority Provider
 ~~~~~~~~~~~~~~~~~~~~~~~
 .. automodule:: sitri.strategy.index_priority
+   :members:
+   :show-inheritance:
+
+Settings
+---------------------
+
+Settings Base
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.settings.base
+   :members:
+   :show-inheritance:
+
+Vault Settings
+~~~~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.settings.contrib.vault.__init__
+   :members:
+   :show-inheritance:
+
+Vault KV Settings
+""""""""""""""""""
+.. automodule:: sitri.settings.contrib.vault.vault_kv
    :members:
    :show-inheritance:

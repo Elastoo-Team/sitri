@@ -1,9 +1,8 @@
-"""
-.. module:: __init__
-   :synopsis: General Sitri class
+""".. module:: __init__
+
 .. moduleauthor:: Aleksander Lavrov <github.com/egnod>
 """
 
 from sitri.configurator import SitriProviderConfigurator
 
-Sitri = SitriProviderConfigurator
+Sitri = SitriProviderConfigurator  # noqa

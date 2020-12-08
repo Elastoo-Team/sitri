@@ -110,3 +110,4 @@ venv.bak/
 
 # JetBrains IDE
 .idea/
+tmp.py

@@ -46,17 +46,16 @@ In code:
 
 .. code-block:: python
 
-    from sitri.contrib.system import SystemConfigProvider, SystemCredentialProvider
+    from sitri.contrib.system import SystemConfigProvider
     from sitri import Sitri
 
     conf = Sitri(
         config_provider=SystemConfigProvider(prefix="test"),
-        credential_provider=SystemCredentialProvider(prefix="test"),
     )
 
 
-    print(conf.get_config("host"), conf.get_credential("password"))
-    # Output: example.com 123
+    print(conf.get_config("host"))
+    # Output: example.com
 
     print(conf.config.keys())
     # Output: ["host", "password"]
@@ -67,7 +66,7 @@ In code:
     Not bug, but future. This behavior is due to the fact that in our example we use providers with the same backend (system environment) and same prefixes for variables (test)
 
 .. note::
-    All kwargs in get_credential or get_config call pipe to get in provider
+    All kwargs in get_config call pipe to get in provider
 
 Contribute Providers
 ---------------------
@@ -103,7 +102,6 @@ Usage
 
     from consul import Consul
 
-    from sitri.contrib.system import SystemCredentialProvider
     from sitri.contrib.consul import ConsulConfigProvider
 
     conf = ConsulConfigProvider(folder="test/", consul_connector=lambda: Consul())
@@ -245,32 +243,25 @@ Usage
 ******
 
 .. note::
-    :class:`RedisConfigProvider <sitri.contrib.redis.RedisConfigProvider>` and :class:`RedisCredentialProvider <sitri.contrib.redis.RedisCredentialProvider>`  search variables by prefix (as a system providers).
+    :class:`RedisConfigProvider <sitri.contrib.redis.RedisConfigProvider>` search variables by prefix (as a system providers).
 
     In this example I set two vars:
         TEST_CONFIG_A = 1
 
-        TEST_CREDENTIAL_A = 2
-
 
 .. code-block:: python
-
     from redis import Redis
 
-    from sitri.contrib.redis import RedisConfigProvider, RedisCredentialProvider
+    from sitri.contrib.redis import RedisConfigProvider
 
 
     conf = RedisConfigProvider(
         prefix="test_config",
         redis_connector=lambda: Redis(host="localhost", port=6379, db=0),
     )
-    cred = RedisCredentialProvider(
-        prefix="test_credential",
-        redis_connector=lambda: Redis(host="localhost", port=6379, db=0),
-    )
 
-    print(conf.get("a"), cred.get("a"))
-    # Output: 1 2
+    print(conf.get("a"))
+    # Output: 1
 
 .. note::
     Here we were able to fix the "problem" that we saw in the system providers, just separated "namespaces" using different prefixes.
@@ -293,7 +284,7 @@ Usage
 ******
 
 .. note::
-    :class:`VedisConfigProvider <sitri.contrib.vedis.VedisConfigProvider>` and :class:`VedisCredentialProvider <sitri.contrib.vedis.VedisCredentialProvider>`  search variables in hash object from vedis (default hash name - sitri).
+    :class:`VedisConfigProvider <sitri.contrib.vedis.VedisConfigProvider>`  search variables in hash object from vedis (default hash name - sitri).
 
     In this example I create two vars in hash:
         a = 1
@@ -304,15 +295,13 @@ Usage
 
     from vedis import Vedis
 
-    from sitri.contrib.vedis import VedisConfigProvider, VedisCredentialProvider
+    from sitri.contrib.vedis import VedisConfigProvider
 
     conf = VedisConfigProvider(hash_name="test", vedis_connector=lambda: Vedis(":mem:"))
 
-    cred = VedisCredentialProvider(hash_name="test", vedis_connector=lambda: Vedis(":mem:"))
-
-    print(conf.get("a"), cred.get("b"))
-    # Output: 1 2
+    print(conf.get("a"))
+    # Output: 1
 
 For own provider
 ----------------
-If you want write own credential or config provider use base classes for this: :class:`CredentialProvider <sitri.credentials.providers.CredentialProvider>`, :class:`ConfigProvider <sitri.config.providers.ConfigProvider>`
+If you want write own config provider use base classes for this: :class:`ConfigProvider <sitri.config.providers.ConfigProvider>`
