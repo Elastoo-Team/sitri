@@ -3,4 +3,4 @@ python-consul (>=1.1,<2.0)
 redis (>=3.3,<4.0)
 sphinx-autodoc-typehints (>=1.8,<2.0)
 vedis (>=0.7.1,<0.8.0)
-sphinx-material (>=v0.0.31, <v0.0.32)
+sphinx-material==0.0.32
