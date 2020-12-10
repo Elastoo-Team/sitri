@@ -34,6 +34,7 @@ class VaultKVSettings(BaseSettings):
             vault_secret_path = field.field_info.extra.get("vault_secret_path")
             vault_mount_point = field.field_info.extra.get("vault_mount_point")
             vault_secret_key = field.field_info.extra.get("vault_secret_key")
+            use_default = field.field_info.extra.get("use_default", False)
 
             if vault_secret_key is None:
                 vault_secret_key = field.alias
@@ -56,6 +57,9 @@ class VaultKVSettings(BaseSettings):
                     raise SettingsError(
                         f'Error parsing JSON for "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
                     ) from e
+
+            if vault_val is None and field.default and use_default:
+                vault_val = field.default
 
             d[field.alias] = vault_val
 
