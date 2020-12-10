@@ -10,6 +10,8 @@ from sitri.providers.base import ConfigProvider
 
 class BaseMetaConfig(BaseConfig):
     provider: Type[ConfigProvider]
+    local_mode: Optional[bool]
+    local_mode_provider: Optional[Type[ConfigProvider]]
 
 
 class BaseSettings(ABC, PydanticBaseSettings):

@@ -22,7 +22,7 @@ def vault_kv_config(vault_connection) -> VaultKVConfigProvider:
 @pytest.fixture(scope="module")
 def vault_kv_settings_empty(vault_kv_config):
     class TestSettings(VaultKVSettings):
-        class Config:
+        class Config(VaultKVSettings.VaultKVSettingsConfig):
             provider = vault_kv_config
 
     return TestSettings
@@ -35,7 +35,7 @@ def vault_kv_settings():
             key1: str = Field(...)
             key2: str = Field(...)
 
-            class Config:
+            class Config(VaultKVSettings.VaultKVSettingsConfig):
                 provider = provider_instance
 
         return TestSettings
@@ -49,7 +49,7 @@ def vault_kv_settings_vault_raise():
         class TestSettings(VaultKVSettings):
             key3: str = Field(...)
 
-            class Config:
+            class Config(VaultKVSettings.VaultKVSettingsConfig):
                 provider = provider_instance
 
         return TestSettings
@@ -66,7 +66,7 @@ def vault_kv_settings_complex():
         class TestSettings(VaultKVSettings):
             key0: Key0Model = Field(...)
 
-            class Config:
+            class Config(VaultKVSettings.VaultKVSettingsConfig):
                 provider = provider_instance
 
         return TestSettings
@@ -83,7 +83,7 @@ def vault_kv_settings_complex_raise():
         class TestSettings(VaultKVSettings):
             key4: Key4Model = Field(...)
 
-            class Config:
+            class Config(VaultKVSettings.VaultKVSettingsConfig):
                 provider = provider_instance
 
         return TestSettings
