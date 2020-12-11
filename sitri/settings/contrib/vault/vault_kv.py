@@ -35,8 +35,6 @@ class VaultKVSettings(BaseSettings):
         for field in self.__fields__.values():
             value: Optional[str] = None
 
-            use_default = field.field_info.extra.get("use_default", False)
-
             try:
                 value = provider.get(field.alias)
             except VaultError:
@@ -50,7 +48,7 @@ class VaultKVSettings(BaseSettings):
                 except ValueError as e:
                     raise SettingsError(f"Error parsing JSON for variable {provider.prefixize(field.alias)}") from e
 
-            if value is None and field.default and use_default:
+            if value is None and field.default is not None:
                 value = field.default
 
             d[field.alias] = value
@@ -68,7 +66,6 @@ class VaultKVSettings(BaseSettings):
             vault_secret_path = field.field_info.extra.get("vault_secret_path")
             vault_mount_point = field.field_info.extra.get("vault_mount_point")
             vault_secret_key = field.field_info.extra.get("vault_secret_key")
-            use_default = field.field_info.extra.get("use_default", False)
 
             if vault_secret_key is None:
                 vault_secret_key = field.alias
@@ -94,7 +91,7 @@ class VaultKVSettings(BaseSettings):
                         f'Error parsing JSON for "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
                     ) from e
 
-            if vault_val is None and field.default and use_default:
+            if vault_val is None and field.default is not None:
                 vault_val = field.default
 
             d[field.alias] = vault_val
