@@ -6,7 +6,7 @@ from loguru import logger
 from pydantic.env_settings import SettingsError
 from pydantic.utils import deep_update
 
-from sitri.providers.contrib.system import SystemConfigProvider
+from sitri.providers.contrib.json import JsonConfigProvider
 from sitri.providers.contrib.vault import VaultKVConfigProvider
 from sitri.settings.base import BaseMetaConfig, BaseSettings
 
@@ -35,10 +35,16 @@ class VaultKVSettings(BaseSettings):
         for field in self.__fields__.values():
             value: Optional[str] = None
 
+            if self.__config__.default_secret_path:
+                path = f"{self.__config__.default_secret_path}.{field.alias}"
+
+            else:
+                path = field.alias
+
             try:
-                value = provider.get(field.alias)
+                value = provider.get(path, separator=".")
             except VaultError:
-                logger.opt(exception=True).warning(f"Could not get local variable {provider.prefixize(field.alias)}")
+                logger.opt(exception=True).warning(f"Could not get local variable {path}")
 
             if field.is_complex() and (
                 isinstance(value, str) or isinstance(value, bytes) or isinstance(value, bytearray)
@@ -46,7 +52,7 @@ class VaultKVSettings(BaseSettings):
                 try:
                     value = self.__config__.json_loads(value)  # type: ignore
                 except ValueError as e:
-                    raise SettingsError(f"Error parsing JSON for variable {provider.prefixize(field.alias)}") from e
+                    raise SettingsError(f"Error parsing JSON for variable {path}") from e
 
             if value is None and field.default is not None:
                 value = field.default
@@ -102,7 +108,7 @@ class VaultKVSettings(BaseSettings):
         provider: VaultKVConfigProvider
         default_secret_path: Optional[str] = None
         default_mount_point: Optional[str] = None
-        local_mode_provider: Optional[SystemConfigProvider] = None
+        local_mode_provider: Optional[JsonConfigProvider] = None
         local_mode: bool = False
 
     __config__: VaultKVSettingsConfig
