@@ -1,9 +1,11 @@
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from hvac.exceptions import VaultError
 from loguru import logger
+from pydantic import Field
 from pydantic.env_settings import SettingsError
+from pydantic.main import BaseModel
 from pydantic.utils import deep_update
 
 from sitri.providers.contrib.json import JsonConfigProvider
@@ -11,7 +13,27 @@ from sitri.providers.contrib.vault import VaultKVConfigProvider
 from sitri.settings.base import BaseMetaConfig, BaseSettings
 
 
+class VaultKVLocalProviderArgs(BaseModel):
+    json_path: str = Field(...)
+    default_path_mode_state: bool = Field(default=True)
+
+
 class VaultKVSettings(BaseSettings):
+    @property
+    def local_provider(self) -> JsonConfigProvider:
+        if not self._local_provider:
+            if args := self.__config__.local_provider_args:
+                if isinstance(args, dict):
+                    args = VaultKVLocalProviderArgs(**args)
+
+                self._local_provider = JsonConfigProvider(
+                    json_path=args.json_path, default_path_mode_state=args.default_path_mode_state
+                )
+            else:
+                raise ValueError("Local provider arguments not found for local mode")
+
+        return self._local_provider
+
     def _build_values(
         self,
         init_kwargs: Dict[str, Any],
@@ -109,8 +131,10 @@ class VaultKVSettings(BaseSettings):
         default_secret_path: Optional[str] = None
         default_mount_point: Optional[str] = None
 
-        local_provider_factory: Optional[Callable[[], JsonConfigProvider]] = None
         local_mode: bool = False
+
         local_mode_path_prefix: Optional[str] = None
+        local_provider_args: Optional[Union[VaultKVLocalProviderArgs, Dict]]
 
     __config__: VaultKVSettingsConfig
+    _local_provider: JsonConfigProvider
