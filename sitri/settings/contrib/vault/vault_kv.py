@@ -137,4 +137,4 @@ class VaultKVSettings(BaseSettings):
         local_provider_args: Optional[Union[VaultKVLocalProviderArgs, Dict]]
 
     __config__: VaultKVSettingsConfig
-    _local_provider: JsonConfigProvider
+    _local_provider: JsonConfigProvider = None
