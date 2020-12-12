@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 from hvac.exceptions import VaultError
 from loguru import logger
@@ -30,19 +30,19 @@ class VaultKVSettings(BaseSettings):
     def _build_local(self):
         d: Dict[str, Optional[str]] = {}
 
-        provider = self.__config__.local_mode_provider
+        provider = self.local_provider
 
         for field in self.__fields__.values():
             value: Optional[str] = None
 
-            if self.__config__.default_secret_path:
-                path = f"{self.__config__.default_secret_path}.{field.alias}"
+            if self.__config__.local_mode_path_prefix:
+                path = f"{self.__config__.local_mode_path_prefix}.{field.alias}"
 
             else:
                 path = field.alias
 
             try:
-                value = provider.get(path, separator=".")
+                value = provider.get(key=path, separator=".")
             except VaultError:
                 logger.opt(exception=True).warning(f"Could not get local variable {path}")
 
@@ -108,7 +108,9 @@ class VaultKVSettings(BaseSettings):
         provider: VaultKVConfigProvider
         default_secret_path: Optional[str] = None
         default_mount_point: Optional[str] = None
-        local_mode_provider: Optional[JsonConfigProvider] = None
+
+        local_provider_factory: Optional[Callable[[], JsonConfigProvider]] = None
         local_mode: bool = False
+        local_mode_path_prefix: Optional[str] = None
 
     __config__: VaultKVSettingsConfig
