@@ -21,18 +21,18 @@ class VaultKVLocalProviderArgs(BaseModel):
 class VaultKVSettings(BaseSettings):
     @property
     def local_provider(self) -> JsonConfigProvider:
-        if not self._local_provider:
+        if not self.__config__.local_provider:
             if args := self.__config__.local_provider_args:
                 if isinstance(args, dict):
                     args = VaultKVLocalProviderArgs(**args)
 
-                self._local_provider = JsonConfigProvider(
+                self.__config__.local_provider = JsonConfigProvider(
                     json_path=args.json_path, default_path_mode_state=args.default_path_mode_state
                 )
             else:
                 raise ValueError("Local provider arguments not found for local mode")
 
-        return self._local_provider
+        return self.__config__.local_provider
 
     def _build_values(
         self,
@@ -136,5 +136,6 @@ class VaultKVSettings(BaseSettings):
         local_mode_path_prefix: Optional[str] = None
         local_provider_args: Optional[Union[VaultKVLocalProviderArgs, Dict]]
 
+        local_provider: JsonConfigProvider = None
+
     __config__: VaultKVSettingsConfig
-    _local_provider: JsonConfigProvider = None
