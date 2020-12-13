@@ -36,7 +36,7 @@ class ConsulConfigProvider(ConfigProvider):
         """
         index, data = self._consul.kv.get(f"{self.folder}{key}" if self.folder not in key else key)
 
-        if data and data["Value"]:
+        if data and "Value" in data.keys():
             return data["Value"].decode()
 
         return None
@@ -49,7 +49,7 @@ class ConsulConfigProvider(ConfigProvider):
 
         if data:
             for var in data:
-                if var["Value"]:
+                if "Value" in var.keys():
                     var_list.append(var["Key"])
 
         return var_list
