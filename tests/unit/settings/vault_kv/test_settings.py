@@ -36,3 +36,14 @@ def test_get_variable(
 
     with pytest.raises(SettingsError):
         vault_kv_settings_complex_raise(provider_instance=vault_kv_config)()
+
+
+def test_get_variable_local_mode(vault_kv_config, vault_kv_local_mode):
+    test_settings = vault_kv_local_mode(provider_instance=vault_kv_config)()
+
+    assert test_settings.key1 == "1"
+    assert test_settings.key2 == "2"
+    assert test_settings.key3 == "3"
+
+    assert "test" in test_settings.key4.dict()
+    assert test_settings.key4.test == "test"

@@ -89,3 +89,32 @@ def vault_kv_settings_complex_raise():
         return TestSettings
 
     return wrapper
+
+
+@pytest.fixture(scope="module")
+def path_to_json() -> str:
+    return "tests/unit/settings/vault_kv/data.json"
+
+
+@pytest.fixture(scope="module")
+def vault_kv_local_mode(path_to_json):
+    def wrapper(provider_instance):
+        class Key4Model(BaseModel):
+            test: str = Field(...)
+
+        class TestSettings(VaultKVSettings):
+            key1: str = Field(...)
+            key2: str = Field(...)
+            key3: str = Field(...)
+            key4: Key4Model = Field(...)
+
+            class Config(VaultKVSettings.VaultKVSettingsConfig):
+                provider = provider_instance
+
+                local_mode = True
+                local_provider_args = {"json_path": path_to_json}
+                local_mode_path_prefix = "test"
+
+        return TestSettings
+
+    return wrapper
