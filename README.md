@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="https://github.com/lemegetonx/sitri">
+  <a href="https://github.com/elastoo-team/sitri">
     <img src="docs/_static/logo.gif">
   </a>
   <h1 align="center">
@@ -8,11 +8,15 @@
   </h1>
 </p>
 
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FLemegetonX%2Fsitri%2Fbadge&style=popout)](https://actions-badge.atrox.dev/LemegetonX/sitri/goto)
-[![codecov](https://codecov.io/gh/LemegetonX/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/LemegetonX/sitri)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FElastoo-Team%2Fsitri%2Fbadge&style=popout)](https://actions-badge.atrox.dev/Elastoo-Team/sitri/goto)
+
+[![codecov](https://codecov.io/gh/Elastoo-Team/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/elastoo-team/sitri)
+
 ![PyPI](https://img.shields.io/pypi/v/sitri)
+
 ![Read the Docs](https://img.shields.io/readthedocs/sitri)
-[![CodeFactor](https://www.codefactor.io/repository/github/lemegetonx/sitri/badge)](https://www.codefactor.io/repository/github/lemegetonx/sitri) [![Join the chat at https://gitter.im/lemegetonx/sitri](https://badges.gitter.im/lemegetonx/sitri.svg)](https://gitter.im/lemegetonx/sitri?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/lemegetonx/sitri/badge)](https://www.codefactor.io/repository/github/elastoo-team/sitri)
 
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
 
