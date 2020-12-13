@@ -1,3 +1,5 @@
+import typing
+
 from sitri.providers.base import ConfigProvider
 from sitri.strategy.base import BaseStrategy
 
@@ -14,7 +16,7 @@ class IndexPriorityStrategy(BaseStrategy):
 
         self.providers = data_providers
 
-    def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs) -> typing.Optional[typing.Any]:
         """Get value by index priority strategy.
 
         :param args: any args for providers
@@ -25,3 +27,5 @@ class IndexPriorityStrategy(BaseStrategy):
 
             if result is not None:
                 return result
+
+        return None

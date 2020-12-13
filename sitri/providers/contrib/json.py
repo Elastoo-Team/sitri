@@ -53,7 +53,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
             try:
                 dict_local = dict_local[int(key)] if key.isdigit() else dict_local[key]
             except Exception:
-                if key not in dict_local:
+                if key not in dict_local.keys():
                     return None
 
                 dict_local = dict_local[key]
@@ -65,7 +65,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         :param key: key from json
         """
 
-        if key in self._json:
+        if key in self._json.keys():
             return self._json[key]
         else:
             return None

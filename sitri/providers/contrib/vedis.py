@@ -40,12 +40,14 @@ class VedisConfigProvider(ConfigProvider):
         if isinstance(result, bytes):
             return result.decode()
 
+        return None
+
     @logger.catch(level="ERROR")
     def keys(self) -> typing.List[str]:
         var_list = []
-        vars = self._config_hash.keys() if self._config_hash.keys() is not None else []
+        variables = self._config_hash.keys() if self._config_hash.keys() is not None else []
 
-        for var in vars:
+        for var in variables:
             var_list.append(var.decode())
 
         return var_list

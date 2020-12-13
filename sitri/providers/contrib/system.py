@@ -7,8 +7,8 @@ from sitri.providers.base import ConfigProvider
 class SystemConfigProvider(ConfigProvider):
     """Provider for get config from system environment."""
 
-    _prefix = "system"
     provider_code = "system"
+    _prefix = ""
 
     def __init__(self, prefix: str):
         """
@@ -21,15 +21,20 @@ class SystemConfigProvider(ConfigProvider):
 
         :param key: varname without prefix
         """
-        return f"{self._prefix}_{key.upper()}"
+        if self._prefix:
+            return f"{self._prefix}_{key.upper()}"
+
+        return key.upper()
 
     def unprefixize(self, var_name: str) -> str:
         """Remove prefix from variable name.
 
         :param var_name: variable name
         """
+        if self._prefix:
+            return var_name.replace(f"{self._prefix}_", "").lower()
 
-        return var_name.replace(f"{self._prefix}_", "").lower()
+        return var_name
 
     def get(self, key: str, **kwargs) -> typing.Union[str, None]:
         """Get value from system env.
@@ -43,7 +48,7 @@ class SystemConfigProvider(ConfigProvider):
         var_list = []
 
         for var in os.environ:
-            if self._prefix in var:
+            if var.upper().startswith(self._prefix):
                 var_list.append(self.unprefixize(var))
 
         return var_list
