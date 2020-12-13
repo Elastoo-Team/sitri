@@ -12,12 +12,14 @@ plugins:
     enabled: true
   radon:
     enabled: true
-  rubocop:
+  sonar-python:
     enabled: true
+    config:
+      tests_patterns:
+        - tests/**/*
 
 
 exclude_patterns:
-- tests/**/*
 - sitri.egg-info/**/*
 - docs/**/*
 - venv/**/*
