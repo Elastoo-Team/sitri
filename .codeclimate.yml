@@ -20,6 +20,7 @@ plugins:
 
 
 exclude_patterns:
+- tests/**/*
 - sitri.egg-info/**/*
 - docs/**/*
 - venv/**/*
