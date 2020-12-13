@@ -250,6 +250,7 @@ Usage
 
 
 .. code-block:: python
+
     from redis import Redis
 
     from sitri.contrib.redis import RedisConfigProvider

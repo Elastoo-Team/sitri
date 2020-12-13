@@ -65,4 +65,4 @@ html_favicon = "_static/favicon.png"
 
 html_sidebars = {"index": ["sidebar.html"]}
 
-html_theme_options = {"page_width": "50%"}
+html_theme_options = {"page_width": "80%"}
