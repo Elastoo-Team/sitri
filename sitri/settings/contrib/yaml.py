@@ -1,31 +1,13 @@
-from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Dict, Optional
 
 from pydantic.env_settings import SettingsError
-from pydantic.utils import deep_update
 
 from sitri.providers.contrib.yaml import YamlConfigProvider
-from sitri.settings.base import BaseMetaConfig, BaseSettings
+from sitri.settings.base import BaseConfig, BaseSettings
 
 
 class YamlSettings(BaseSettings):
-    @property
-    def local_provider(self) -> None:
-        return None
-
-    def _build_values(
-        self,
-        init_kwargs: Dict[str, Any],
-        _env_file: Union[Path, str, None] = None,
-        _env_file_encoding: Optional[str] = None,
-        _secrets_dir: Union[Path, str, None] = None,
-    ) -> Dict[str, Any]:
-        return deep_update(
-            deep_update(self._build_yaml()),
-            init_kwargs,
-        )
-
-    def _build_yaml(self):
+    def _build_default(self):
         d: Dict[str, Optional[str]] = {}
 
         provider = self.__config__.provider
@@ -61,7 +43,7 @@ class YamlSettings(BaseSettings):
 
         return d
 
-    class YamlSettingsConfig(BaseMetaConfig):
+    class YamlSettingsConfig(BaseConfig):
         provider: YamlConfigProvider
 
         default_path_prefix: Optional[str] = None

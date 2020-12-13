@@ -1,16 +1,14 @@
-from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Dict, Optional, Union
 
 from hvac.exceptions import VaultError
 from loguru import logger
 from pydantic import Field
 from pydantic.env_settings import SettingsError
 from pydantic.main import BaseModel
-from pydantic.utils import deep_update
 
 from sitri.providers.contrib.json import JsonConfigProvider
 from sitri.providers.contrib.vault import VaultKVConfigProvider
-from sitri.settings.base import BaseMetaConfig, BaseSettings
+from sitri.settings.base import BaseLocalModeConfig, BaseLocalModeSettings
 
 
 class VaultKVLocalProviderArgs(BaseModel):
@@ -18,7 +16,7 @@ class VaultKVLocalProviderArgs(BaseModel):
     default_path_mode_state: bool = Field(default=True)
 
 
-class VaultKVSettings(BaseSettings):
+class VaultKVSettings(BaseLocalModeSettings):
     @property
     def local_provider(self) -> JsonConfigProvider:
         if not self.__config__.local_provider:
@@ -33,21 +31,6 @@ class VaultKVSettings(BaseSettings):
                 raise ValueError("Local provider arguments not found for local mode")
 
         return self.__config__.local_provider
-
-    def _build_values(
-        self,
-        init_kwargs: Dict[str, Any],
-        _env_file: Union[Path, str, None] = None,
-        _env_file_encoding: Optional[str] = None,
-        _secrets_dir: Union[Path, str, None] = None,
-    ) -> Dict[str, Any]:
-        if not self.__config__.local_mode:
-            return deep_update(
-                deep_update(self._build_vault()),
-                init_kwargs,
-            )
-        else:
-            return deep_update(deep_update(self._build_local()), init_kwargs)
 
     def _build_local(self):
         d: Dict[str, Optional[str]] = {}
@@ -83,7 +66,7 @@ class VaultKVSettings(BaseSettings):
 
         return d
 
-    def _build_vault(self):
+    def _build_default(self):
         d: Dict[str, Optional[str]] = {}
 
         provider = self.__config__.provider
@@ -126,7 +109,7 @@ class VaultKVSettings(BaseSettings):
 
         return d
 
-    class VaultKVSettingsConfig(BaseMetaConfig):
+    class VaultKVSettingsConfig(BaseLocalModeConfig):
         provider: VaultKVConfigProvider
         default_secret_path: Optional[str] = None
         default_mount_point: Optional[str] = None
