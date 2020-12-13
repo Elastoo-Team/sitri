@@ -7,7 +7,7 @@ Installation
 ------------
 
 .. attention::
-    Sitri works only on Python 3.5 or higher.
+    Sitri works only on Python 3.6.1 or higher.
 
     When support will for older Python versions? - Never.
 
