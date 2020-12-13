@@ -13,6 +13,7 @@
 ![PyPI](https://img.shields.io/pypi/v/sitri)
 ![Read the Docs](https://img.shields.io/readthedocs/sitri)
 [![CodeFactor](https://www.codefactor.io/repository/github/elastoo-team/sitri/badge)](https://www.codefactor.io/repository/github/elastoo-team/sitri)
+[![Maintainability](https://api.codeclimate.com/v1/badges/625f1d869adbf4128f75/maintainability)](https://codeclimate.com/github/Elastoo-Team/sitri/maintainability)
 
 Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
 

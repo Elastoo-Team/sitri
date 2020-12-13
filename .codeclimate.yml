@@ -1,0 +1,22 @@
+version: "2"
+
+plugins:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+  fixme:
+    enabled: true
+  pep8:
+    enabled: true
+  radon:
+    enabled: true
+
+exclude_patterns:
+- tests/**/*
+- sitri.egg-info/**/*
+- docs/**/*
+- venv/**/*
+- dist/**/*
+- .github/**/*
