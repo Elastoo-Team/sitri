@@ -20,7 +20,8 @@ class VaultKVSettings(BaseLocalModeSettings):
     @property
     def local_provider(self) -> JsonConfigProvider:
         if not self.__config__.local_provider:
-            if args := self.__config__.local_provider_args:
+            args = self.__config__.local_provider_args
+            if args:
                 if isinstance(args, dict):
                     args = VaultKVLocalProviderArgs(**args)
 
