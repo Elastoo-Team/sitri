@@ -10,11 +10,12 @@ class SystemConfigProvider(ConfigProvider):
     provider_code = "system"
     _prefix = ""
 
-    def __init__(self, prefix: str):
+    def __init__(self, prefix: typing.Optional[str] = None):
         """
         :param prefix: prefix for create "namespace" for project variables in environment
         """
-        self._prefix = prefix.upper()
+        if prefix:
+            self._prefix = prefix.upper()
 
     def prefixize(self, key: str) -> str:
         """Get key with prefix.

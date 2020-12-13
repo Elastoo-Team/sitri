@@ -15,7 +15,7 @@ class PathModeStateProvider(ABC):
     _default_path_mode_state: bool = False
 
     def _get_path_mode_state(self, path_mode_param: typing.Optional[bool]) -> bool:
-        return path_mode_param or self._default_path_mode_state
+        return path_mode_param if path_mode_param is not None else self._default_path_mode_state
 
     @abstractmethod
     def get(self, key: str, path_mode: typing.Optional[bool] = None, **kwargs) -> typing.Optional[typing.Any]:
