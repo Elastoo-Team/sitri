@@ -12,6 +12,9 @@ plugins:
     enabled: true
   radon:
     enabled: true
+  rubocop:
+    enabled: true
+
 
 exclude_patterns:
 - tests/**/*
