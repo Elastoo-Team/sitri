@@ -1,7 +1,5 @@
 from typing import Dict, Optional
 
-from pydantic.env_settings import SettingsError
-
 from sitri.providers.contrib.yaml import YamlConfigProvider
 from sitri.settings.base import BaseConfig, BaseSettings
 
@@ -27,14 +25,8 @@ class YamlSettings(BaseSettings):
 
             value: Optional[str] = provider.get(key_name)
 
-            if field.is_complex() and (
-                isinstance(value, str) or isinstance(value, bytes) or isinstance(value, bytearray)
-            ):
-                try:
-                    value = self.__config__.json_loads(value)  # type: ignore
-
-                except ValueError as e:
-                    raise SettingsError(f'Error parsing JSON for "{key_name}"') from e
+            if field.is_complex():
+                value = self._build_complex_value(value, key_name)
 
             if value is None and field.default is not None:
                 value = field.default

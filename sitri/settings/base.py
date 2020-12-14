@@ -4,6 +4,7 @@ from typing import Any, Dict, Optional, Type, Union
 
 from pydantic import BaseConfig as PydanticBaseConfig
 from pydantic import BaseSettings as PydanticBaseSettings
+from pydantic.env_settings import SettingsError
 from pydantic.utils import deep_update
 
 from sitri.providers.base import ConfigProvider
@@ -20,6 +21,15 @@ class BaseLocalModeConfig(BaseConfig):
 
 
 class BaseSettings(ABC, PydanticBaseSettings):
+    def _build_complex_value(self, value: Union[str, bytes, bytearray], path: str):
+        if isinstance(value, str) or isinstance(value, bytes) or isinstance(value, bytearray):
+            try:
+                value = self.__config__.json_loads(value)  # type: ignore
+            except ValueError as e:
+                raise SettingsError(f"Error parsing for variable {path}") from e
+
+        return value
+
     def _build_values(
         self,
         init_kwargs: Dict[str, Any],
@@ -39,7 +49,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
     __config__: Type[BaseConfig]
 
 
-class BaseLocalModeSettings(BaseSettings, ABC):
+class BaseLocalModeSettings(BaseSettings):
     @property
     @abstractmethod
     def local_provider(self) -> Type[ConfigProvider]:

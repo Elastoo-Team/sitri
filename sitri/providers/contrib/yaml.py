@@ -34,22 +34,27 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
         """
 
         if not yaml_data:
-            try:
-                self._yaml = yaml.safe_load(open(os.path.abspath(yaml_path)))
-
-            except FileNotFoundError:
-                if not found_file_error:
-                    self._yaml = {}
-
-                else:
-                    raise
-
+            self._yaml = self._get_yaml_from_file(yaml_path, found_file_error)
         else:
             yaml_data = StringIO(yaml_data)
             self._yaml = yaml.safe_load(yaml_data)
 
         self.separator = default_separator
         self._default_path_mode_state = default_path_mode_state
+
+    @staticmethod
+    def _get_yaml_from_file(yaml_path: str, found_file_error: bool):
+        try:
+            with open(os.path.abspath(yaml_path)) as f:
+                data = yaml.safe_load(f)
+
+            return data
+
+        except FileNotFoundError:
+            if not found_file_error:
+                return {}
+            else:
+                raise
 
     def _get_by_path(self, path: str, separator: str) -> typing.Any:
         """Retrieve value from a dictionary using a list of keys.
