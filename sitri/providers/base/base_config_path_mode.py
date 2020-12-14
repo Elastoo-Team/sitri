@@ -8,6 +8,8 @@
 import typing
 from abc import ABC, abstractmethod
 
+from sitri.providers.types import ValueNotFoundType
+
 
 class PathModeStateProvider(ABC):
     """Base class for config providers with path_mode discovery."""
@@ -18,7 +20,9 @@ class PathModeStateProvider(ABC):
         return path_mode_param if path_mode_param is not None else self._default_path_mode_state
 
     @abstractmethod
-    def get(self, key: str, path_mode: typing.Optional[bool] = None, **kwargs) -> typing.Optional[typing.Any]:
+    def get(
+        self, key: str, path_mode: typing.Optional[bool] = None, **kwargs
+    ) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Get value from storage.
 
         :param key: key for get value

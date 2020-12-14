@@ -4,6 +4,7 @@ import vedis
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class VedisConfigProvider(ConfigProvider):
@@ -34,13 +35,14 @@ class VedisConfigProvider(ConfigProvider):
         return self._vedis.Hash(self._hash_name)
 
     @logger.catch(level="ERROR")
-    def get(self, key: str, **kwargs) -> typing.Optional[str]:
+    def get(self, key: str, **kwargs) -> typing.Union[str, ValueNotFoundType]:
         result = self._config_hash.get(key)
 
         if isinstance(result, bytes):
             return result.decode()
 
-        return None
+        else:
+            return ValueNotFound
 
     @logger.catch(level="ERROR")
     def keys(self) -> typing.List[str]:

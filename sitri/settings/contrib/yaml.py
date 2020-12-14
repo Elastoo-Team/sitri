@@ -3,6 +3,7 @@ from typing import Dict, Optional
 from pydantic.env_settings import SettingsError
 
 from sitri.providers.contrib.yaml import YamlConfigProvider
+from sitri.providers.types import ValueNotFound
 from sitri.settings.base import BaseConfig, BaseSettings
 
 
@@ -36,7 +37,7 @@ class YamlSettings(BaseSettings):
                 except ValueError as e:
                     raise SettingsError(f'Error parsing JSON for "{key_name}"') from e
 
-            if value is None and field.default is not None:
+            if value is ValueNotFound and field.default is not None:
                 value = field.default
 
             d[field.alias] = value

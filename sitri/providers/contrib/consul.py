@@ -4,6 +4,7 @@ import consul
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class ConsulConfigProvider(ConfigProvider):
@@ -29,7 +30,7 @@ class ConsulConfigProvider(ConfigProvider):
         return self._consul_instance
 
     @logger.catch(level="ERROR")
-    def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, **kwargs) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Get value from consul by key.
 
         :param key: key from consul folder
@@ -39,7 +40,7 @@ class ConsulConfigProvider(ConfigProvider):
         if data and "Value" in data.keys():
             return data["Value"].decode()
 
-        return None
+        return ValueNotFound
 
     @logger.catch(level="ERROR")
     def keys(self) -> typing.List[typing.Any]:

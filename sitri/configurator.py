@@ -10,6 +10,7 @@ import typing
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound
 from sitri.strategy.base import BaseStrategy
 from sitri.strategy.single import SingleStrategy
 
@@ -45,4 +46,4 @@ class SitriProviderConfigurator:
 
         variable = self.config.get(key, **kwargs)
 
-        return variable if variable else default
+        return variable if variable is not ValueNotFound else default

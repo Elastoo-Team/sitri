@@ -1,6 +1,7 @@
 import pytest
 
 from sitri.providers.contrib.json import JsonConfigProvider
+from sitri.providers.types import ValueNotFound
 
 
 def test_no_file_error():
@@ -23,8 +24,8 @@ def test_metadata(json_config_obj) -> None:
 )
 def test_get_by_other(json_config_obj) -> None:
     assert isinstance(json_config_obj._get_by_path("test", separator=json_config_obj.separator), dict)
-    assert json_config_obj._get_by_key("test.test_key2") is None
-    assert json_config_obj._get_by_path("test.test_key2", separator=json_config_obj.separator) is None
+    assert json_config_obj._get_by_key("test.test_key2") is ValueNotFound
+    assert json_config_obj._get_by_path("test.test_key2", separator=json_config_obj.separator) is ValueNotFound
     assert isinstance(json_config_obj._get_by_key("test"), dict)
     assert json_config_obj._get_by_path("test", separator=json_config_obj.separator) == json_config_obj._get_by_key(
         "test"
@@ -47,7 +48,7 @@ def test_get(json_config_obj):
     assert json_config_obj.get("test.test_key2", separator=".", path_mode=True) == json_config_obj.get(
         "test/test_key2", path_mode=True
     )
-    assert not json_config_obj.get("test/test_key2")
+    assert json_config_obj.get("test/test_key2") is ValueNotFound
 
 
 @pytest.mark.parametrize(

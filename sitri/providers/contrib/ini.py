@@ -3,6 +3,7 @@ import os
 import typing
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class IniConfigProvider(ConfigProvider):
@@ -32,16 +33,16 @@ class IniConfigProvider(ConfigProvider):
 
         return self._sections
 
-    def get(self, key: str, section: str, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, section: str, **kwargs) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Get value from ini file.
 
         :param key: key or path for search
         :param section: section of ini file
         """
         if section not in self.sections:
-            return None
+            return ValueNotFound
 
-        return self.configparser[section].get(key)
+        return self.configparser[section].get(key, ValueNotFound)
 
     def keys(self, section: str) -> typing.List[str]:
         """Get keys of section.

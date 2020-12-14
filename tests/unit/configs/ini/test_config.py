@@ -1,6 +1,7 @@
 import pytest
 
 from sitri.providers.contrib.ini import IniConfigProvider
+from sitri.providers.types import ValueNotFound
 
 
 def test_no_file_error():
@@ -25,7 +26,7 @@ def test_keys(ini_config):
 
 def test_get(ini_config):
     assert ini_config.get(section="test_a", key="hello") == "world"
-    assert ini_config.get(section="test_a", key="not_exist") is None
+    assert ini_config.get(section="test_a", key="not_exist") is ValueNotFound
     assert ini_config.get(section="test_b", key="str") == "str"
     assert ini_config.get(section="test_b", key="int") == "1"
-    assert ini_config.get(section="not_exist", key="int") is None
+    assert ini_config.get(section="not_exist", key="int") is ValueNotFound

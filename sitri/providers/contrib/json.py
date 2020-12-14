@@ -3,6 +3,7 @@ import os
 import typing
 
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
@@ -41,7 +42,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         self.separator = default_separator
         self._default_path_mode_state = default_path_mode_state
 
-    def _get_by_path(self, path: str, separator: str) -> typing.Any:
+    def _get_by_path(self, path: str, separator: str) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Retrieve value from a dictionary using a list of keys.
 
         :param path: string with separated keys
@@ -54,12 +55,12 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
                 dict_local = dict_local[int(key)] if key.isdigit() else dict_local[key]
             except Exception:
                 if key not in dict_local.keys():
-                    return None
+                    return ValueNotFound
 
                 dict_local = dict_local[key]
         return dict_local
 
-    def _get_by_key(self, key: str) -> typing.Any:
+    def _get_by_key(self, key: str) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Retrieve value from a dictionary using a key.
 
         :param key: key from json
@@ -68,11 +69,11 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         if key in self._json.keys():
             return self._json[key]
         else:
-            return None
+            return ValueNotFound
 
     def get(
         self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Get value from json.
 
         :param key: key or path for search

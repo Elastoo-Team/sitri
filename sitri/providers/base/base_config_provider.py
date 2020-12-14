@@ -8,6 +8,8 @@
 import typing
 from abc import ABC, abstractmethod
 
+from sitri.providers.types import ValueNotFoundType
+
 
 class ConfigProvider(ABC):
     """Base class for config providers."""
@@ -18,13 +20,13 @@ class ConfigProvider(ABC):
         """Provider code property for identity provider in manager."""
 
     @abstractmethod
-    def get(self, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, *args, **kwargs) -> typing.Union[typing.Any, ValueNotFoundType]:
         """Get value from storage.
 
         :param kwargs: additional arguments for providers
         """
 
-    def keys(self, **kwargs) -> typing.List[str]:
+    def keys(self, *args, **kwargs) -> typing.List[str]:
         """Get keys list in storage."""
         raise NotImplementedError("keys method not impl for this provider!")
 

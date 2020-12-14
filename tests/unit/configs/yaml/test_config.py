@@ -1,6 +1,7 @@
 import pytest
 
 from sitri.providers.contrib.yaml import YamlConfigProvider
+from sitri.providers.types import ValueNotFound
 
 
 def test_no_file_error():
@@ -23,8 +24,8 @@ def test_metadata(yaml_config_obj) -> None:
 )
 def test_get_by_other(yaml_config_obj) -> None:
     assert isinstance(yaml_config_obj._get_by_path("test", separator=yaml_config_obj.separator), dict)
-    assert yaml_config_obj._get_by_key("test.test_key2") is None
-    assert yaml_config_obj._get_by_path("test.test_key2", separator=yaml_config_obj.separator) is None
+    assert yaml_config_obj._get_by_key("test.test_key2") is ValueNotFound
+    assert yaml_config_obj._get_by_path("test.test_key2", separator=yaml_config_obj.separator) is ValueNotFound
     assert isinstance(yaml_config_obj._get_by_key("test"), dict)
     assert yaml_config_obj._get_by_path("test", separator=yaml_config_obj.separator) == yaml_config_obj._get_by_key(
         "test"
@@ -47,7 +48,7 @@ def test_get(yaml_config_obj):
     assert yaml_config_obj.get("test.test_key2", separator=".", path_mode=True) == yaml_config_obj.get(
         "test/test_key2", path_mode=True
     )
-    assert not yaml_config_obj.get("test/test_key2")
+    assert yaml_config_obj.get("test/test_key2") is ValueNotFound
 
 
 @pytest.mark.parametrize(

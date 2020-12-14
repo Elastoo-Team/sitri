@@ -8,6 +8,7 @@ from pydantic.main import BaseModel
 
 from sitri.providers.contrib.json import JsonConfigProvider
 from sitri.providers.contrib.vault import VaultKVConfigProvider
+from sitri.providers.types import ValueNotFound
 from sitri.settings.base import BaseLocalModeConfig, BaseLocalModeSettings
 
 
@@ -60,7 +61,7 @@ class VaultKVSettings(BaseLocalModeSettings):
                 except ValueError as e:
                     raise SettingsError(f"Error parsing JSON for variable {path}") from e
 
-            if value is None and field.default is not None:
+            if value is ValueNotFound and field.default is not None:
                 value = field.default
 
             d[field.alias] = value
@@ -103,7 +104,7 @@ class VaultKVSettings(BaseLocalModeSettings):
                         f'Error parsing JSON for "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
                     ) from e
 
-            if vault_val is None and field.default is not None:
+            if vault_val is ValueNotFound and field.default is not None:
                 vault_val = field.default
 
             d[field.alias] = vault_val

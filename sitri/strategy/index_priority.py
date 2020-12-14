@@ -1,6 +1,7 @@
 import typing
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound
 from sitri.strategy.base import BaseStrategy
 
 
@@ -25,7 +26,7 @@ class IndexPriorityStrategy(BaseStrategy):
         for provider in self.providers:
             result = provider.get(*args, **kwargs)
 
-            if result is not None:
+            if result is not ValueNotFound:
                 return result
 
-        return None
+        return ValueNotFound

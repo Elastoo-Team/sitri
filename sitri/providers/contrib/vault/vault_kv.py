@@ -4,6 +4,7 @@ import hvac
 from loguru import logger
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class VaultKVConfigProvider(ConfigProvider):
@@ -41,7 +42,7 @@ class VaultKVConfigProvider(ConfigProvider):
     @logger.catch(level="ERROR")
     def get(
         self, key: str, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
-    ) -> typing.Optional[str]:
+    ) -> typing.Union[str, ValueNotFoundType]:
         request_params = {
             "path": secret_path if secret_path else self._secret_path,
             "mount_point": mount_point if mount_point else self._mount_point,
@@ -49,7 +50,7 @@ class VaultKVConfigProvider(ConfigProvider):
 
         response = self._vault.secrets.kv.v1.read_secret(**request_params)
 
-        return response["data"].get(key)
+        return response["data"].get(key, ValueNotFound)
 
     @logger.catch(level="ERROR")
     def keys(

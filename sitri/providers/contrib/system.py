@@ -2,6 +2,7 @@ import os
 import typing
 
 from sitri.providers.base import ConfigProvider
+from sitri.providers.types import ValueNotFound, ValueNotFoundType
 
 
 class SystemConfigProvider(ConfigProvider):
@@ -37,12 +38,12 @@ class SystemConfigProvider(ConfigProvider):
 
         return var_name
 
-    def get(self, key: str, **kwargs) -> typing.Union[str, None]:
+    def get(self, key: str, **kwargs) -> typing.Union[str, ValueNotFoundType]:
         """Get value from system env.
 
         :param key: key without prefix from env
         """
-        return os.getenv(self.prefixize(key), None)
+        return os.getenv(self.prefixize(key), ValueNotFound)
 
     def keys(self) -> typing.List[str]:
         """Get keys list with prefix from system env."""
