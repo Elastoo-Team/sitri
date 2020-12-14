@@ -18,10 +18,9 @@ class ConfigProvider(ABC):
         """Provider code property for identity provider in manager."""
 
     @abstractmethod
-    def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, **kwargs) -> typing.Optional[typing.Any]:
         """Get value from storage.
 
-        :param key: key for get value
         :param kwargs: additional arguments for providers
         """
 
