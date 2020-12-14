@@ -11,8 +11,8 @@ class IniConfigProvider(ConfigProvider):
     provider_code = "ini"
 
     def __init__(
-            self,
-            ini_path: str = "./config.ini",
+        self,
+        ini_path: str = "./config.ini",
     ):
         """
 
@@ -20,7 +20,7 @@ class IniConfigProvider(ConfigProvider):
         """
         self.configparser = configparser.ConfigParser()
 
-        with open(os.path.abspath(ini_path), 'r') as f:
+        with open(os.path.abspath(ini_path)) as f:
             self.configparser.read_file(f)
 
         self._sections = None
@@ -45,7 +45,7 @@ class IniConfigProvider(ConfigProvider):
         return self.configparser[section].get(key, default)
 
     def keys(self, section: str) -> typing.List[str]:
-        """Get keys of section
+        """Get keys of section.
 
         :param section: section of ini file
         """

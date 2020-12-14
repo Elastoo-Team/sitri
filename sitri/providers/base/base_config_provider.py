@@ -23,7 +23,6 @@ class ConfigProvider(ABC):
 
         :param kwargs: additional arguments for providers
         """
-        pass
 
     def keys(self, **kwargs) -> typing.List[str]:
         """Get keys list in storage."""

@@ -9,5 +9,5 @@ def path_to_ini() -> str:
 
 
 @pytest.fixture(scope="module")
-def ini_config(path_to_init) -> IniConfigProvider:
-    return IniConfigProvider(ini_path=path_to_init)
+def ini_config(path_to_ini) -> IniConfigProvider:
+    return IniConfigProvider(ini_path=path_to_ini)

@@ -8,33 +8,25 @@ def test_no_file_error():
         IniConfigProvider(ini_path="not_exists.ini")
 
 
-@pytest.mark.parametrize(
-    "ini_config_obj", [pytest.lazy_fixture("ini_config")]
-)
+@pytest.mark.parametrize("ini_config_obj", [pytest.lazy_fixture("ini_config")])
 def test_metadata(ini_config_obj) -> None:
     assert ini_config_obj.provider_code == "ini"
 
 
-@pytest.mark.parametrize(
-    "ini_config_obj", [pytest.lazy_fixture("ini_config")]
-)
+@pytest.mark.parametrize("ini_config_obj", [pytest.lazy_fixture("ini_config")])
 def test_sections(ini_config_obj):
     assert isinstance(ini_config_obj.sections, list)
     assert sorted(ini_config_obj.sections) == ["DEFAULTS", "test_a", "test_b"]
 
 
-@pytest.mark.parametrize(
-    "ini_config_obj", [pytest.lazy_fixture("ini_config")]
-)
+@pytest.mark.parametrize("ini_config_obj", [pytest.lazy_fixture("ini_config")])
 def test_keys(ini_config_obj):
     assert ini_config_obj.keys("test_a") == ["hello"]
     assert ini_config_obj.keys("test_b") == ["test_a", "test_b"]
     assert ini_config_obj.keys("not_exist") == []
 
 
-@pytest.mark.parametrize(
-    "ini_config_obj", [pytest.lazy_fixture("ini_config")]
-)
+@pytest.mark.parametrize("ini_config_obj", [pytest.lazy_fixture("ini_config")])
 def test_get(ini_config_obj):
     assert ini_config_obj.keys(section="test_a", key="hello") == "world"
     assert ini_config_obj.keys(section="test_a", key="not_exist") is None
