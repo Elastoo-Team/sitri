@@ -27,19 +27,26 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         :param default_path_mode_state: default state for path mode on get value by key
         """
         if not json_data:
-            try:
-                self._json = json.load(open(os.path.abspath(json_path)))
-
-            except FileNotFoundError:
-                if not found_file_error:
-                    self._json = {}
-                else:
-                    raise
+            self._json = self._get_json_from_file(json_path, found_file_error)
         else:
             self._json = json.loads(json_data)
 
         self.separator = default_separator
         self._default_path_mode_state = default_path_mode_state
+
+    @staticmethod
+    def _get_json_from_file(json_path: str, found_file_error: bool):
+        try:
+            with open(os.path.abspath(json_path)) as f:
+                data = json.load(f)
+
+            return data
+
+        except FileNotFoundError:
+            if not found_file_error:
+                return {}
+            else:
+                raise
 
     def _get_by_path(self, path: str, separator: str) -> typing.Any:
         """Retrieve value from a dictionary using a list of keys.

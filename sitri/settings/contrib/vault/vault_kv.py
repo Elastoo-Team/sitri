@@ -3,7 +3,6 @@ from typing import Dict, Optional, Union
 from hvac.exceptions import VaultError
 from loguru import logger
 from pydantic import Field
-from pydantic.env_settings import SettingsError
 from pydantic.main import BaseModel
 
 from sitri.providers.contrib.json import JsonConfigProvider
@@ -18,13 +17,20 @@ class VaultKVLocalProviderArgs(BaseModel):
 
 class VaultKVSettings(BaseLocalModeSettings):
     @property
+    def _local_provider_args(self):
+        args = self.__config__.local_provider_args
+        if args:
+            if isinstance(args, dict):
+                args = VaultKVLocalProviderArgs(**args)
+
+        return args
+
+    @property
     def local_provider(self) -> JsonConfigProvider:
         if not self.__config__.local_provider:
-            args = self.__config__.local_provider_args
-            if args:
-                if isinstance(args, dict):
-                    args = VaultKVLocalProviderArgs(**args)
+            args = self._local_provider_args
 
+            if args:
                 self.__config__.local_provider = JsonConfigProvider(
                     json_path=args.json_path, default_path_mode_state=args.default_path_mode_state
                 )
@@ -36,29 +42,22 @@ class VaultKVSettings(BaseLocalModeSettings):
     def _build_local(self):
         d: Dict[str, Optional[str]] = {}
 
-        provider = self.local_provider
-
         for field in self.__fields__.values():
             value: Optional[str] = None
 
             if self.__config__.local_mode_path_prefix:
-                path = f"{self.__config__.local_mode_path_prefix}.{field.alias}"
+                path = f"{self.__config__.local_mode_path_prefix}{self.local_provider.separator}{field.alias}"
 
             else:
                 path = field.alias
 
             try:
-                value = provider.get(key=path, separator=".")
+                value = self.local_provider.get(key=path)
             except VaultError:
                 logger.opt(exception=True).warning(f"Could not get local variable {path}")
 
-            if field.is_complex() and (
-                isinstance(value, str) or isinstance(value, bytes) or isinstance(value, bytearray)
-            ):
-                try:
-                    value = self.__config__.json_loads(value)  # type: ignore
-                except ValueError as e:
-                    raise SettingsError(f"Error parsing JSON for variable {path}") from e
+            if field.is_complex():
+                value = self._build_complex_value(value, path)
 
             if value is None and field.default is not None:
                 value = field.default
@@ -93,15 +92,10 @@ class VaultKVSettings(BaseLocalModeSettings):
                     f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
                 )
 
-            if field.is_complex() and (
-                isinstance(vault_val, str) or isinstance(vault_val, bytes) or isinstance(vault_val, bytearray)
-            ):
-                try:
-                    vault_val = self.__config__.json_loads(vault_val)  # type: ignore
-                except ValueError as e:
-                    raise SettingsError(
-                        f'Error parsing JSON for "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
-                    ) from e
+            if field.is_complex():
+                vault_val = self._build_complex_value(
+                    vault_val, f"{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"
+                )
 
             if vault_val is None and field.default is not None:
                 vault_val = field.default

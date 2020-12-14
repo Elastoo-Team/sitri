@@ -28,13 +28,17 @@ class ConsulConfigProvider(ConfigProvider):
 
         return self._consul_instance
 
+    def _get_path(self, key: str):
+        return f"{self.folder}{key}" if self.folder not in key else key
+
     @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
         """Get value from consul by key.
 
         :param key: key from consul folder
         """
-        index, data = self._consul.kv.get(f"{self.folder}{key}" if self.folder not in key else key)
+
+        index, data = self._consul.kv.get(self._get_path(key))
 
         if data and "Value" in data.keys():
             return data["Value"].decode()
