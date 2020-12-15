@@ -1,0 +1,19 @@
+Basic strategy with one provider. Proxy on each other provider for Sitri class.
+
+.. hint::
+    Before code with basic usage, I export variable:
+
+        PROJECT_A=1
+
+Example:
+
+.. code-block:: python
+
+    from sitri.strategy.single import SingleStrategy
+    from sitri.contrib.system import SystemConfigProvider
+
+    conf = SystemConfigProvider(prefix="project")
+    strategy = SingleStrategy(conf)
+
+    print(strategy.get("a"))
+    # Output: 1
