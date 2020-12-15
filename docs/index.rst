@@ -4,11 +4,4 @@
    contain the root `toctree` directive.
 
 
-Sitri - configuration library
-=================================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 .. include:: contents.rst.inc

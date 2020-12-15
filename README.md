@@ -1,10 +1,9 @@
-
 <p align="center">
   <a href="https://github.com/elastoo-team/sitri">
-    <img src="docs/_static/logo.gif">
+    <img src="docs/_static/logo.png">
   </a>
   <h1 align="center">
-    Sitri Configuration Library
+    Sitri - powerful settings & configs for python
   </h1>
 </p>
 
