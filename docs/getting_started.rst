@@ -100,6 +100,11 @@ INI
 ~~~~~~
 .. include:: getting_started/providers/ini.rst
 
+Vault
+~~~~~~
+Vault KV
+*********
+.. include:: getting_started/providers/vault_kv.rst
 
 For own provider
 ----------------
