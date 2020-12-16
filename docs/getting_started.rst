@@ -96,6 +96,11 @@ Vedis
 ~~~~~~
 .. include:: getting_started/providers/vedis.rst
 
+INI
+~~~~~~
+.. include:: getting_started/providers/ini.rst
+
+
 For own provider
 ----------------
 If you want write own config provider use base classes for this: :class:`ConfigProvider <sitri.config.providers.ConfigProvider>`

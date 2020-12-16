@@ -4,7 +4,7 @@ Prepare
 .. note::
     The configuration and start of the Redis remains at your side
 
-Install Consul client with Poetry:
+Install Redis client library with Poetry:
 
 .. code-block:: sh
 

@@ -58,6 +58,12 @@ Vedis Provider
    :members:
    :show-inheritance:
 
+INI Provider
+~~~~~~~~~~~~~~~~~~~~
+.. automodule:: sitri.providers.contrib.ini
+   :members:
+   :show-inheritance:
+
 Vault Providers
 ~~~~~~~~~~~~~~~~~~~~
 .. automodule:: sitri.providers.contrib.vault.__init__
@@ -102,10 +108,6 @@ Settings Base
 
 Vault Settings
 ~~~~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.settings.contrib.vault.__init__
-   :members:
-   :show-inheritance:
-
 Vault KV Settings
 """"""""""""""""""
 .. automodule:: sitri.settings.contrib.vault.vault_kv
