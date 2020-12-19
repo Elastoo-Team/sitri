@@ -15,7 +15,7 @@ class YamlSettings(BaseSettings):
             path_prefix: Optional[str] = field.field_info.extra.get("yaml_path_prefix")
 
             if key_name is None:
-                key_name = field.alias
+                key_name = field.name
 
             if path_prefix is not None:
                 key_name = f"{path_prefix}{provider.separator}{key_name}"
@@ -31,7 +31,7 @@ class YamlSettings(BaseSettings):
             if value is None and field.default is not None:
                 value = field.default
 
-            d[field.alias] = value
+            d[field.name] = value
 
         return d
 

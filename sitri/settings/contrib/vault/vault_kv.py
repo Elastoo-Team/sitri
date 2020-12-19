@@ -46,10 +46,10 @@ class VaultKVSettings(BaseLocalModeSettings):
             value: Optional[str] = None
 
             if self.__config__.local_mode_path_prefix:
-                path = f"{self.__config__.local_mode_path_prefix}{self.local_provider.separator}{field.alias}"
+                path = f"{self.__config__.local_mode_path_prefix}{self.local_provider.separator}{field.name}"
 
             else:
-                path = field.alias
+                path = field.name
 
             try:
                 value = self.local_provider.get(key=path)
@@ -62,7 +62,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             if value is None and field.default is not None:
                 value = field.default
 
-            d[field.alias] = value
+            d[field.name] = value
 
         return d
 
@@ -79,7 +79,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             vault_secret_key = field.field_info.extra.get("vault_secret_key")
 
             if vault_secret_key is None:
-                vault_secret_key = field.alias
+                vault_secret_key = field.name
 
             try:
                 vault_val = provider.get(
@@ -100,7 +100,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             if vault_val is None and field.default is not None:
                 vault_val = field.default
 
-            d[field.alias] = vault_val
+            d[field.name] = vault_val
 
         return d
 
