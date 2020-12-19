@@ -7,7 +7,7 @@
 <a href="https://actions-badge.atrox.dev/Elastoo-Team/sitri/goto"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FElastoo-Team%2Fsitri%2Fbadge&amp;style=popout" alt="Build Status" width="60%"></a>
 
 {%- if display_toc %}
-  <h3><a href="{{ pathto(master_doc) }}">{{ _('Table Of Contents') }}</a></h3> {{ toc }}
+  <h3><a href="{{ pathto(master_doc) }}">{{ _('Table Of Contents') }}</a></h3> {{ toctree(collapse=False,maxdepth=2) }}
 {%- endif %}
 
 <h3>Useful Links</h3>

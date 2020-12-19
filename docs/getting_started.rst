@@ -68,7 +68,7 @@ In code:
 .. note::
     All kwargs in get_config call pipe to get in provider
 
-Contribute Providers
+Config Providers
 ---------------------
 
 .. hint::
