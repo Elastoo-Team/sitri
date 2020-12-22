@@ -63,8 +63,8 @@ html_static_path = ["_static"]
 html_favicon = "_static/favicon.png"
 
 html_theme_options = {
-    "light_logo": "logo-light.png",
-    "dark_logo": "logo-dark.png",
+    "light_logo": "logo.svg",
+    "dark_logo": "logo.svg",
 }
 
 html_sidebars = {"index": ["sidebar.html"]}
