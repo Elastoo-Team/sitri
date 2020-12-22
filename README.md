@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/elastoo-team/sitri">
-    <img src="docs/_static/logo.png">
+    <img src="https://raw.githubusercontent.com/Elastoo-Team/sitri/master/docs/_static/logo.svg">
   </a>
   <h1 align="center">
     Sitri - powerful settings & configs for python
