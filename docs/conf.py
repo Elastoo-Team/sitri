@@ -60,7 +60,7 @@ html_theme = "furo"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
-html_favicon = "_static/favicon.png"
+html_favicon = "_static/logo.ico"
 
 html_theme_options = {
     "light_logo": "logo.svg",
