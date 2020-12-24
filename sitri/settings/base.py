@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Dict, Optional, Type, Union
+from typing import Any, Callable, Dict, Optional, Type, Union
 
 from pydantic import BaseConfig as PydanticBaseConfig
 from pydantic import BaseSettings as PydanticBaseSettings
@@ -21,6 +21,10 @@ class BaseLocalModeConfig(BaseConfig):
 
 
 class BaseSettings(ABC, PydanticBaseSettings):
+    def fill(self, call: Callable):
+        data = self.dict()
+        return call(**data)
+
     def _build_complex_value(self, value: Union[str, bytes, bytearray], path: str):
         if isinstance(value, str) or isinstance(value, bytes) or isinstance(value, bytearray):
             try:

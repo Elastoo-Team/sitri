@@ -3,8 +3,7 @@
    :synopsis: Config Base
 .. moduleauthor:: Aleksander Lavrov <github.com/egnod>
 """
-
-
+import inspect
 import typing
 from abc import ABC, abstractmethod
 
@@ -18,15 +17,30 @@ class ConfigProvider(ABC):
         """Provider code property for identity provider in manager."""
 
     @abstractmethod
-    def get(self, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
         """Get value from storage.
 
+        :param key: key for find value in provider source
         :param kwargs: additional arguments for providers
         """
 
+    @abstractmethod
     def keys(self, **kwargs) -> typing.List[str]:
         """Get keys list in storage."""
-        raise NotImplementedError("keys method not impl for this provider!")
+
+    def fill(self, call: typing.Callable, **kwargs):
+        """Fill callable object kwargs if all founded by provider.
+
+        :param call: callable object for fill
+        :param kwargs: additional arguments for getting
+        """
+        parameters = inspect.signature(call).parameters
+        data = {}
+
+        for key in parameters.keys():
+            data[key] = self.get(key=key, **kwargs)
+
+        return call(**data)
 
 
 class ConfigProviderManager:
