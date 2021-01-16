@@ -1,8 +1,8 @@
 import typing
 
 import hvac
-from loguru import logger
 
+from sitri.logger import logger
 from sitri.providers.base import ConfigProvider
 
 
@@ -38,7 +38,6 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return self._vault_hvac_instance
 
-    @logger.catch(level="ERROR")
     def get(
         self, key: str, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
     ) -> typing.Optional[str]:
@@ -46,12 +45,14 @@ class VaultKVConfigProvider(ConfigProvider):
             "path": secret_path if secret_path else self._secret_path,
             "mount_point": mount_point if mount_point else self._mount_point,
         }
-
-        response = self._vault.secrets.kv.v1.read_secret(**request_params)
+        try:
+            response = self._vault.secrets.kv.v1.read_secret(**request_params)
+        except Exception as e:
+            logger.error(f"Could not get secret from Vault server ({e})")
+            raise e
 
         return response["data"].get(key)
 
-    @logger.catch(level="ERROR")
     def keys(
         self, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
     ) -> typing.List[str]:

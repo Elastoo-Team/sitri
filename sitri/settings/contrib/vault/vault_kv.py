@@ -1,10 +1,10 @@
 from typing import Dict, Optional, Union
 
 from hvac.exceptions import VaultError
-from loguru import logger
 from pydantic import Field
 from pydantic.main import BaseModel
 
+from sitri.logger import logger
 from sitri.providers.contrib.json import JsonConfigProvider
 from sitri.providers.contrib.vault import VaultKVConfigProvider
 from sitri.settings.base import BaseLocalModeConfig, BaseLocalModeSettings
@@ -54,7 +54,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             try:
                 value = self.local_provider.get(key=path)
             except VaultError:
-                logger.opt(exception=True).warning(f"Could not get local variable {path}")
+                logger.error(f"Could not get local variable {path}")
 
             if field.is_complex():
                 value = self._build_complex_value(value, path)
@@ -87,10 +87,8 @@ class VaultKVSettings(BaseLocalModeSettings):
                     secret_path=vault_secret_path if vault_secret_path else self.__config__.default_secret_path,
                     mount_point=vault_mount_point if vault_mount_point else self.__config__.default_mount_point,
                 )
-            except VaultError:
-                logger.opt(exception=True).warning(
-                    f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
-                )
+            except VaultError as e:
+                logger.error(f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}" ({e})')
 
             if field.is_complex():
                 vault_val = self._build_complex_value(

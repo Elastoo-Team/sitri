@@ -2,6 +2,7 @@ import json
 import os
 import typing
 
+from sitri.logger import logger
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
 
@@ -42,11 +43,12 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
 
             return data
 
-        except FileNotFoundError:
+        except FileNotFoundError as e:
+            logger.error(f"File not found ({json_path})")
             if not found_file_error:
                 return {}
             else:
-                raise
+                raise e
 
     def _get_by_path(self, path: str, separator: str) -> typing.Any:
         """Retrieve value from a dictionary using a list of keys.

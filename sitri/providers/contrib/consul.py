@@ -1,7 +1,6 @@
 import typing
 
 import consul
-from loguru import logger
 
 from sitri.providers.base import ConfigProvider
 
@@ -31,7 +30,6 @@ class ConsulConfigProvider(ConfigProvider):
     def _get_path(self, key: str):
         return f"{self.folder}{key}" if self.folder not in key else key
 
-    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
         """Get value from consul by key.
 
@@ -45,7 +43,6 @@ class ConsulConfigProvider(ConfigProvider):
 
         return None
 
-    @logger.catch(level="ERROR")
     def keys(self) -> typing.List[typing.Any]:
         """Get keys list from consul folder."""
         index, data = self._consul.kv.get(self.folder, recurse=True)

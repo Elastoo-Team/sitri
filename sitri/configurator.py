@@ -7,8 +7,7 @@
 
 import typing
 
-from loguru import logger
-
+from sitri.logger import logger
 from sitri.providers.base import ConfigProvider
 from sitri.strategy.base import BaseStrategy
 from sitri.strategy.single import SingleStrategy
@@ -40,7 +39,7 @@ class SitriProviderConfigurator:
         :param default: if provider return None
         """
         if not self.config:
-            logger.info("No config provider")
+            logger.warning("No config provider")
             return None
 
         variable = self.config.get(key, **kwargs)
