@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sitri"
-version = "0.10.27"
+version = "0.11.0"
 description = "Library for one endpoint config managment"
 authors = ["Alexander Lavrov <egnod@ya.ru>"]
 license = "MIT"
