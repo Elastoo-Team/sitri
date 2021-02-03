@@ -1,7 +1,6 @@
 import typing
 
 import vedis
-from loguru import logger
 
 from sitri.providers.base import ConfigProvider
 
@@ -33,7 +32,6 @@ class VedisConfigProvider(ConfigProvider):
     def _config_hash(self):
         return self._vedis.Hash(self._hash_name)
 
-    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[str]:
         result = self._config_hash.get(key)
 
@@ -42,7 +40,6 @@ class VedisConfigProvider(ConfigProvider):
 
         return None
 
-    @logger.catch(level="ERROR")
     def keys(self) -> typing.List[str]:
         var_list = []
         variables = self._config_hash.keys() if self._config_hash.keys() is not None else []

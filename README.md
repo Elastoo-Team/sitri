@@ -8,7 +8,6 @@
 </p>
 
 [![PyPI](https://img.shields.io/pypi/v/sitri)](https://pypi.org/project/sitri/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dw/sitri)](https://pypi.org/project/sitri/)
 [![codecov](https://codecov.io/gh/Elastoo-Team/sitri/branch/master/graph/badge.svg)](https://codecov.io/gh/elastoo-team/sitri)
 [![Maintainability](https://api.codeclimate.com/v1/badges/625f1d869adbf4128f75/maintainability)](https://codeclimate.com/github/Elastoo-Team/sitri/maintainability)
 ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/Elastoo-Team/sitri)

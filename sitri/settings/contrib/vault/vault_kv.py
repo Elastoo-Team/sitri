@@ -54,7 +54,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             try:
                 value = self.local_provider.get(key=path)
             except VaultError:
-                logger.opt(exception=True).warning(f"Could not get local variable {path}")
+                logger.warning(f"Could not get local variable {path}")
 
             if field.is_complex():
                 value = self._build_complex_value(value, path)
@@ -88,9 +88,7 @@ class VaultKVSettings(BaseLocalModeSettings):
                     mount_point=vault_mount_point if vault_mount_point else self.__config__.default_mount_point,
                 )
             except VaultError:
-                logger.opt(exception=True).warning(
-                    f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
-                )
+                logger.warning(f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"')
 
             if field.is_complex():
                 vault_val = self._build_complex_value(

@@ -1,7 +1,6 @@
 import typing
 
 import hvac
-from loguru import logger
 
 from sitri.providers.base import ConfigProvider
 
@@ -38,7 +37,6 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return self._vault_hvac_instance
 
-    @logger.catch(level="ERROR")
     def get(
         self, key: str, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
     ) -> typing.Optional[str]:
@@ -51,7 +49,6 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return response["data"].get(key)
 
-    @logger.catch(level="ERROR")
     def keys(
         self, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
     ) -> typing.List[str]:
