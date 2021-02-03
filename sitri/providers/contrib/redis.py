@@ -1,7 +1,6 @@
 import typing
 
 import redis
-from loguru import logger
 
 from sitri.providers.base import ConfigProvider
 
@@ -44,14 +43,12 @@ class RedisConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
-    @logger.catch(level="ERROR")
     def get(self, key: str, **kwargs) -> typing.Optional[str]:
         result = self._redis.get(self.prefixize(key))
 
         if isinstance(result, bytes):
             return result.decode()
 
-    @logger.catch(level="ERROR")
     def keys(self) -> typing.List[str]:
         var_list = []
 
