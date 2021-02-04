@@ -6,3 +6,6 @@
 from sitri.configurator import SitriProviderConfigurator
 
 Sitri = SitriProviderConfigurator  # noqa
+
+
+__version__ = "0.11.0"
