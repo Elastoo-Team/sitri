@@ -86,7 +86,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
             return None
 
     def get(
-        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None
+        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None, **kwargs
     ) -> typing.Optional[typing.Any]:
         """Get value from json.
 
@@ -102,7 +102,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None) -> typing.List[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs) -> typing.List[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list

@@ -40,7 +40,7 @@ class VedisConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self) -> typing.List[str]:
+    def keys(self, **kwargs) -> typing.List[str]:
         var_list = []
         variables = self._config_hash.keys() if self._config_hash.keys() is not None else []
 

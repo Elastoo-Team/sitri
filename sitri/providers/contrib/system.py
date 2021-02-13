@@ -44,7 +44,7 @@ class SystemConfigProvider(ConfigProvider):
         """
         return os.getenv(self.prefixize(key), None)
 
-    def keys(self) -> typing.List[str]:
+    def keys(self, **kwargs) -> typing.List[str]:
         """Get keys list with prefix from system env."""
         var_list = []
 
