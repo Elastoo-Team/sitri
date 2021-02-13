@@ -11,11 +11,11 @@ from sitri.providers.base import ConfigProvider
 
 
 class BaseConfig(PydanticBaseConfig):
-    provider: Type[ConfigProvider]
+    provider: Union[Type[ConfigProvider], ConfigProvider]
 
 
 class BaseLocalModeConfig(BaseConfig):
-    provider: Type[ConfigProvider]
+    provider: Union[Type[ConfigProvider], ConfigProvider]
 
     local_mode: Optional[bool]
 
@@ -56,7 +56,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
 class BaseLocalModeSettings(BaseSettings):
     @property
     @abstractmethod
-    def local_provider(self) -> Type[ConfigProvider]:
+    def local_provider(self) -> Union[Type[ConfigProvider], ConfigProvider]:
         pass
 
     @abstractmethod

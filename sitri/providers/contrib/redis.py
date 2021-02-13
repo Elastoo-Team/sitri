@@ -19,7 +19,8 @@ class RedisConfigProvider(ConfigProvider):
         """
         self._prefix = prefix.upper()
         self._redis_get = redis_connector
-        self._redis_instance = None
+
+        self._redis_instance: typing.Optional[redis.Redis] = None
 
     @property
     def _redis(self) -> redis.Redis:
@@ -49,7 +50,9 @@ class RedisConfigProvider(ConfigProvider):
         if isinstance(result, bytes):
             return result.decode()
 
-    def keys(self) -> typing.List[str]:
+        return None
+
+    def keys(self, **kwargs) -> typing.List[str]:
         var_list = []
 
         for var in self._redis.keys():

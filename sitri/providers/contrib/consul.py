@@ -43,7 +43,7 @@ class ConsulConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self) -> typing.List[typing.Any]:
+    def keys(self, **kwargs) -> typing.List[typing.Any]:
         """Get keys list from consul folder."""
         index, data = self._consul.kv.get(self.folder, recurse=True)
         var_list = []

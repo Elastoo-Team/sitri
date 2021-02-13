@@ -32,7 +32,7 @@ class IniConfigProvider(ConfigProvider):
 
         return self._sections
 
-    def get(self, key: str, section: str, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, section: str, **kwargs) -> typing.Optional[typing.Any]:  # type: ignore
         """Get value from ini file.
 
         :param key: key or path for search
@@ -43,7 +43,7 @@ class IniConfigProvider(ConfigProvider):
 
         return self.configparser[section].get(key)
 
-    def keys(self, section: str) -> typing.List[str]:
+    def keys(self, section: str, **kwargs) -> typing.List[str]:  # type: ignore
         """Get keys of section.
 
         :param section: section of ini file
