@@ -7,9 +7,19 @@ import inspect
 import typing
 from abc import ABC, abstractmethod
 
+from sitri.logger import get_default_logger
+
 
 class ConfigProvider(ABC):
     """Base class for config providers."""
+
+    def __init__(self, logger: typing.Optional[typing.Any] = None, *args, **kwargs):
+        """Default init method for all providers."""
+
+        if not logger:
+            logger = get_default_logger(__name__)
+
+        self.logger = logger
 
     @property
     @abstractmethod
@@ -55,8 +65,6 @@ class ConfigProviderManager:
             .. code-block:: python
 
                ConfigProviderManager.get_by_code("system")
-
-               -> SystemConfigProvider
         """
         for provider in ConfigProvider.__subclasses__():
             if provider.provider_code == code:

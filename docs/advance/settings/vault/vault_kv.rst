@@ -42,9 +42,10 @@ This settings configurator has local_mode with JsonConfigProvider.
     class AppSettings(BaseModel):
         db: DBSettings = Field(default_factory=DBSettings)
 
+
     settings = AppSettings()
 
-    print(settings.dict()) # -> {'db': {'url': 'psql://test', 'name': 'testdb'}}
+    print(settings.dict())  # -> {'db': {'url': 'psql://test', 'name': 'testdb'}}
 
 .. important::
     For pydantic Field added three extra args: \

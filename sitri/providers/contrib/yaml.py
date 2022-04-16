@@ -19,10 +19,12 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
     def __init__(
         self,
         yaml_path: str = "./data.yaml",
-        yaml_data: str = None,
+        yaml_data: typing.Optional[str] = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
+        *args,
+        **kwargs
     ):
         """
 
@@ -32,6 +34,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
         :param found_file_error: if true no file not found error raise on yaml.load
         :param default_path_mode_state: default state for path mode on get value by key
         """
+        super().__init__(*args, **kwargs)
 
         if not yaml_data:
             self._yaml = self._get_yaml_from_file(yaml_path, found_file_error)

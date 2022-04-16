@@ -29,3 +29,9 @@ Vault KV Setting Example
 Local mode example
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 .. include:: advance/settings/examples/local_mode.rst
+
+Logging
+----------
+Tips
+~~~~~~~~~~~~~~~~~~~~~~~~~
+.. include:: advance/logging.rst

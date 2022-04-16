@@ -18,12 +18,15 @@ class VaultKVConfigProvider(ConfigProvider):
         vault_connector: typing.Callable[[], hvac.Client],
         mount_point: typing.Optional[str] = None,
         secret_path: typing.Optional[str] = None,
+        *args,
+        **kwargs
     ):
         """
         :param vault_connector: function return connection to Vault
         :param mount_point: default vault_kv kv1 storage mount point
         :param secret_path: default path to the secret in mounted
         """
+        super().__init__(*args, **kwargs)
 
         self._vault_get = vault_connector
         self._vault_hvac_instance = None

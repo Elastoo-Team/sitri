@@ -11,12 +11,14 @@ class RedisConfigProvider(ConfigProvider):
     provider_code = "redis"
     _prefix = "redis"
 
-    def __init__(self, prefix: str, redis_connector: typing.Callable[[], redis.Redis]):
+    def __init__(self, prefix: str, redis_connector: typing.Callable[[], redis.Redis], *args, **kwargs):
         """
 
         :param prefix: prefix for create "namespace" for project variables in redis
         :param redis_connector: function return connection to Redis
         """
+        super().__init__(*args, **kwargs)
+
         self._prefix = prefix.upper()
         self._redis_get = redis_connector
 

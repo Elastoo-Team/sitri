@@ -36,6 +36,7 @@ Example with AppRole authenticate:
 
     configurator = SystemConfigProvider(prefix="test")
 
+
     def vault_client_factory() -> hvac.Client:
         client = hvac.Client(url=configurator.get("vault_api"))
 
@@ -46,10 +47,9 @@ Example with AppRole authenticate:
 
         return client
 
+
     provider = VaultKVConfigProvider(
-        vault_connector=vault_client_factory,
-        mount_point=f"test_kv/",
-        secret_path="test"
+        vault_connector=vault_client_factory, mount_point=f"test_kv/", secret_path="test"
     )
 
     print(provider.get("key1"))

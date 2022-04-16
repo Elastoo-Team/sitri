@@ -1,6 +1,10 @@
-import json
 import os
 import typing
+
+try:
+    import ujson as json
+except ImportError:
+    import json
 
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
@@ -13,10 +17,12 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
     def __init__(
         self,
         json_path: str = "./data.json",
-        json_data: str = None,
+        json_data: typing.Optional[str] = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
+        *args,
+        **kwargs
     ):
         """
 
@@ -26,6 +32,8 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         :param found_file_error: if true no file not found error raise on json.load
         :param default_path_mode_state: default state for path mode on get value by key
         """
+        super().__init__(*args, **kwargs)
+
         if not json_data:
             self._json = self._get_json_from_file(json_path, found_file_error)
         else:

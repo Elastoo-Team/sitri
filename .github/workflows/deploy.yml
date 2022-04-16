@@ -18,7 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel poetry attrs codecov
-        poetry config virtualenvs.create false --local && poetry install -E "consul pyyaml hvac redis vedis" --no-ansi -n
+        poetry config virtualenvs.create false --local && poetry install -E "all" --no-ansi -n
     - name: Test with pre-commit
       run: |
         pip install pre-commit

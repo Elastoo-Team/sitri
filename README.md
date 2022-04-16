@@ -19,13 +19,25 @@ Sitri - library for managing authorization and configuration data from a single 
 #  Installation
 
 ```bash
-poetry add sitri
+poetry add sitri -E "all"
 ```
 
 or
 ```bash
-pip3 install sitri
+pip3 install sitri[all]
 ```
+
+*Extras* packs and providers:
+
+    1. all - all providers and settings module.
+    2. settings - pydantic, providers with settings-support.
+    3. redis - for redis provider.
+    4. hvac - for HashiCorp Vault provider.
+    5. vedis - for vedis provider.
+    6. pyyaml - for YAML provider.
+    7. structlog - structlog package if your app does not provide structlog (optional, default logging package also support).
+    8. ujson - speed-up your json provider (optional).
+
 
 # Basics with SystemProvider
 

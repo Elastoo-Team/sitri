@@ -39,13 +39,6 @@ YAML Provider
    :members:
    :show-inheritance:
 
-
-Consul Provider
-~~~~~~~~~~~~~~~~~~~~
-.. automodule:: sitri.providers.contrib.consul
-   :members:
-   :show-inheritance:
-
 Redis Provider
 ~~~~~~~~~~~~~~~~~~~~
 .. automodule:: sitri.providers.contrib.redis

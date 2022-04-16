@@ -59,7 +59,10 @@ Next, we just need to add the class of our settings to the config, the fields ne
 .. code-block:: python
 
     is_local_mode = ENV == "local"
-    local_mode_filepath = configurator.get("local_mode_file_path")  # export SUPERAPP_LOCAL_MODE_FILE_PATH=/path/to/config.json
+    local_mode_filepath = configurator.get(
+        "local_mode_file_path"
+    )  # export SUPERAPP_LOCAL_MODE_FILE_PATH=/path/to/config.json
+
 
     class BaseSettingsConfig(VaultKVSettings.VaultKVSettingsConfig):
         provider = provider
@@ -67,6 +70,7 @@ Next, we just need to add the class of our settings to the config, the fields ne
         local_mode = is_local_mode
         local_mode = local_mode
         local_provider_args = {"json_path": local_mode_filepath}
+
 
     class DBSettings(VaultKVSettings):
         url: str = Field(...)

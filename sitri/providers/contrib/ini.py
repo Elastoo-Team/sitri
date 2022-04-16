@@ -10,14 +10,13 @@ class IniConfigProvider(ConfigProvider):
 
     provider_code = "ini"
 
-    def __init__(
-        self,
-        ini_path: str = "./config.ini",
-    ):
+    def __init__(self, ini_path: str = "./config.ini", *args, **kwargs):
         """
 
         :param ini_path: path to ini file
         """
+        super().__init__(*args, **kwargs)
+
         self.configparser = configparser.ConfigParser()
 
         with open(os.path.abspath(ini_path)) as f:

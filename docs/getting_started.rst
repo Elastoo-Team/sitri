@@ -7,7 +7,7 @@ Installation
 ------------
 
 .. attention::
-    Sitri works only on Python 3.6.1 or higher.
+    Sitri works only on Python 3.8 or higher.
 
     When support will for older Python versions? - Never.
 
@@ -15,19 +15,23 @@ Install Sitri with Poetry (**recommend**):
 
 .. code-block:: sh
 
-    poetry add sitri
+    poetry add sitri -E "all"
 
 Install Sitri with pip:
 
 .. code-block:: sh
 
-    pip install sitri
+    pip install sitri[all]
 
-Install Sitri with pipenv:
+*Extras* packs and providers:
 
-.. code-block:: sh
-
-    pipenv install sitri
+    1. all - all providers and settings module.
+    2. settings - pydantic, providers with settings-support.
+    3. redis - for redis provider.
+    4. hvac - for HashiCorp Vault provider.
+    5. vedis - for vedis provider.
+    6. pyyaml - for YAML provider.
+    7. structlog - structlog package if your app does not provide structlog (*optional*, default logging package also support).
 
 
 Basic Usage
@@ -75,10 +79,6 @@ Config Providers
     In this section most part providers require additional libraries. Install instruction for install dependencies in "Prepare" subsections.
 
     All providers will be considered separately without Sitri class
-
-Consul
-~~~~~~
-.. include:: getting_started/providers/consul.rst
 
 JSON
 ~~~~~~

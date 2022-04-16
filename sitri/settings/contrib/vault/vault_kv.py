@@ -1,7 +1,6 @@
-from typing import Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from hvac.exceptions import VaultError
-from loguru import logger
 from pydantic import Field
 from pydantic.main import BaseModel
 
@@ -32,7 +31,9 @@ class VaultKVSettings(BaseLocalModeSettings):
 
             if args:
                 self.__config__.local_provider = JsonConfigProvider(
-                    json_path=args.json_path, default_path_mode_state=args.default_path_mode_state
+                    json_path=args.json_path,
+                    default_path_mode_state=args.default_path_mode_state,
+                    logger=self.__config__.local_provider_logger,
                 )
             else:
                 raise ValueError("Local provider arguments not found for local mode")
@@ -54,7 +55,7 @@ class VaultKVSettings(BaseLocalModeSettings):
             try:
                 value = self.local_provider.get(key=path)
             except VaultError:
-                logger.warning(f"Could not get local variable {path}")
+                self.local_provider.logger.error(f"Could not get local variable {path}")
 
             if field.is_complex():
                 value = self._build_complex_value(value, path)
@@ -88,7 +89,9 @@ class VaultKVSettings(BaseLocalModeSettings):
                     mount_point=vault_mount_point if vault_mount_point else self.__config__.default_mount_point,
                 )
             except VaultError:
-                logger.warning(f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"')
+                provider.logger.warning(
+                    f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
+                )
 
             if field.is_complex():
                 vault_val = self._build_complex_value(
@@ -112,6 +115,8 @@ class VaultKVSettings(BaseLocalModeSettings):
         local_mode_path_prefix: Optional[str] = None
         local_provider_args: Optional[Union[VaultKVLocalProviderArgs, Dict]]
 
-        local_provider: JsonConfigProvider = None
+        local_provider: Optional[JsonConfigProvider] = None
+
+        local_provider_logger: Optional[Any] = None
 
     __config__: VaultKVSettingsConfig
