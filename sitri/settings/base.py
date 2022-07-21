@@ -39,6 +39,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
         init_kwargs: Dict[str, Any],
         _env_file: Union[Path, str, None] = None,
         _env_file_encoding: Optional[str] = None,
+        _env_nested_delimiter: Optional[str] = None,
         _secrets_dir: Union[Path, str, None] = None,
     ) -> Dict[str, Any]:
         return deep_update(
@@ -68,6 +69,7 @@ class BaseLocalModeSettings(BaseSettings):
         init_kwargs: Dict[str, Any],
         _env_file: Union[Path, str, None] = None,
         _env_file_encoding: Optional[str] = None,
+        _env_nested_delimiter: Optional[str] = None,
         _secrets_dir: Union[Path, str, None] = None,
     ) -> Dict[str, Any]:
         if not self.__config__.local_mode:

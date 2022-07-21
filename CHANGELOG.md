@@ -2,7 +2,7 @@
 
 ### Fix
 
-- FIX (3.10 unsupport)
+- FIX (3.10 unsupported)
 
 ## 2.0.0 (2022-04-16)
 
