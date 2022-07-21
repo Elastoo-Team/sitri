@@ -1,6 +1,6 @@
 [installer]
 parallel = true
-max-workers = 2
+max-workers = 1
 
 [virtualenvs]
 create = true
