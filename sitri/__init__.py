@@ -8,4 +8,4 @@ from sitri.configurator import SitriProviderConfigurator
 Sitri = SitriProviderConfigurator  # noqa
 
 
-__version__ = "2.0.1"
+__version__ = "2.1.0"
