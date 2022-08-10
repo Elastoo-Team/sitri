@@ -56,7 +56,8 @@ ujson = ["ujson"]
 structlog = ["structlog"]
 settings = ["pydantic", "hvac"]
 pydantic = ["pydantic"]
-all = ["redis", "vedis", "hvac", "pydantic", "pyyaml", "structlog", "ujson"]
+toml = ["toml"]
+all = ["redis", "vedis", "hvac", "pydantic", "pyyaml", "structlog", "ujson", "toml"]
 
 [tool.black]
 line-length = 120

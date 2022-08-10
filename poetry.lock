@@ -677,20 +677,21 @@ optional = true
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [extras]
-all = ["redis", "vedis", "hvac", "pydantic", "pyyaml", "structlog", "ujson"]
+all = ["redis", "vedis", "hvac", "pydantic", "pyyaml", "structlog", "ujson", "toml"]
 hvac = ["hvac"]
 pydantic = ["pydantic"]
 pyyaml = ["pyyaml"]
 redis = ["redis"]
 settings = ["pydantic", "hvac"]
 structlog = ["structlog"]
+toml = ["toml"]
 ujson = ["ujson"]
 vedis = ["vedis"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "7ec1d77dd4531f43262338f3abd414286ac894943eeb4e56358153b9ac805793"
+content-hash = "dec9778981c4e087396dce1b6cb9cb1288294df8f7a9b08680a434518ca86443"
 
 [metadata.files]
 argcomplete = [
