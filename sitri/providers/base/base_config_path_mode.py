@@ -42,7 +42,7 @@ class PathModeStateProvider(ABC):
 
     @property
     @abstractmethod
-    def data(self) -> dict[str, typing.Any]:
+    def data(self) -> typing.Dict[str, typing.Any]:
         """Retrieve data as dict.
 
         :param key: key from json

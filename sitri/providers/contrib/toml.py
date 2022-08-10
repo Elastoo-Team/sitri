@@ -118,7 +118,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> dict[str, typing.Any]:
+    def data(self) -> typing.Dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._toml
