@@ -1,7 +1,7 @@
 import os
 import typing
 
-import yaml
+import toml
 
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
@@ -11,15 +11,15 @@ except ImportError:
     from io import StringIO
 
 
-class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
-    """Config provider for YAML."""
+class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
+    """Config provider for TOML."""
 
-    provider_code = "yaml"
+    provider_code = "toml"
 
     def __init__(
         self,
-        yaml_path: str = "./data.yaml",
-        yaml_data: typing.Optional[str] = None,
+        toml_path: str = "./data.toml",
+        toml_data: typing.Optional[str] = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
@@ -28,28 +28,27 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
     ):
         """
 
-        :param yaml_path: path to yaml file
-        :param yaml_data: yaml data in string
+        :param toml_path: path to toml file
+        :param toml_data: toml data in string
         :param default_separator: default value separator for path-mode
-        :param found_file_error: if true no file not found error raise on yaml.load
+        :param found_file_error: if true no file not found error raise on toml.load
         :param default_path_mode_state: default state for path mode on get value by key
         """
         super().__init__(*args, **kwargs)
 
-        if not yaml_data:
-            self._yaml = self._get_yaml_from_file(yaml_path, found_file_error)
+        if not toml_data:
+            self._toml = self._get_toml_from_file(toml_path, found_file_error)
         else:
-            yaml_data = StringIO(yaml_data)
-            self._yaml = yaml.safe_load(yaml_data)
+            self._toml = toml.loads(toml_data)
 
         self.separator = default_separator
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_yaml_from_file(yaml_path: str, found_file_error: bool):
+    def _get_toml_from_file(toml_path: str, found_file_error: bool):
         try:
-            with open(os.path.abspath(yaml_path)) as f:
-                data = yaml.safe_load(f)
+            with open(os.path.abspath(toml_path)) as f:
+                data = toml.load(f)
 
             return data
 
@@ -64,7 +63,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         :param path: string with separated keys
         """
-        dict_local = self._yaml.copy()
+        dict_local = self._toml.copy()
         keys = path.split(separator)
 
         for key in keys:
@@ -83,8 +82,8 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
         :param key: key from json
         """
 
-        if key in self._yaml:
-            return self._yaml[key]
+        if key in self._toml:
+            return self._toml[key]
         else:
             return None
 
@@ -114,7 +113,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
         # TODO: implemented path-mode for keys list
 
         if not path_mode:
-            return self._yaml.keys()
+            return self._toml.keys()
         else:
             raise NotImplementedError("Path-mode not implemented!")
 
@@ -122,4 +121,4 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
     def data(self) -> dict[str, typing.Any]:
         """Retrieve data as dict."""
 
-        return self._yaml
+        return self._toml

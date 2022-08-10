@@ -39,3 +39,11 @@ class PathModeStateProvider(ABC):
 
         :param key: key from json
         """
+
+    @property
+    @abstractmethod
+    def data(self) -> dict[str, typing.Any]:
+        """Retrieve data as dict.
+
+        :param key: key from json
+        """

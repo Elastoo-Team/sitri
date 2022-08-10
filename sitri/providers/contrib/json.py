@@ -114,3 +114,9 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
             return self._json.keys()
         else:
             raise NotImplementedError("Path-mode not implemented!")
+
+    @property
+    def data(self) -> dict[str, typing.Any]:
+        """Retrieve data as dict."""
+
+        return self._json
