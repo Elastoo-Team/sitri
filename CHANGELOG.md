@@ -1,3 +1,14 @@
+## 2.1.0 (2022-08-10)
+
+### Fix
+
+- typo
+- typo
+
+### Feat
+
+- add toml contrib
+
 ## 2.1.0 (2022-07-21)
 
 ### Feat
