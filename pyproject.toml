@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sitri"
-version = "2.1.2"
+version = "2.1.3"
 description = "Library for one endpoint config managment"
 authors = ["Alexander Lavrov <egnod@ya.ru>"]
 license = "MIT"
@@ -80,7 +80,7 @@ exclude = '''
 '''
 
 [tool.commitizen]
-version = "2.1.2"
+version = "2.1.3"
 tag_format = "$major.$minor.$patch"
 version_files = [
     "sitri/__init__.py",
