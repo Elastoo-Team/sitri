@@ -16,11 +16,11 @@ class VaultKVConfigProvider(ConfigProvider):
     def __init__(
         self,
         vault_connector: typing.Callable[[], hvac.Client],
-        mount_point: typing.Optional[str] = None,
-        secret_path: typing.Optional[str] = None,
-        *args,
-        **kwargs
-    ):
+        mount_point: str | None = None,
+        secret_path: str | None = None,
+        *args: typing.Any,
+        **kwargs: typing.Any,
+    ) -> None:
         """
         :param vault_connector: function return connection to Vault
         :param mount_point: default vault_kv kv1 storage mount point
@@ -35,14 +35,29 @@ class VaultKVConfigProvider(ConfigProvider):
 
     @property
     def _vault(self) -> hvac.Client:
+        """_vault.
+
+        :rtype: hvac.Client
+        """
         if not self._vault_hvac_instance:
             self._vault_hvac_instance = self._vault_get()
 
         return self._vault_hvac_instance
 
     def get(
-        self, key: str, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
-    ) -> typing.Optional[str]:
+        self, key: str, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any
+    ) -> str | None:
+        """get.
+
+        :param key:
+        :type key: str
+        :param mount_point:
+        :type mount_point: typing.Optional[str]
+        :param secret_path:
+        :type secret_path: typing.Optional[str]
+        :param kwargs:
+        :rtype: typing.Optional[str]
+        """
         request_params = {
             "path": secret_path if secret_path else self._secret_path,
             "mount_point": mount_point if mount_point else self._mount_point,
@@ -52,9 +67,16 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return response["data"].get(key)
 
-    def keys(
-        self, mount_point: typing.Optional[str] = None, secret_path: typing.Optional[str] = None, **kwargs
-    ) -> typing.List[str]:
+    def keys(self, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any) -> list[str]:
+        """keys.
+
+        :param mount_point:
+        :type mount_point: typing.Optional[str]
+        :param secret_path:
+        :type secret_path: typing.Optional[str]
+        :param kwargs:
+        :rtype: typing.List[str]
+        """
         request_params = {
             "path": secret_path if secret_path else self._secret_path,
             "mount_point": mount_point if mount_point else self._mount_point,

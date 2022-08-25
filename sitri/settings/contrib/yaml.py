@@ -1,18 +1,21 @@
-from typing import Dict, Optional
+from typing import Any
 
 from sitri.providers.contrib.yaml import YamlConfigProvider
 from sitri.settings.base import BaseConfig, BaseSettings
 
 
 class YamlSettings(BaseSettings):
-    def _build_default(self):
-        d: Dict[str, Optional[str]] = {}
+    """YamlSettings."""
+
+    def _build_default(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """_build_default."""
+        d: dict[str, str | None] = {}
 
         provider = self.__config__.provider
 
         for field in self.__fields__.values():
-            key_name: Optional[str] = field.field_info.extra.get("yaml_key_name")
-            path_prefix: Optional[str] = field.field_info.extra.get("yaml_path_prefix")
+            key_name: str | None = field.field_info.extra.get("yaml_key_name")
+            path_prefix: str | None = field.field_info.extra.get("yaml_path_prefix")
 
             if key_name is None:
                 key_name = field.name
@@ -23,7 +26,7 @@ class YamlSettings(BaseSettings):
             elif self.__config__.default_path_prefix is not None:
                 key_name = f"{self.__config__.default_path_prefix}{provider.separator}{key_name}"
 
-            value: Optional[str] = provider.get(key_name)
+            value: str | None = provider.get(key_name)
 
             if field.is_complex():
                 value = self._build_complex_value(value, key_name)
@@ -36,8 +39,10 @@ class YamlSettings(BaseSettings):
         return d
 
     class YamlSettingsConfig(BaseConfig):
+        """YamlSettingsConfig."""
+
         provider: YamlConfigProvider
 
-        default_path_prefix: Optional[str] = None
+        default_path_prefix: str | None = None
 
     __config__: YamlSettingsConfig

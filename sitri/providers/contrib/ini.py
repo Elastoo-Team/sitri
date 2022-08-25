@@ -10,7 +10,7 @@ class IniConfigProvider(ConfigProvider):
 
     provider_code = "ini"
 
-    def __init__(self, ini_path: str = "./config.ini", *args, **kwargs):
+    def __init__(self, ini_path: str = "./config.ini", *args: typing.Any, **kwargs: typing.Any) -> None:
         """
 
         :param ini_path: path to ini file
@@ -25,13 +25,14 @@ class IniConfigProvider(ConfigProvider):
         self._sections = None
 
     @property
-    def sections(self):
-        if not self._sections:
+    def sections(self) -> list[str]:
+        """sections."""
+        if self._sections:
             self._sections = list(self.configparser.keys())
 
         return self._sections
 
-    def get(self, key: str, section: str, **kwargs) -> typing.Optional[typing.Any]:  # type: ignore
+    def get(self, key: str, section: str, **kwargs: typing.Any) -> typing.Any | None:  # type: ignore
         """Get value from ini file.
 
         :param key: key or path for search
@@ -42,7 +43,7 @@ class IniConfigProvider(ConfigProvider):
 
         return self.configparser[section].get(key)
 
-    def keys(self, section: str, **kwargs) -> typing.List[str]:  # type: ignore
+    def keys(self, section: str, **kwargs: typing.Any) -> list[str]:  # type: ignore
         """Get keys of section.
 
         :param section: section of ini file

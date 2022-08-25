@@ -1,14 +1,21 @@
 import os
-import typing
+from typing import Any
 
 import redis
 
 
 class RedisMock:
+    """RedisMock."""
 
     _env = os.environ
 
-    def get(self, key: str) -> typing.Optional[bytes]:
+    def get(self, key: str) -> bytes | None:
+        """get.
+
+        :param key:
+        :type key: str
+        :rtype: bytes | None
+        """
         result = self._env.get(key)
 
         if result:
@@ -16,8 +23,16 @@ class RedisMock:
         else:
             return None
 
-    def keys(self) -> typing.List[bytes]:
+    def keys(self) -> list[bytes]:
+        """keys.
+
+        :rtype: list[bytes]
+        """
         return [bytes(key, encoding="utf-8") for key in self._env.keys()]
 
-    def __instancecheck__(self, instance):
+    def __instancecheck__(self, instance: Any) -> bool:
+        """__instancecheck__.
+
+        :param instance:
+        """
         return isinstance(instance, redis.Redis)

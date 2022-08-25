@@ -31,7 +31,6 @@ Install Sitri with pip:
     4. hvac - for HashiCorp Vault provider.
     5. vedis - for vedis provider.
     6. pyyaml - for YAML provider.
-    7. structlog - structlog package if your app does not provide structlog (*optional*, default logging package also support).
 
 
 Basic Usage

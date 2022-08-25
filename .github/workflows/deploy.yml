@@ -27,4 +27,4 @@ jobs:
         codecov -t ${{ secrets.CODECOV_TOKEN }}
     - name: Build and publish
       run: |
-          poetry publish --build -u __token__ -p ${{ secrets.PYPI_TOKEN }}
+        poetry publish --build -u __token__ -p ${{ secrets.PYPI_TOKEN }}

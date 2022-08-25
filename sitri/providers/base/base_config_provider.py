@@ -13,7 +13,7 @@ from sitri.logger import get_default_logger
 class ConfigProvider(ABC):
     """Base class for config providers."""
 
-    def __init__(self, logger: typing.Optional[typing.Any] = None, *args, **kwargs):
+    def __init__(self, logger: typing.Any | None = None, *args: typing.Any, **kwargs: typing.Any) -> None:
         """Default init method for all providers."""
 
         if not logger:
@@ -27,7 +27,7 @@ class ConfigProvider(ABC):
         """Provider code property for identity provider in manager."""
 
     @abstractmethod
-    def get(self, key: str, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, **kwargs: typing.Any) -> typing.Any | None:
         """Get value from storage.
 
         :param key: key for find value in provider source
@@ -35,10 +35,10 @@ class ConfigProvider(ABC):
         """
 
     @abstractmethod
-    def keys(self, **kwargs) -> typing.List[str]:
+    def keys(self, **kwargs: typing.Any) -> list[str]:
         """Get keys list in storage."""
 
-    def fill(self, call: typing.Callable, **kwargs):
+    def fill(self, call: typing.Callable[[typing.Any], typing.Any], **kwargs: typing.Any) -> typing.Any:
         """Fill callable object kwargs if all founded by provider.
 
         :param call: callable object for fill
@@ -57,7 +57,7 @@ class ConfigProviderManager:
     """Manager for children ConfigProvider classes."""
 
     @staticmethod
-    def get_by_code(code: str) -> typing.Optional[typing.Type[ConfigProvider]]:
+    def get_by_code(code: str) -> type[ConfigProvider] | None:
         """Get config provider by provider_code.
 
         :param code: provider_code for search config provider
@@ -67,6 +67,6 @@ class ConfigProviderManager:
                ConfigProviderManager.get_by_code("system")
         """
         for provider in ConfigProvider.__subclasses__():
-            if provider.provider_code == code:
+            if provider.provider_code == code:  # type: ignore
                 return provider
         return None

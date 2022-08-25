@@ -16,7 +16,7 @@ class IndexPriorityStrategy(BaseStrategy):
 
         self.providers = data_providers
 
-    def get(self, *args, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, *args: typing.Any, **kwargs: typing.Any) -> typing.Any | None:
         """Get value by index priority strategy.
 
         :param args: any args for providers

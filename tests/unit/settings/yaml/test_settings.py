@@ -1,20 +1,40 @@
+from typing import Any, Callable
+
 import pytest
 from pydantic.env_settings import SettingsError
 from pydantic.error_wrappers import ValidationError
 
+from sitri.providers.contrib.yaml import YamlConfigProvider
+from sitri.settings.contrib.yaml import YamlSettings
 
-def test_metadata(yaml_settings_empty) -> None:
+
+def test_metadata(yaml_settings_empty: YamlSettings) -> None:
+    """test_metadata.
+
+    :param yaml_settings_empty:
+    :rtype: None
+    """
     assert yaml_settings_empty.Config.provider.provider_code == "yaml"
 
 
 def test_get_variable(
-    monkeypatch,
-    yaml_config,
-    yaml_settings,
-    yaml_settings_raise,
-    yaml_settings_complex,
-    yaml_settings_complex_raise,
+    monkeypatch: Any,
+    yaml_config: YamlConfigProvider,
+    yaml_settings: Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_raise: Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_complex: Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_complex_raise: Callable[[YamlConfigProvider], YamlSettings],
 ) -> None:
+    """test_get_variable.
+
+    :param monkeypatch:
+    :param yaml_config:
+    :param yaml_settings:
+    :param yaml_settings_raise:
+    :param yaml_settings_complex:
+    :param yaml_settings_complex_raise:
+    :rtype: None
+    """
     test_settings = yaml_settings(provider_instance=yaml_config)()
     assert test_settings.key1 == "1"
     assert test_settings.key2 == "2"

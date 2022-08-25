@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from typing import Any
 
 
 class BaseStrategy(metaclass=ABCMeta):
@@ -10,5 +11,5 @@ class BaseStrategy(metaclass=ABCMeta):
         """Code for strategy manager."""
 
     @abstractmethod
-    def get(self, *args, **kwargs):
+    def get(self, *args: Any, **kwargs: Any) -> Any:
         """Get value by strategy."""

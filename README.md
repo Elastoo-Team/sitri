@@ -35,8 +35,7 @@ pip3 install sitri[all]
     4. hvac - for HashiCorp Vault provider.
     5. vedis - for vedis provider.
     6. pyyaml - for YAML provider.
-    7. structlog - structlog package if your app does not provide structlog (optional, default logging package also support).
-    8. ujson - speed-up your json provider (optional).
+    7. ujson - speed-up your json provider (optional).
 
 
 # Basics with SystemProvider

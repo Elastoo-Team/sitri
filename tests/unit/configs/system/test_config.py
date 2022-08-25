@@ -1,14 +1,35 @@
-def test_metadata(system_config) -> None:
+from typing import Any
+
+from sitri.providers.contrib.system import SystemConfigProvider
+
+
+def test_metadata(system_config: SystemConfigProvider) -> None:
+    """test_metadata.
+
+    :param system_config:
+    :rtype: None
+    """
     assert system_config.provider_code == "system"
     assert system_config._prefix == "TEST"
 
 
-def test_prefixize(system_config) -> None:
+def test_prefixize(system_config: SystemConfigProvider) -> None:
+    """test_prefixize.
+
+    :param system_config:
+    :rtype: None
+    """
     assert system_config.prefixize("key1") == "TEST_KEY1"
     assert system_config.unprefixize("TEST_KEY1") == "key1"
 
 
-def test_get_variable(monkeypatch, system_config) -> None:
+def test_get_variable(monkeypatch: Any, system_config: SystemConfigProvider) -> None:
+    """test_get_variable.
+
+    :param monkeypatch:
+    :param system_config:
+    :rtype: None
+    """
     monkeypatch.setenv("TEST_KEY1", "1")
     monkeypatch.setenv("TEST_KEY2", "2")
 
@@ -18,7 +39,13 @@ def test_get_variable(monkeypatch, system_config) -> None:
     monkeypatch.undo()
 
 
-def test_get_variables_list(monkeypatch, system_config) -> None:
+def test_get_variables_list(monkeypatch: Any, system_config: SystemConfigProvider) -> None:
+    """test_get_variables_list.
+
+    :param monkeypatch:
+    :param system_config:
+    :rtype: None
+    """
     monkeypatch.setenv("TEST_KEY1", "1")
     monkeypatch.setenv("TEST_KEY2", "2")
 

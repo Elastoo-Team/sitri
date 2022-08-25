@@ -8,10 +8,19 @@ from .mock import VedisMock
 
 
 @pytest.fixture(scope="module")
-def vedis_connection() -> typing.Callable:
+def vedis_connection() -> typing.Callable[[], VedisMock]:
+    """vedis_connection.
+
+    :rtype: typing.Callable
+    """
     return lambda: VedisMock()
 
 
 @pytest.fixture(scope="module")
-def vedis_config(vedis_connection) -> VedisConfigProvider:
+def vedis_config(vedis_connection: typing.Callable[[], VedisMock]) -> VedisConfigProvider:
+    """vedis_config.
+
+    :param vedis_connection:
+    :rtype: VedisConfigProvider
+    """
     return VedisConfigProvider(vedis_connector=vedis_connection, hash_name="test")

@@ -1,20 +1,40 @@
+from typing import Any, Callable
+
 import pytest
 from pydantic.env_settings import SettingsError
 from pydantic.error_wrappers import ValidationError
 
+from sitri.providers.contrib.vault import VaultKVConfigProvider
+from sitri.settings.contrib.vault import VaultKVSettings
 
-def test_metadata(vault_kv_settings_empty) -> None:
+
+def test_metadata(vault_kv_settings_empty: VaultKVSettings) -> None:
+    """test_metadata.
+
+    :param vault_kv_settings_empty:
+    :rtype: None
+    """
     assert vault_kv_settings_empty.Config.provider.provider_code == "vault_kv"
 
 
 def test_get_variable(
-    monkeypatch,
-    vault_kv_config,
-    vault_kv_settings,
-    vault_kv_settings_vault_raise,
-    vault_kv_settings_complex_raise,
-    vault_kv_settings_complex,
+    monkeypatch: Any,
+    vault_kv_config: VaultKVConfigProvider,
+    vault_kv_settings: Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_vault_raise: Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_complex_raise: Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_complex: Callable[[VaultKVConfigProvider], VaultKVSettings],
 ) -> None:
+    """test_get_variable.
+
+    :param monkeypatch:
+    :param vault_kv_config:
+    :param vault_kv_settings:
+    :param vault_kv_settings_vault_raise:
+    :param vault_kv_settings_complex_raise:
+    :param vault_kv_settings_complex:
+    :rtype: None
+    """
     vault_kv_config._vault._env.update({"test": {"test": {"data": {}}}})
 
     vault_kv_config._vault._env["test"]["test"]["data"]["key1"] = "1"
@@ -28,7 +48,7 @@ def test_get_variable(
 
     test_settings_complex = vault_kv_settings_complex(provider_instance=vault_kv_config)()
     assert test_settings_complex.key0 == test_settings_complex.__config__.json_loads(
-        vault_kv_config._vault._env["test"]["test"]["data"]["key0"]
+        vault_kv_config._vault._env["test"]["test"]["data"]["key0"],
     )
 
     with pytest.raises(ValidationError):
@@ -38,7 +58,15 @@ def test_get_variable(
         vault_kv_settings_complex_raise(provider_instance=vault_kv_config)()
 
 
-def test_get_variable_local_mode(vault_kv_config, vault_kv_local_mode):
+def test_get_variable_local_mode(
+    vault_kv_config: VaultKVConfigProvider,
+    vault_kv_local_mode: Callable[[VaultKVConfigProvider], VaultKVSettings],
+) -> None:
+    """test_get_variable_local_mode.
+
+    :param vault_kv_config:
+    :param vault_kv_local_mode:
+    """
     test_settings = vault_kv_local_mode(provider_instance=vault_kv_config)()
 
     assert test_settings.key1 == "1"

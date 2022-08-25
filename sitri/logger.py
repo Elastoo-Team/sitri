@@ -1,8 +1,13 @@
 import logging
-import typing
 
 
-def get_default_logger(name: typing.Optional[str] = None) -> logging.Logger:
+def get_default_logger(name: str | None = None) -> logging.Logger:
+    """get_default_logger.
+
+    :param name:
+    :type name: typing.Optional[str]
+    :rtype: logging.Logger
+    """
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s",

@@ -1,66 +1,74 @@
-[tool.poetry]
+[project]
 name = "sitri"
 version = "2.1.3"
 description = "Library for one endpoint config managment"
-authors = ["Alexander Lavrov <egnod@ya.ru>"]
-license = "MIT"
-
+authors = [
+    {name = "Alexander Lavrov", email = "admin@egnod.dev"},
+]
+requires-python = ">=3.10,<3.11"
+readme = "README.md"
+license = {text = "MIT"}
 keywords = ["packaging", "poetry", "config", "configuration", "managment", "vault", "pydantic", "json", "yaml", "environment"]
+classifiers = ["Development Status :: 4 - Beta", "Environment :: Other Environment", "Intended Audience :: Developers", "Intended Audience :: Science/Research", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent", "Programming Language :: Python", "Topic :: Software Development :: Libraries :: Python Modules"]
 
+[project.urls]
 repository = "https://github.com/Egnod/sitri"
 documentation = "https://sitri.readthedocs.io"
 
-readme = "README.md"
+[project.optional-dependencies]
+redis = ["redis>=4.3.4"]
+vedis = ["vedis>=0.7.1"]
+pyyaml = ["pyyaml>=6.0"]
+hvac = ["hvac>=0.11.2"]
+settings = ["pydantic[dotenv,email]>=1.9.1"]
+ujson = ["ujson>=5.4.0"]
 
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Environment :: Other Environment",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest==6.2.5",
+    "pytest-mock==3.7.0",
+    "coverage==6.3.2",
+    "pytest-cov==3.0.0",
+    "pytest-lazy-fixture==0.6.3",
+    "pytest-cases==3.6.11",
+    "pre-commit==2.20.0",
+    "commitizen==2.29.5",
+    "pylance<1.0.0,>=0.0.3",
+    "doq==0.9.1",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.11"
+[tool.pdm.build]
+includes = []
 
-redis = { version = "==4.3.4", optional = true }
-vedis = { version = "==0.7.1", optional = true }
-pyyaml = { version = "==6.0", optional = true }
-hvac = { version = "==0.11.2", optional = true }
-pydantic = { version = "==1.9.1", extras = ["email", "dotenv"], optional = true }
-structlog = { version = "==22.1.0", optional = true }
-ujson = { version = "==5.4.0", optional = true }
-toml = {version = "==0.10.2", optional = true}
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
 
-[tool.poetry.dev-dependencies]
-pytest = "==6.2.5"
-pytest-mock = "==3.7.0"
-coverage = "==6.3.2"
-pytest-cov = "==3.0.0"
-pytest-lazy-fixture = "==0.6.3"
-pytest_cases = "==3.6.11"
-
-pre-commit = "==2.20.0"
-commitizen = "==2.29.5"
-pylance = "^0.0.3"
-
-[tool.poetry.extras]
-redis = ["redis"]
-vedis = ["vedis"]
-pyyaml = ["pyyaml"]
-hvac = ["hvac"]
-ujson = ["ujson"]
-structlog = ["structlog"]
-settings = ["pydantic", "hvac"]
-pydantic = ["pydantic"]
-all = ["redis", "vedis", "hvac", "pydantic", "pyyaml", "structlog", "ujson"]
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = true
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build"]
+ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+verbose = 0
+quiet = false
+whitelist-regex = []
+color = true
+omit-covered-files = false
 
 [tool.black]
 line-length = 120
 include = '\.pyi?$'
+target-version = ['py310']
 exclude = '''
 (
   /(
@@ -79,7 +87,34 @@ exclude = '''
 )
 '''
 
+[tool.isort]
+known_first_party = "sitri"
+line_length = 120
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+
+[tool.pycln]
+all = true
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+no_site_packages = true
+strict_optional = false
+strict = true
+allow_subclassing_any = true
+allow_untyped_calls = true
+pretty = true
+show_error_codes = true
+implicit_reexport = true
+allow_untyped_decorators = true
+warn_return_any = false
+disable_error_code = ["valid-type", "call-arg"]
+
 [tool.commitizen]
+name = "cz_conventional_commits"
 version = "2.1.3"
 tag_format = "$major.$minor.$patch"
 version_files = [
@@ -87,10 +122,24 @@ version_files = [
     "pyproject.toml",
     "docs/conf.py"
 ]
-bump_message = "release $current_version → $new_version"
-update_changelog_on_bump = true
-annotated_tag = true
+style = [
+    ["qmark", "fg:#ff9d00 bold"],
+    ["question", "bold"],
+    ["answer", "fg:#ff9d00 bold"],
+    ["pointer", "fg:#ff9d00 bold"],
+    ["highlighted", "fg:#ff9d00 bold"],
+    ["selected", "fg:#cc5454"],
+    ["separator", "fg:#cc5454"],
+    ["instruction", ""],
+    ["text", ""],
+    ["disabled", "fg:#858585 italic"]
+]
 
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+[tool.pytest]
+addopts = "--cov=sitri tests/unit/configs/ tests/unit/config/ tests/"
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+select = ["B","C","E","F","W","T4","B9"]
+ignore = ["E203", "E266", "E501", "W503", "F403", "F401", "B008", "E402", "B902"]

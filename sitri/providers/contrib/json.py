@@ -4,7 +4,7 @@ import typing
 try:
     import ujson as json
 except ImportError:
-    import json
+    import json  # type: ignore
 
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
@@ -17,13 +17,13 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
     def __init__(
         self,
         json_path: str = "./data.json",
-        json_data: typing.Optional[str] = None,
+        json_data: str | None = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
-        *args,
-        **kwargs
-    ):
+        *args: typing.Any,
+        **kwargs: typing.Any,
+    ) -> None:
         """
 
         :param json_path: path to json file
@@ -43,7 +43,14 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_json_from_file(json_path: str, found_file_error: bool):
+    def _get_json_from_file(json_path: str, found_file_error: bool) -> typing.Any:
+        """_get_json_from_file.
+
+        :param json_path:
+        :type json_path: str
+        :param found_file_error:
+        :type found_file_error: bool
+        """
         try:
             with open(os.path.abspath(json_path)) as f:
                 data = json.load(f)
@@ -86,8 +93,8 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
             return None
 
     def get(
-        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None, **kwargs
-    ) -> typing.Optional[typing.Any]:
+        self, key: str, path_mode: bool | None = None, separator: str = None, **kwargs: typing.Any
+    ) -> typing.Any | None:
         """Get value from json.
 
         :param key: key or path for search
@@ -102,7 +109,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs) -> typing.List[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> list[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -116,7 +123,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._json

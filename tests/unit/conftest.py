@@ -5,5 +5,6 @@ from sitri.providers.contrib.system import SystemConfigProvider
 
 
 @pytest.fixture(scope="module")
-def test_sitri():
+def test_sitri() -> Sitri:
+    """test_sitri."""
     return Sitri(config_provider=SystemConfigProvider(prefix="test"))

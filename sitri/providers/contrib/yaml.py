@@ -19,13 +19,13 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
     def __init__(
         self,
         yaml_path: str = "./data.yaml",
-        yaml_data: typing.Optional[str] = None,
+        yaml_data: str | None = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
-        *args,
-        **kwargs
-    ):
+        *args: typing.Any,
+        **kwargs: typing.Any,
+    ) -> None:
         """
 
         :param yaml_path: path to yaml file
@@ -46,7 +46,14 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_yaml_from_file(yaml_path: str, found_file_error: bool):
+    def _get_yaml_from_file(yaml_path: str, found_file_error: bool) -> typing.Any:
+        """_get_yaml_from_file.
+
+        :param yaml_path:
+        :type yaml_path: str
+        :param found_file_error:
+        :type found_file_error: bool
+        """
         try:
             with open(os.path.abspath(yaml_path)) as f:
                 data = yaml.safe_load(f)
@@ -89,8 +96,8 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
             return None
 
     def get(
-        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None, **kwargs
-    ) -> typing.Optional[typing.Any]:
+        self, key: str, path_mode: bool | None = None, separator: str = None, **kwargs: typing.Any
+    ) -> typing.Any | None:
         """Get value from json.
 
         :param key: key or path for search
@@ -105,7 +112,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs) -> typing.List[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> list[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -119,7 +126,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._yaml

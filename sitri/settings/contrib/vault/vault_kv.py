@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from hvac.exceptions import VaultError
 from pydantic import Field
@@ -10,13 +10,18 @@ from sitri.settings.base import BaseLocalModeConfig, BaseLocalModeSettings
 
 
 class VaultKVLocalProviderArgs(BaseModel):
+    """VaultKVLocalProviderArgs."""
+
     json_path: str = Field(...)
     default_path_mode_state: bool = Field(default=True)
 
 
 class VaultKVSettings(BaseLocalModeSettings):
+    """VaultKVSettings."""
+
     @property
-    def _local_provider_args(self):
+    def _local_provider_args(self) -> VaultKVLocalProviderArgs | dict[str, Any]:
+        """_local_provider_args."""
         args = self.__config__.local_provider_args
         if args:
             if isinstance(args, dict):
@@ -26,13 +31,17 @@ class VaultKVSettings(BaseLocalModeSettings):
 
     @property
     def local_provider(self) -> JsonConfigProvider:
+        """local_provider.
+
+        :rtype: JsonConfigProvider
+        """
         if not self.__config__.local_provider:
             args = self._local_provider_args
 
             if args:
                 self.__config__.local_provider = JsonConfigProvider(
-                    json_path=args.json_path,
-                    default_path_mode_state=args.default_path_mode_state,
+                    json_path=args.json_path,  # type: ignore
+                    default_path_mode_state=args.default_path_mode_state,  # type: ignore
                     logger=self.__config__.local_provider_logger,
                 )
             else:
@@ -40,11 +49,12 @@ class VaultKVSettings(BaseLocalModeSettings):
 
         return self.__config__.local_provider
 
-    def _build_local(self):
-        d: Dict[str, Optional[str]] = {}
+    def _build_local(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """_build_local."""
+        d: dict[str, str | None] = {}
 
         for field in self.__fields__.values():
-            value: Optional[str] = None
+            value: str | None = None
 
             if self.__config__.local_mode_path_prefix:
                 path = f"{self.__config__.local_mode_path_prefix}{self.local_provider.separator}{field.name}"
@@ -67,13 +77,14 @@ class VaultKVSettings(BaseLocalModeSettings):
 
         return d
 
-    def _build_default(self):
-        d: Dict[str, Optional[str]] = {}
+    def _build_default(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """_build_default."""
+        d: dict[str, str | None] = {}
 
         provider = self.__config__.provider
 
         for field in self.__fields__.values():
-            vault_val: Optional[str] = None
+            vault_val: str | None = None
 
             vault_secret_path = field.field_info.extra.get("vault_secret_path")
             vault_mount_point = field.field_info.extra.get("vault_mount_point")
@@ -90,12 +101,13 @@ class VaultKVSettings(BaseLocalModeSettings):
                 )
             except VaultError:
                 provider.logger.warning(
-                    f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"'
+                    f'Could not get secret "{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"',
                 )
 
             if field.is_complex():
                 vault_val = self._build_complex_value(
-                    vault_val, f"{vault_mount_point}/{vault_secret_path}:{vault_secret_key}"
+                    vault_val,
+                    f"{vault_mount_point}/{vault_secret_path}:{vault_secret_key}",
                 )
 
             if vault_val is None and field.default is not None:
@@ -106,17 +118,19 @@ class VaultKVSettings(BaseLocalModeSettings):
         return d
 
     class VaultKVSettingsConfig(BaseLocalModeConfig):
+        """VaultKVSettingsConfig."""
+
         provider: VaultKVConfigProvider
-        default_secret_path: Optional[str] = None
-        default_mount_point: Optional[str] = None
+        default_secret_path: str | None = None
+        default_mount_point: str | None = None
 
         local_mode: bool = False
 
-        local_mode_path_prefix: Optional[str] = None
-        local_provider_args: Optional[Union[VaultKVLocalProviderArgs, Dict]]
+        local_mode_path_prefix: str | None = None
+        local_provider_args: VaultKVLocalProviderArgs | dict[str, Any] | None
 
-        local_provider: Optional[JsonConfigProvider] = None
+        local_provider: JsonConfigProvider | None = None
 
-        local_provider_logger: Optional[Any] = None
+        local_provider_logger: Any | None = None
 
     __config__: VaultKVSettingsConfig

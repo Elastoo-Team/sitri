@@ -1,14 +1,35 @@
-def test_metadata(redis_config) -> None:
+from typing import Any
+
+from sitri.providers.contrib.redis import RedisConfigProvider
+
+
+def test_metadata(redis_config: RedisConfigProvider) -> None:
+    """test_metadata.
+
+    :param redis_config:
+    :rtype: None
+    """
     assert redis_config.provider_code == "redis"
     assert redis_config._prefix == "TEST"
 
 
-def test_prefixize(redis_config) -> None:
+def test_prefixize(redis_config: RedisConfigProvider) -> None:
+    """test_prefixize.
+
+    :param redis_config:
+    :rtype: None
+    """
     assert redis_config.prefixize("key1") == "TEST_KEY1"
     assert redis_config.unprefixize("TEST_KEY1") == "key1"
 
 
-def test_get_variable(monkeypatch, redis_config) -> None:
+def test_get_variable(monkeypatch: Any, redis_config: RedisConfigProvider) -> None:
+    """test_get_variable.
+
+    :param monkeypatch:
+    :param redis_config:
+    :rtype: None
+    """
     monkeypatch.setenv("TEST_KEY1", "1")
     monkeypatch.setenv("TEST_KEY2", "2")
 
@@ -18,7 +39,13 @@ def test_get_variable(monkeypatch, redis_config) -> None:
     monkeypatch.undo()
 
 
-def test_get_variables_list(monkeypatch, redis_config) -> None:
+def test_get_variables_list(monkeypatch: Any, redis_config: RedisConfigProvider) -> None:
+    """test_get_variables_list.
+
+    :param monkeypatch:
+    :param redis_config:
+    :rtype: None
+    """
     monkeypatch.setenv("TEST_KEY1", "1")
     monkeypatch.setenv("TEST_KEY2", "2")
 

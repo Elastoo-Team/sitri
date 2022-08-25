@@ -16,9 +16,7 @@ from sitri.strategy.single import SingleStrategy
 class SitriProviderConfigurator:
     """Class for unite config provider."""
 
-    def __init__(
-        self, config_provider: typing.Union[ConfigProvider, BaseStrategy], logger: typing.Optional[typing.Any] = None
-    ):
+    def __init__(self, config_provider: ConfigProvider | BaseStrategy, logger: typing.Any | None = None) -> None:
         """
         :param config_provider: object of config provider
         """
@@ -36,7 +34,7 @@ class SitriProviderConfigurator:
         elif config_provider:
             self.config = SingleStrategy(config_provider)
 
-    def get(self, key: str, default: typing.Any = None, **kwargs) -> typing.Union[typing.Any, None]:
+    def get(self, key: str, default: None = None, **kwargs: typing.Any) -> str | None:
         """Get value from config provider.
 
         :param key: key for config provider

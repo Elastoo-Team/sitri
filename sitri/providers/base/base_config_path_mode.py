@@ -14,11 +14,17 @@ class PathModeStateProvider(ABC):
 
     _default_path_mode_state: bool = False
 
-    def _get_path_mode_state(self, path_mode_param: typing.Optional[bool]) -> bool:
+    def _get_path_mode_state(self, path_mode_param: bool | None) -> bool:
+        """_get_path_mode_state.
+
+        :param path_mode_param:
+        :type path_mode_param: typing.Optional[bool]
+        :rtype: bool
+        """
         return path_mode_param if path_mode_param is not None else self._default_path_mode_state
 
     @abstractmethod
-    def get(self, key: str, path_mode: typing.Optional[bool] = None, **kwargs) -> typing.Optional[typing.Any]:
+    def get(self, key: str, path_mode: bool | None = None, **kwargs: typing.Any) -> typing.Any | None:
         """Get value from storage.
 
         :param key: key for get value
@@ -42,7 +48,7 @@ class PathModeStateProvider(ABC):
 
     @property
     @abstractmethod
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> dict[str, typing.Any]:
         """Retrieve data as dict.
 
         :param key: key from json

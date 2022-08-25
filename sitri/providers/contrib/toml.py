@@ -6,9 +6,9 @@ import toml
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
 try:
-    from StringIO import StringIO
+    pass
 except ImportError:
-    from io import StringIO
+    pass
 
 
 class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
@@ -19,13 +19,13 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
     def __init__(
         self,
         toml_path: str = "./data.toml",
-        toml_data: typing.Optional[str] = None,
+        toml_data: str | None = None,
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
-        *args,
-        **kwargs
-    ):
+        *args: typing.Any,
+        **kwargs: typing.Any,
+    ) -> None:
         """
 
         :param toml_path: path to toml file
@@ -45,7 +45,14 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_toml_from_file(toml_path: str, found_file_error: bool):
+    def _get_toml_from_file(toml_path: str, found_file_error: bool) -> dict[str, typing.Any]:
+        """_get_toml_from_file.
+
+        :param toml_path:
+        :type toml_path: str
+        :param found_file_error:
+        :type found_file_error: bool
+        """
         try:
             with open(os.path.abspath(toml_path)) as f:
                 data = toml.load(f)
@@ -68,7 +75,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         for key in keys:
             try:
-                dict_local = dict_local[int(key)] if key.isdigit() else dict_local[key]
+                dict_local = dict_local[int(key)] if key.isdigit() else dict_local[key]  # type: ignore
             except Exception:
                 if key not in dict_local:
                     return None
@@ -88,8 +95,8 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
             return None
 
     def get(
-        self, key: str, path_mode: typing.Optional[bool] = None, separator: str = None, **kwargs
-    ) -> typing.Optional[typing.Any]:
+        self, key: str, path_mode: bool | None = None, separator: str = None, **kwargs: typing.Any
+    ) -> typing.Any | None:
         """Get value from json.
 
         :param key: key or path for search
@@ -104,7 +111,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs) -> typing.List[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> list[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -113,12 +120,12 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         # TODO: implemented path-mode for keys list
 
         if not path_mode:
-            return self._toml.keys()
+            return list(self._toml.keys())
         else:
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._toml

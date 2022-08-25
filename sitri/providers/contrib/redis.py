@@ -11,7 +11,9 @@ class RedisConfigProvider(ConfigProvider):
     provider_code = "redis"
     _prefix = "redis"
 
-    def __init__(self, prefix: str, redis_connector: typing.Callable[[], redis.Redis], *args, **kwargs):
+    def __init__(
+        self, prefix: str, redis_connector: typing.Callable[[], redis.Redis], *args: typing.Any, **kwargs: typing.Any
+    ) -> None:
         """
 
         :param prefix: prefix for create "namespace" for project variables in redis
@@ -22,10 +24,14 @@ class RedisConfigProvider(ConfigProvider):
         self._prefix = prefix.upper()
         self._redis_get = redis_connector
 
-        self._redis_instance: typing.Optional[redis.Redis] = None
+        self._redis_instance: redis.Redis | None = None
 
     @property
     def _redis(self) -> redis.Redis:
+        """_redis.
+
+        :rtype: redis.Redis
+        """
         if not self._redis_instance:
             self._redis_instance = self._redis_get()
 
@@ -46,7 +52,14 @@ class RedisConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
-    def get(self, key: str, **kwargs) -> typing.Optional[str]:
+    def get(self, key: str, **kwargs: typing.Any) -> str | None:
+        """get.
+
+        :param key:
+        :type key: str
+        :param kwargs:
+        :rtype: typing.Optional[str]
+        """
         result = self._redis.get(self.prefixize(key))
 
         if isinstance(result, bytes):
@@ -54,7 +67,12 @@ class RedisConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self, **kwargs) -> typing.List[str]:
+    def keys(self, **kwargs: typing.Any) -> list[str]:
+        """keys.
+
+        :param kwargs:
+        :rtype: typing.List[str]
+        """
         var_list = []
 
         for var in self._redis.keys():
