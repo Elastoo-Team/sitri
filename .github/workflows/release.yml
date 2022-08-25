@@ -45,8 +45,8 @@ jobs:
         eval $(pdm venv activate)
     - name: Test with pre-commit
       run: |
-        pytest
-        codecov -t ${{ secrets.CODECOV_TOKEN }}
+        pdm run pytest
+        pdm run codecov -t ${{ secrets.CODECOV_TOKEN }}
     - name: Build and publish
       run: |
         pdm publish -u __token__ -P ${{ secrets.PYPI_TOKEN }}
