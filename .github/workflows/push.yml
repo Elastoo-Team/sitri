@@ -25,5 +25,4 @@ jobs:
         eval $(pdm venv activate)
     - name: Tests
       run: |
-        pdm run pre-commit run -a
         pdm run pytest
