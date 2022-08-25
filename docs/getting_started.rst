@@ -6,11 +6,6 @@ Getting Started
 Installation
 ------------
 
-.. attention::
-    Sitri works only on Python 3.8 or higher.
-
-    When support will for older Python versions? - Never.
-
 Install Sitri with Poetry (**recommend**):
 
 .. code-block:: sh

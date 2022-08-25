@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import configparser
 import os
 import typing
@@ -27,8 +29,8 @@ class IniConfigProvider(ConfigProvider):
     @property
     def sections(self) -> list[str]:
         """sections."""
-        if self._sections:
-            self._sections = list(self.configparser.keys())
+        if not self._sections:
+            self._sections = list(self.configparser.keys())  # type: ignore
 
         return self._sections
 

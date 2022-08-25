@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from sitri.strategy.single import SingleStrategy
 
 from .mock import MockProvider

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Callable, TypeVar
 
 import pytest
@@ -123,6 +125,8 @@ def yaml_settings_complex() -> Callable[[YamlConfigProvider], type[T]]:
 
                 provider = provider_instance
 
+        TestSettings.update_forward_refs(Key4Model=Key4Model)
+
         return TestSettings
 
     return wrapper
@@ -152,6 +156,8 @@ def yaml_settings_complex_raise() -> Callable[[YamlConfigProvider], type[T]]:
                 """Config."""
 
                 provider = provider_instance
+
+        TestSettings.update_forward_refs(Key5Model=Key5Model)
 
         return TestSettings
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from sitri.providers.base import ConfigProviderManager
 from sitri.providers.contrib.json import JsonConfigProvider
 from sitri.providers.contrib.redis import RedisConfigProvider

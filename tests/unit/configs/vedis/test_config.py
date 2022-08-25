@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from _pytest.monkeypatch import MonkeyPatch
 
 from sitri.providers.contrib.vedis import VedisConfigProvider

@@ -3,7 +3,7 @@
    :synopsis: General Sitri class
 .. moduleauthor:: Aleksander Lavrov <github.com/egnod>
 """
-
+from __future__ import annotations
 
 import typing
 

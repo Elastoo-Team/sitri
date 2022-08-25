@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from typing import Any
 
@@ -37,7 +39,7 @@ class VedisMock:
         """
         return isinstance(instance, vedis.Vedis)
 
-    def Hash(self, name: str) -> "VedisMock":
+    def Hash(self, name: str) -> VedisMock:
         """Hash.
 
         :param name:

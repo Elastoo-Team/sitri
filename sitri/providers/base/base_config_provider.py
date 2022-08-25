@@ -3,6 +3,8 @@
    :synopsis: Config Base
 .. moduleauthor:: Aleksander Lavrov <github.com/egnod>
 """
+from __future__ import annotations
+
 import inspect
 import typing
 from abc import ABC, abstractmethod

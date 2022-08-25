@@ -5,7 +5,7 @@ description = "Library for one endpoint config managment"
 authors = [
     {name = "Alexander Lavrov", email = "admin@egnod.dev"},
 ]
-requires-python = ">=3.10,<3.11"
+requires-python = ">=3.7,<3.11"
 readme = "README.md"
 license = {text = "MIT"}
 keywords = ["packaging", "poetry", "config", "configuration", "managment", "vault", "pydantic", "json", "yaml", "environment"]
@@ -22,6 +22,14 @@ pyyaml = ["pyyaml>=6.0"]
 hvac = ["hvac>=0.11.2"]
 settings = ["pydantic[dotenv,email]>=1.9.1"]
 ujson = ["ujson>=5.4.0"]
+all = [
+    "redis>=4.3.4",
+    "vedis>=0.7.1",
+    "pyyaml>=6.0",
+    "hvac>=0.11.2",
+    "pydantic[dotenv,email]>=1.9.1",
+    "ujson>=5.4.0",
+]
 
 [tool.pdm]
 [tool.pdm.dev-dependencies]
@@ -34,7 +42,6 @@ dev = [
     "pytest-cases==3.6.11",
     "pre-commit==2.20.0",
     "commitizen==2.29.5",
-    "pylance<1.0.0,>=0.0.3",
     "doq==0.9.1",
 ]
 
@@ -68,7 +75,7 @@ omit-covered-files = false
 [tool.black]
 line-length = 120
 include = '\.pyi?$'
-target-version = ['py310']
+target-version = ['py310', 'py39', 'py37', 'py38']
 exclude = '''
 (
   /(
@@ -135,7 +142,7 @@ style = [
     ["disabled", "fg:#858585 italic"]
 ]
 
-[tool.pytest]
+[tool.pytest.ini_options]
 addopts = "--cov=sitri tests/unit/configs/ tests/unit/config/ tests/"
 
 [tool.flake8]

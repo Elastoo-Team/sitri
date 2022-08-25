@@ -127,6 +127,8 @@ def vault_kv_settings_complex() -> typing.Callable[[VaultKVConfigProvider], type
 
                 provider = provider_instance
 
+        TestSettings.update_forward_refs(Key0Model=Key0Model)
+
         return TestSettings
 
     return wrapper
@@ -156,6 +158,8 @@ def vault_kv_settings_complex_raise() -> typing.Callable[[VaultKVConfigProvider]
                 """Config."""
 
                 provider = provider_instance
+
+        TestSettings.update_forward_refs(Key4Model=Key4Model)
 
         return TestSettings
 
@@ -205,6 +209,8 @@ def vault_kv_local_mode(path_to_json: str) -> typing.Callable[[VaultKVConfigProv
                 local_mode = True
                 local_provider_args = {"json_path": path_to_json}
                 local_mode_path_prefix = "test"
+
+        TestSettings.update_forward_refs(Key4Model=Key4Model)
 
         return TestSettings
 

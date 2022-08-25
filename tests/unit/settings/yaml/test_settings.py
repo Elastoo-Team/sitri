@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any, Callable
 
 import pytest
@@ -36,11 +38,13 @@ def test_get_variable(
     :rtype: None
     """
     test_settings = yaml_settings(provider_instance=yaml_config)()
+
     assert test_settings.key1 == "1"
     assert test_settings.key2 == "2"
     assert test_settings.key3 == "3"
 
     test_settings_complex = yaml_settings_complex(provider_instance=yaml_config)()
+
     assert "test_key4_field" in test_settings_complex.key4.dict()
     assert test_settings_complex.key4.test_key4_field == "test"
 

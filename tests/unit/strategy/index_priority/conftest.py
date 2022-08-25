@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pytest
 
 from sitri.strategy.index_priority import IndexPriorityStrategy
