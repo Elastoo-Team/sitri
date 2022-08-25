@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+import typing as t
 
 from sitri.providers.contrib.yaml import YamlConfigProvider
 from sitri.settings.base import BaseConfig, BaseSettings
@@ -9,9 +9,9 @@ from sitri.settings.base import BaseConfig, BaseSettings
 class YamlSettings(BaseSettings):
     """YamlSettings."""
 
-    def _build_default(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+    def _build_default(self, *args: t.Any, **kwargs: t.Any) -> t.Dict[str, t.Any]:
         """_build_default."""
-        d: Dict[str, str | None] = {}
+        d: t.Dict[str, str | None] = {}
 
         provider = self.__config__.provider
 

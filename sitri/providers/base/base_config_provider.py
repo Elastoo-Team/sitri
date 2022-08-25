@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 import inspect
-import typing
+import typing as t
 from abc import ABC, abstractmethod
 
 from sitri.logger import get_default_logger
@@ -15,7 +15,7 @@ from sitri.logger import get_default_logger
 class ConfigProvider(ABC):
     """Base class for config providers."""
 
-    def __init__(self, logger: typing.Any | None = None, *args: typing.Any, **kwargs: typing.Any) -> None:
+    def __init__(self, logger: t.Any | None = None, *args: t.Any, **kwargs: t.Any) -> None:
         """Default init method for all providers."""
 
         if not logger:
@@ -29,7 +29,7 @@ class ConfigProvider(ABC):
         """Provider code property for identity provider in manager."""
 
     @abstractmethod
-    def get(self, key: str, **kwargs: typing.Any) -> typing.Any | None:
+    def get(self, key: str, **kwargs: t.Any) -> t.Any | None:
         """Get value from storage.
 
         :param key: key for find value in provider source
@@ -37,10 +37,10 @@ class ConfigProvider(ABC):
         """
 
     @abstractmethod
-    def keys(self, **kwargs: typing.Any) -> typing.List[str]:
+    def keys(self, **kwargs: t.Any) -> t.List[str]:
         """Get keys list in storage."""
 
-    def fill(self, call: typing.Callable[[typing.Any], typing.Any], **kwargs: typing.Any) -> typing.Any:
+    def fill(self, call: t.Callable[[t.Any], t.Any], **kwargs: t.Any) -> t.Any:
         """Fill callable object kwargs if all founded by provider.
 
         :param call: callable object for fill
@@ -59,7 +59,7 @@ class ConfigProviderManager:
     """Manager for children ConfigProvider classes."""
 
     @staticmethod
-    def get_by_code(code: str) -> typing.Type[ConfigProvider] | None:
+    def get_by_code(code: str) -> t.Type[ConfigProvider] | None:
         """Get config provider by provider_code.
 
         :param code: provider_code for search config provider

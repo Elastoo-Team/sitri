@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import configparser
 import os
-import typing
+import typing as t
 
 from sitri.providers.base import ConfigProvider
 
@@ -12,7 +12,7 @@ class IniConfigProvider(ConfigProvider):
 
     provider_code = "ini"
 
-    def __init__(self, ini_path: str = "./config.ini", *args: typing.Any, **kwargs: typing.Any) -> None:
+    def __init__(self, ini_path: str = "./config.ini", *args: t.Any, **kwargs: t.Any) -> None:
         """
 
         :param ini_path: path to ini file
@@ -27,14 +27,14 @@ class IniConfigProvider(ConfigProvider):
         self._sections = None
 
     @property
-    def sections(self) -> typing.List[str]:
+    def sections(self) -> t.List[str]:
         """sections."""
         if not self._sections:
             self._sections = list(self.configparser.keys())  # type: ignore
 
         return self._sections
 
-    def get(self, key: str, section: str, **kwargs: typing.Any) -> typing.Any | None:  # type: ignore
+    def get(self, key: str, section: str, **kwargs: t.Any) -> t.Any | None:  # type: ignore
         """Get value from ini file.
 
         :param key: key or path for search
@@ -45,7 +45,7 @@ class IniConfigProvider(ConfigProvider):
 
         return self.configparser[section].get(key)
 
-    def keys(self, section: str, **kwargs: typing.Any) -> typing.List[str]:  # type: ignore
+    def keys(self, section: str, **kwargs: t.Any) -> t.List[str]:  # type: ignore
         """Get keys of section.
 
         :param section: section of ini file

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable
+import typing as t
 
 import pytest
 from pydantic.env_settings import SettingsError
@@ -20,12 +20,12 @@ def test_metadata(vault_kv_settings_empty: VaultKVSettings) -> None:
 
 
 def test_get_variable(
-    monkeypatch: Any,
+    monkeypatch: t.Any,
     vault_kv_config: VaultKVConfigProvider,
-    vault_kv_settings: Callable[[VaultKVConfigProvider], VaultKVSettings],
-    vault_kv_settings_vault_raise: Callable[[VaultKVConfigProvider], VaultKVSettings],
-    vault_kv_settings_complex_raise: Callable[[VaultKVConfigProvider], VaultKVSettings],
-    vault_kv_settings_complex: Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings: t.Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_vault_raise: t.Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_complex_raise: t.Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_settings_complex: t.Callable[[VaultKVConfigProvider], VaultKVSettings],
 ) -> None:
     """test_get_variable.
 
@@ -62,7 +62,7 @@ def test_get_variable(
 
 def test_get_variable_local_mode(
     vault_kv_config: VaultKVConfigProvider,
-    vault_kv_local_mode: Callable[[VaultKVConfigProvider], VaultKVSettings],
+    vault_kv_local_mode: t.Callable[[VaultKVConfigProvider], VaultKVSettings],
 ) -> None:
     """test_get_variable_local_mode.
 

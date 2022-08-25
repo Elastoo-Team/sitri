@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, List
+import typing as t
 
 import redis
 
@@ -25,14 +25,14 @@ class RedisMock:
         else:
             return None
 
-    def keys(self) -> List[bytes]:
+    def keys(self) -> t.List[bytes]:
         """keys.
 
-        :rtype: List[bytes]
+        :rtype: t.List[bytes]
         """
         return [bytes(key, encoding="utf-8") for key in self._env.keys()]
 
-    def __instancecheck__(self, instance: Any) -> bool:
+    def __instancecheck__(self, instance: t.Any) -> bool:
         """__instancecheck__.
 
         :param instance:

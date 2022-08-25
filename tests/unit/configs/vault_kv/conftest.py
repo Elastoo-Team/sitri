@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import pytest
 
@@ -10,16 +10,16 @@ from .mock import VaultClientMock
 
 
 @pytest.fixture(scope="module")
-def vault_connection() -> typing.Callable[[], VaultClientMock]:
+def vault_connection() -> t.Callable[[], VaultClientMock]:
     """vault_connection.
 
-    :rtype: typing.Callable
+    :rtype: t.Callable
     """
     return lambda: VaultClientMock()
 
 
 @pytest.fixture(scope="module")
-def vault_kv_config(vault_connection: typing.Callable[[], VaultClientMock]) -> VaultKVConfigProvider:
+def vault_kv_config(vault_connection: t.Callable[[], VaultClientMock]) -> VaultKVConfigProvider:
     """vault_kv_config.
 
     :param vault_connection:

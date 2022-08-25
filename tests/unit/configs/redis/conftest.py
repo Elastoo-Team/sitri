@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import pytest
 
@@ -10,16 +10,16 @@ from .mock import RedisMock
 
 
 @pytest.fixture(scope="module")
-def redis_connection() -> typing.Callable[[], RedisMock]:
+def redis_connection() -> t.Callable[[], RedisMock]:
     """redis_connection.
 
-    :rtype: typing.Callable
+    :rtype: t.Callable
     """
     return lambda: RedisMock()
 
 
 @pytest.fixture(scope="module")
-def redis_config(redis_connection: typing.Callable[[], RedisMock]) -> RedisConfigProvider:
+def redis_config(redis_connection: t.Callable[[], RedisMock]) -> RedisConfigProvider:
     """redis_config.
 
     :param redis_connection:

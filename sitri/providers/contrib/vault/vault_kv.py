@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import hvac
 
@@ -17,11 +17,11 @@ class VaultKVConfigProvider(ConfigProvider):
 
     def __init__(
         self,
-        vault_connector: typing.Callable[[], hvac.Client],
+        vault_connector: t.Callable[[], hvac.Client],
         mount_point: str | None = None,
         secret_path: str | None = None,
-        *args: typing.Any,
-        **kwargs: typing.Any,
+        *args: t.Any,
+        **kwargs: t.Any,
     ) -> None:
         """
         :param vault_connector: function return connection to Vault
@@ -47,18 +47,18 @@ class VaultKVConfigProvider(ConfigProvider):
         return self._vault_hvac_instance
 
     def get(
-        self, key: str, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any
+        self, key: str, mount_point: str | None = None, secret_path: str | None = None, **kwargs: t.Any
     ) -> str | None:
         """get.
 
         :param key:
         :type key: str
         :param mount_point:
-        :type mount_point: typing.Optional[str]
+        :type mount_point: t.Optional[str]
         :param secret_path:
-        :type secret_path: typing.Optional[str]
+        :type secret_path: t.Optional[str]
         :param kwargs:
-        :rtype: typing.Optional[str]
+        :rtype: t.Optional[str]
         """
         request_params = {
             "path": secret_path if secret_path else self._secret_path,
@@ -69,17 +69,15 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return response["data"].get(key)
 
-    def keys(
-        self, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any
-    ) -> typing.List[str]:
+    def keys(self, mount_point: str | None = None, secret_path: str | None = None, **kwargs: t.Any) -> t.List[str]:
         """keys.
 
         :param mount_point:
-        :type mount_point: typing.Optional[str]
+        :type mount_point: t.Optional[str]
         :param secret_path:
-        :type secret_path: typing.Optional[str]
+        :type secret_path: t.Optional[str]
         :param kwargs:
-        :rtype: typing.List[str]
+        :rtype: t.List[str]
         """
         request_params = {
             "path": secret_path if secret_path else self._secret_path,

@@ -5,7 +5,7 @@
 """
 from __future__ import annotations
 
-import typing
+import typing as t
 
 from sitri.logger import get_default_logger
 from sitri.providers.base import ConfigProvider
@@ -16,7 +16,7 @@ from sitri.strategy.single import SingleStrategy
 class SitriProviderConfigurator:
     """Class for unite config provider."""
 
-    def __init__(self, config_provider: ConfigProvider | BaseStrategy, logger: typing.Any | None = None) -> None:
+    def __init__(self, config_provider: ConfigProvider | BaseStrategy, logger: t.Any | None = None) -> None:
         """
         :param config_provider: object of config provider
         """
@@ -34,7 +34,7 @@ class SitriProviderConfigurator:
         elif config_provider:
             self.config = SingleStrategy(config_provider)
 
-    def get(self, key: str, default: None = None, **kwargs: typing.Any) -> str | None:
+    def get(self, key: str, default: None = None, **kwargs: t.Any) -> str | None:
         """Get value from config provider.
 
         :param key: key for config provider

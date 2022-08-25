@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, List
+import typing as t
 
 from sitri.providers.base import ConfigProvider
 
@@ -12,7 +12,7 @@ class SystemConfigProvider(ConfigProvider):
     provider_code = "system"
     _prefix = ""
 
-    def __init__(self, prefix: str | None = None, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, prefix: str | None = None, *args: t.Any, **kwargs: t.Any) -> None:
         """
         :param prefix: prefix for create "namespace" for project variables in environment
         """
@@ -41,14 +41,14 @@ class SystemConfigProvider(ConfigProvider):
 
         return var_name
 
-    def get(self, key: str, **kwargs: Any) -> str | None:
+    def get(self, key: str, **kwargs: t.Any) -> str | None:
         """Get value from system env.
 
         :param key: key without prefix from env
         """
         return os.getenv(self.prefixize(key), None)
 
-    def keys(self, **kwargs: Any) -> List[str]:
+    def keys(self, **kwargs: t.Any) -> t.List[str]:
         """Get keys list with prefix from system env."""
         var_list = []
 

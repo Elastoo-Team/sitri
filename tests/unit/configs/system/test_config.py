@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 
 from sitri.providers.contrib.system import SystemConfigProvider
 
@@ -25,7 +25,7 @@ def test_prefixize(system_config: SystemConfigProvider) -> None:
     assert system_config.unprefixize("TEST_KEY1") == "key1"
 
 
-def test_get_variable(monkeypatch: Any, system_config: SystemConfigProvider) -> None:
+def test_get_variable(monkeypatch: t.Any, system_config: SystemConfigProvider) -> None:
     """test_get_variable.
 
     :param monkeypatch:
@@ -41,7 +41,7 @@ def test_get_variable(monkeypatch: Any, system_config: SystemConfigProvider) -> 
     monkeypatch.undo()
 
 
-def test_get_variables_list(monkeypatch: Any, system_config: SystemConfigProvider) -> None:
+def test_get_variables_list(monkeypatch: t.Any, system_config: SystemConfigProvider) -> None:
     """test_get_variables_list.
 
     :param monkeypatch:

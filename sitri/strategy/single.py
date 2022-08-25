@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 
 from sitri.providers.base import ConfigProvider
 from sitri.strategy.base import BaseStrategy
@@ -20,7 +20,7 @@ class SingleStrategy(BaseStrategy):
         """
         self.provider = data_provider
 
-    def get(self, *args: Any, **kwargs: Any) -> Any:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         """get.
 
         :param args:
@@ -28,7 +28,7 @@ class SingleStrategy(BaseStrategy):
         """
         return self.provider.get(*args, **kwargs)
 
-    def __getattribute__(self, item: str) -> Any:
+    def __getattribute__(self, item: str) -> t.Any:
         """__getattribute__.
 
         :param item:

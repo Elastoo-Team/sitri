@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 
 from sitri.providers.contrib.redis import RedisConfigProvider
 
@@ -25,7 +25,7 @@ def test_prefixize(redis_config: RedisConfigProvider) -> None:
     assert redis_config.unprefixize("TEST_KEY1") == "key1"
 
 
-def test_get_variable(monkeypatch: Any, redis_config: RedisConfigProvider) -> None:
+def test_get_variable(monkeypatch: t.Any, redis_config: RedisConfigProvider) -> None:
     """test_get_variable.
 
     :param monkeypatch:
@@ -41,7 +41,7 @@ def test_get_variable(monkeypatch: Any, redis_config: RedisConfigProvider) -> No
     monkeypatch.undo()
 
 
-def test_get_variables_list(monkeypatch: Any, redis_config: RedisConfigProvider) -> None:
+def test_get_variables_list(monkeypatch: t.Any, redis_config: RedisConfigProvider) -> None:
     """test_get_variables_list.
 
     :param monkeypatch:

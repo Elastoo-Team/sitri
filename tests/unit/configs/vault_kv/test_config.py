@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 
 from sitri.settings.contrib.vault import VaultKVSettings
 
@@ -16,7 +16,7 @@ def test_metadata(vault_kv_config: VaultKVSettings) -> None:
     assert vault_kv_config._secret_path == "test"
 
 
-def test_get_variable(monkeypatch: Any, vault_kv_config: VaultKVSettings) -> None:
+def test_get_variable(monkeypatch: t.Any, vault_kv_config: VaultKVSettings) -> None:
     """test_get_variable.
 
     :param monkeypatch:
@@ -32,7 +32,7 @@ def test_get_variable(monkeypatch: Any, vault_kv_config: VaultKVSettings) -> Non
     assert vault_kv_config.get("key2") == "2"
 
 
-def test_get_variables_list(monkeypatch: Any, vault_kv_config: VaultKVSettings) -> None:
+def test_get_variables_list(monkeypatch: t.Any, vault_kv_config: VaultKVSettings) -> None:
     """test_get_variables_list.
 
     :param monkeypatch:

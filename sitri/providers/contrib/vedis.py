@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import vedis
 
@@ -15,10 +15,10 @@ class VedisConfigProvider(ConfigProvider):
 
     def __init__(
         self,
-        vedis_connector: typing.Callable[[], vedis.Vedis],
+        vedis_connector: t.Callable[[], vedis.Vedis],
         hash_name: str = "sitri_config_hash",
-        *args: typing.Any,
-        **kwargs: typing.Any,
+        *args: t.Any,
+        **kwargs: t.Any,
     ) -> None:
         """
 
@@ -43,17 +43,17 @@ class VedisConfigProvider(ConfigProvider):
         return self._vedis_instance
 
     @property
-    def _config_hash(self) -> typing.Any:
+    def _config_hash(self) -> t.Any:
         """_config_hash."""
         return self._vedis.Hash(self._hash_name)
 
-    def get(self, key: str, **kwargs: typing.Any) -> str | None:
+    def get(self, key: str, **kwargs: t.Any) -> str | None:
         """get.
 
         :param key:
         :type key: str
         :param kwargs:
-        :rtype: typing.Optional[str]
+        :rtype: t.Optional[str]
         """
         result = self._config_hash.get(key)
 
@@ -62,11 +62,11 @@ class VedisConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self, **kwargs: typing.Any) -> typing.List[str]:
+    def keys(self, **kwargs: t.Any) -> t.List[str]:
         """keys.
 
         :param kwargs:
-        :rtype: typing.List[str]
+        :rtype: t.List[str]
         """
         var_list = []
         variables = self._config_hash.keys() if self._config_hash.keys() is not None else []

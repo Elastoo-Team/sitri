@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Type
+import typing as t
 
 from sitri.providers.base import ConfigProviderManager
 from sitri.providers.contrib.json import JsonConfigProvider
@@ -9,7 +9,7 @@ from sitri.providers.contrib.system import SystemConfigProvider
 from sitri.providers.contrib.vedis import VedisConfigProvider
 
 
-def test_get_by_codes(config_manager: Type[ConfigProviderManager]) -> None:
+def test_get_by_codes(config_manager: t.Type[ConfigProviderManager]) -> None:
     """test_get_by_codes.
 
     :param config_manager:

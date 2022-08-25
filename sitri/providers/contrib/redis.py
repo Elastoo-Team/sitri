@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import redis
 
@@ -14,7 +14,7 @@ class RedisConfigProvider(ConfigProvider):
     _prefix = "redis"
 
     def __init__(
-        self, prefix: str, redis_connector: typing.Callable[[], redis.Redis], *args: typing.Any, **kwargs: typing.Any
+        self, prefix: str, redis_connector: t.Callable[[], redis.Redis], *args: t.Any, **kwargs: t.Any
     ) -> None:
         """
 
@@ -54,13 +54,13 @@ class RedisConfigProvider(ConfigProvider):
 
         return var_name.replace(f"{self._prefix}_", "").lower()
 
-    def get(self, key: str, **kwargs: typing.Any) -> str | None:
+    def get(self, key: str, **kwargs: t.Any) -> str | None:
         """get.
 
         :param key:
         :type key: str
         :param kwargs:
-        :rtype: typing.Optional[str]
+        :rtype: t.Optional[str]
         """
         result = self._redis.get(self.prefixize(key))
 
@@ -69,11 +69,11 @@ class RedisConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self, **kwargs: typing.Any) -> typing.List[str]:
+    def keys(self, **kwargs: t.Any) -> t.List[str]:
         """keys.
 
         :param kwargs:
-        :rtype: typing.List[str]
+        :rtype: t.List[str]
         """
         var_list = []
 

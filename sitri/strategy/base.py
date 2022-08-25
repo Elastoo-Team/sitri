@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+import typing as t
 from abc import ABCMeta, abstractmethod
-from typing import Any
 
 
 class BaseStrategy(metaclass=ABCMeta):
@@ -13,5 +13,5 @@ class BaseStrategy(metaclass=ABCMeta):
         """Code for strategy manager."""
 
     @abstractmethod
-    def get(self, *args: Any, **kwargs: Any) -> Any:
+    def get(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         """Get value by strategy."""

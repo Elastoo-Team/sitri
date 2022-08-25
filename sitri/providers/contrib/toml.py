@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-import typing
+import typing as t
 
 import toml
 
@@ -25,8 +25,8 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         default_separator: str = ".",
         found_file_error: bool = True,
         default_path_mode_state: bool = False,
-        *args: typing.Any,
-        **kwargs: typing.Any,
+        *args: t.Any,
+        **kwargs: t.Any,
     ) -> None:
         """
 
@@ -47,7 +47,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_toml_from_file(toml_path: str, found_file_error: bool) -> typing.Dict[str, typing.Any]:
+    def _get_toml_from_file(toml_path: str, found_file_error: bool) -> t.Dict[str, t.Any]:
         """_get_toml_from_file.
 
         :param toml_path:
@@ -67,7 +67,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
             else:
                 raise
 
-    def _get_by_path(self, path: str, separator: str) -> typing.Any:
+    def _get_by_path(self, path: str, separator: str) -> t.Any:
         """Retrieve value from a dictionary using a list of keys.
 
         :param path: string with separated keys
@@ -85,7 +85,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
                 dict_local = dict_local[key]
         return dict_local
 
-    def _get_by_key(self, key: str) -> typing.Any:
+    def _get_by_key(self, key: str) -> t.Any:
         """Retrieve value from a dictionary using a key.
 
         :param key: key from json
@@ -96,9 +96,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         else:
             return None
 
-    def get(
-        self, key: str, path_mode: bool | None = None, separator: str = None, **kwargs: typing.Any
-    ) -> typing.Any | None:
+    def get(self, key: str, path_mode: bool | None = None, separator: str = None, **kwargs: t.Any) -> t.Any | None:
         """Get value from json.
 
         :param key: key or path for search
@@ -113,7 +111,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> typing.List[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: t.Any) -> t.List[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -127,7 +125,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> t.Dict[str, t.Any]:
         """Retrieve data as dict."""
 
         return self._toml

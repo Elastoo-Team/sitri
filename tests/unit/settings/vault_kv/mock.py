@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import hvac
 
@@ -8,32 +8,32 @@ import hvac
 class VaultClientMock:
     """VaultClientMock."""
 
-    _env: typing.Dict[str, typing.Any] = {}
+    _env: t.Dict[str, t.Any] = {}
 
-    def read_secret(self, mount_point: str, path: str) -> typing.Any | None:
+    def read_secret(self, mount_point: str, path: str) -> t.Any | None:
         """read_secret.
 
         :param mount_point:
         :type mount_point: str
         :param path:
         :type path: str
-        :rtype: typing.Any | None
+        :rtype: t.Any | None
         """
 
         return self._env.get(mount_point, {}).get(path)
 
-    def __instancecheck__(self, instance: typing.Any) -> bool:
+    def __instancecheck__(self, instance: t.Any) -> bool:
         """__instancecheck__.
 
         :param instance:
         """
         return isinstance(instance, hvac.Client)
 
-    def __getattribute__(self, item: str) -> typing.Any:
+    def __getattribute__(self, item: str) -> t.Any:
         """__getattribute__.
 
         :param item:
-        :rtype: typing.Any
+        :rtype: t.Any
         """
         if item in ("secrets", "kv", "v1"):
             return self

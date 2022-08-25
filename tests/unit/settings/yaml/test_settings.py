@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable
+import typing as t
 
 import pytest
 from pydantic.env_settings import SettingsError
@@ -20,12 +20,12 @@ def test_metadata(yaml_settings_empty: YamlSettings) -> None:
 
 
 def test_get_variable(
-    monkeypatch: Any,
+    monkeypatch: t.Any,
     yaml_config: YamlConfigProvider,
-    yaml_settings: Callable[[YamlConfigProvider], YamlSettings],
-    yaml_settings_raise: Callable[[YamlConfigProvider], YamlSettings],
-    yaml_settings_complex: Callable[[YamlConfigProvider], YamlSettings],
-    yaml_settings_complex_raise: Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings: t.Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_raise: t.Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_complex: t.Callable[[YamlConfigProvider], YamlSettings],
+    yaml_settings_complex_raise: t.Callable[[YamlConfigProvider], YamlSettings],
 ) -> None:
     """test_get_variable.
 

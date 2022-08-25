@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import typing as t
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Callable, Dict, Type
 
 from pydantic import BaseConfig as PydanticBaseConfig
 from pydantic import BaseSettings as PydanticBaseSettings
@@ -15,13 +15,13 @@ from sitri.providers.base import ConfigProvider
 class BaseConfig(PydanticBaseConfig):
     """BaseConfig."""
 
-    provider: Type[ConfigProvider] | ConfigProvider
+    provider: t.Type[ConfigProvider] | ConfigProvider
 
 
 class BaseLocalModeConfig(BaseConfig):
     """BaseLocalModeConfig."""
 
-    provider: Type[ConfigProvider] | ConfigProvider
+    provider: t.Type[ConfigProvider] | ConfigProvider
 
     local_mode: bool | None
 
@@ -29,16 +29,16 @@ class BaseLocalModeConfig(BaseConfig):
 class BaseSettings(ABC, PydanticBaseSettings):
     """BaseSettings."""
 
-    def fill(self, call: Callable[[Any], Any], *args: Any, **kwargs: Any) -> Any:
+    def fill(self, call: t.Callable[[t.Any], t.Any], *args: t.Any, **kwargs: t.Any) -> t.Any:
         """fill.
 
         :param call:
-        :type call: Callable
+        :type call: t.Callable
         """
         data = self.dict()
         return call(**data)
 
-    def _build_complex_value(self, value: str | bytes | bytearray, path: str) -> Any:
+    def _build_complex_value(self, value: str | bytes | bytearray, path: str) -> t.Any:
         """_build_complex_value.
 
         :param value:
@@ -56,16 +56,16 @@ class BaseSettings(ABC, PydanticBaseSettings):
 
     def _build_values(
         self,
-        init_kwargs: Dict[str, Any],
+        init_kwargs: t.Dict[str, t.Any],
         _env_file: Path | str | None = None,
         _env_file_encoding: str | None = None,
         _env_nested_delimiter: str | None = None,
         _secrets_dir: Path | str | None = None,
-    ) -> Dict[str, Any]:
+    ) -> t.Dict[str, t.Any]:
         """_build_values.
 
         :param init_kwargs:
-        :type init_kwargs: Dict[str, Any]
+        :type init_kwargs: t.Dict[str, t.Any]
         :param _env_file:
         :type _env_file: Union[Path, str, None]
         :param _env_file_encoding:
@@ -74,7 +74,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
         :type _env_nested_delimiter: Optional[str]
         :param _secrets_dir:
         :type _secrets_dir: Union[Path, str, None]
-        :rtype: Dict[str, Any]
+        :rtype: t.Dict[str, t.Any]
         """
         return deep_update(
             deep_update(self._build_default()),
@@ -82,16 +82,16 @@ class BaseSettings(ABC, PydanticBaseSettings):
         )
 
     @abstractmethod
-    def _build_default(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+    def _build_default(self, *args: t.Any, **kwargs: t.Any) -> t.Dict[str, t.Any]:
         """_build_default.
 
         :param args:
         :param kwargs:
-        :rtype: Dict[str, Any]
+        :rtype: t.Dict[str, t.Any]
         """
         pass
 
-    __config__: Type[BaseConfig]
+    __config__: t.Type[BaseConfig]
 
 
 class BaseLocalModeSettings(BaseSettings):
@@ -99,35 +99,35 @@ class BaseLocalModeSettings(BaseSettings):
 
     @property
     @abstractmethod
-    def local_provider(self) -> Type[ConfigProvider] | ConfigProvider:
+    def local_provider(self) -> t.Type[ConfigProvider] | ConfigProvider:
         """local_provider.
 
-        :rtype: Union[Type[ConfigProvider], ConfigProvider]
+        :rtype: Union[t.Type[ConfigProvider], ConfigProvider]
         """
         pass
 
     @abstractmethod
-    def _build_local(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+    def _build_local(self, *args: t.Any, **kwargs: t.Any) -> t.Dict[str, t.Any]:
         """_build_local.
 
         :param args:
         :param kwargs:
-        :rtype: Dict[str, Any]
+        :rtype: t.Dict[str, t.Any]
         """
         pass
 
     def _build_values(
         self,
-        init_kwargs: Dict[str, Any],
+        init_kwargs: t.Dict[str, t.Any],
         _env_file: Path | str | None = None,
         _env_file_encoding: str | None = None,
         _env_nested_delimiter: str | None = None,
         _secrets_dir: Path | str | None = None,
-    ) -> Dict[str, Any]:
+    ) -> t.Dict[str, t.Any]:
         """_build_values.
 
         :param init_kwargs:
-        :type init_kwargs: Dict[str, Any]
+        :type init_kwargs: t.Dict[str, t.Any]
         :param _env_file:
         :type _env_file: Union[Path, str, None]
         :param _env_file_encoding:
@@ -136,7 +136,7 @@ class BaseLocalModeSettings(BaseSettings):
         :type _env_nested_delimiter: Optional[str]
         :param _secrets_dir:
         :type _secrets_dir: Union[Path, str, None]
-        :rtype: Dict[str, Any]
+        :rtype: t.Dict[str, t.Any]
         """
         if not self.__config__.local_mode:
             return deep_update(
@@ -146,4 +146,4 @@ class BaseLocalModeSettings(BaseSettings):
         else:
             return deep_update(deep_update(self._build_local()), init_kwargs)
 
-    __config__: Type[BaseLocalModeConfig]
+    __config__: t.Type[BaseLocalModeConfig]

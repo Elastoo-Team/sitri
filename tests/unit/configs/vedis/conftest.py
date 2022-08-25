@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing
+import typing as t
 
 import pytest
 
@@ -10,16 +10,16 @@ from .mock import VedisMock
 
 
 @pytest.fixture(scope="module")
-def vedis_connection() -> typing.Callable[[], VedisMock]:
+def vedis_connection() -> t.Callable[[], VedisMock]:
     """vedis_connection.
 
-    :rtype: typing.Callable
+    :rtype: t.Callable
     """
     return lambda: VedisMock()
 
 
 @pytest.fixture(scope="module")
-def vedis_config(vedis_connection: typing.Callable[[], VedisMock]) -> VedisConfigProvider:
+def vedis_config(vedis_connection: t.Callable[[], VedisMock]) -> VedisConfigProvider:
     """vedis_config.
 
     :param vedis_connection:

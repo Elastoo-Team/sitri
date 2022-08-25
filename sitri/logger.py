@@ -7,7 +7,7 @@ def get_default_logger(name: str | None = None) -> logging.Logger:
     """get_default_logger.
 
     :param name:
-    :type name: typing.Optional[str]
+    :type name: t.Optional[str]
     :rtype: logging.Logger
     """
     logging.basicConfig(

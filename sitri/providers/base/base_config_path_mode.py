@@ -6,7 +6,7 @@
 
 from __future__ import annotations
 
-import typing
+import typing as t
 from abc import ABC, abstractmethod
 
 
@@ -19,13 +19,13 @@ class PathModeStateProvider(ABC):
         """_get_path_mode_state.
 
         :param path_mode_param:
-        :type path_mode_param: typing.Optional[bool]
+        :type path_mode_param: t.Optional[bool]
         :rtype: bool
         """
         return path_mode_param if path_mode_param is not None else self._default_path_mode_state
 
     @abstractmethod
-    def get(self, key: str, path_mode: bool | None = None, **kwargs: typing.Any) -> typing.Any | None:
+    def get(self, key: str, path_mode: bool | None = None, **kwargs: t.Any) -> t.Any | None:
         """Get value from storage.
 
         :param key: key for get value
@@ -34,14 +34,14 @@ class PathModeStateProvider(ABC):
         """
 
     @abstractmethod
-    def _get_by_path(self, path: str, separator: str) -> typing.Any:
+    def _get_by_path(self, path: str, separator: str) -> t.Any:
         """Retrieve value from a dictionary using a list of keys.
 
         :param path: string with separated keys
         """
 
     @abstractmethod
-    def _get_by_key(self, key: str) -> typing.Any:
+    def _get_by_key(self, key: str) -> t.Any:
         """Retrieve value from a dictionary using a key.
 
         :param key: key from json
@@ -49,7 +49,7 @@ class PathModeStateProvider(ABC):
 
     @property
     @abstractmethod
-    def data(self) -> typing.Dict[str, typing.Any]:
+    def data(self) -> t.Dict[str, t.Any]:
         """Retrieve data as dict.
 
         :param key: key from json
