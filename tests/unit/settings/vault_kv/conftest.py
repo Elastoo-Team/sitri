@@ -34,7 +34,7 @@ def vault_kv_config(vault_connection: typing.Callable[[], hvac.Client]) -> Vault
 
 
 @pytest.fixture(scope="module")
-def vault_kv_settings_empty(vault_kv_config: VaultKVConfigProvider) -> type[T]:
+def vault_kv_settings_empty(vault_kv_config: VaultKVConfigProvider) -> typing.Type[T]:
     """vault_kv_settings_empty.
 
     :param vault_kv_config:
@@ -52,10 +52,10 @@ def vault_kv_settings_empty(vault_kv_config: VaultKVConfigProvider) -> type[T]:
 
 
 @pytest.fixture(scope="module")
-def vault_kv_settings() -> typing.Callable[[VaultKVConfigProvider], type[T]]:
+def vault_kv_settings() -> typing.Callable[[VaultKVConfigProvider], typing.Type[T]]:
     """vault_kv_settings."""
 
-    def wrapper(provider_instance: VaultKVConfigProvider) -> type[T]:
+    def wrapper(provider_instance: VaultKVConfigProvider) -> typing.Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -78,10 +78,10 @@ def vault_kv_settings() -> typing.Callable[[VaultKVConfigProvider], type[T]]:
 
 
 @pytest.fixture(scope="module")
-def vault_kv_settings_vault_raise() -> typing.Callable[[VaultKVConfigProvider], type[T]]:
+def vault_kv_settings_vault_raise() -> typing.Callable[[VaultKVConfigProvider], typing.Type[T]]:
     """vault_kv_settings_vault_raise."""
 
-    def wrapper(provider_instance: VaultKVConfigProvider) -> type[T]:
+    def wrapper(provider_instance: VaultKVConfigProvider) -> typing.Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -103,10 +103,10 @@ def vault_kv_settings_vault_raise() -> typing.Callable[[VaultKVConfigProvider], 
 
 
 @pytest.fixture(scope="module")
-def vault_kv_settings_complex() -> typing.Callable[[VaultKVConfigProvider], type[T]]:
+def vault_kv_settings_complex() -> typing.Callable[[VaultKVConfigProvider], typing.Type[T]]:
     """vault_kv_settings_complex."""
 
-    def wrapper(provider_instance: VaultKVConfigProvider) -> type[T]:
+    def wrapper(provider_instance: VaultKVConfigProvider) -> typing.Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -135,10 +135,10 @@ def vault_kv_settings_complex() -> typing.Callable[[VaultKVConfigProvider], type
 
 
 @pytest.fixture(scope="module")
-def vault_kv_settings_complex_raise() -> typing.Callable[[VaultKVConfigProvider], type[T]]:
+def vault_kv_settings_complex_raise() -> typing.Callable[[VaultKVConfigProvider], typing.Type[T]]:
     """vault_kv_settings_complex_raise."""
 
-    def wrapper(provider_instance: VaultKVConfigProvider) -> type[T]:
+    def wrapper(provider_instance: VaultKVConfigProvider) -> typing.Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -176,13 +176,13 @@ def path_to_json() -> str:
 
 
 @pytest.fixture(scope="module")
-def vault_kv_local_mode(path_to_json: str) -> typing.Callable[[VaultKVConfigProvider], type[T]]:
+def vault_kv_local_mode(path_to_json: str) -> typing.Callable[[VaultKVConfigProvider], typing.Type[T]]:
     """vault_kv_local_mode.
 
     :param path_to_json:
     """
 
-    def wrapper(provider_instance: VaultKVConfigProvider) -> type[T]:
+    def wrapper(provider_instance: VaultKVConfigProvider) -> typing.Type[T]:
         """wrapper.
 
         :param provider_instance:

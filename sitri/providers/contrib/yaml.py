@@ -114,7 +114,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> list[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> typing.List[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -128,7 +128,7 @@ class YamlConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> dict[str, typing.Any]:
+    def data(self) -> typing.Dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._yaml

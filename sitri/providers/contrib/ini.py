@@ -27,7 +27,7 @@ class IniConfigProvider(ConfigProvider):
         self._sections = None
 
     @property
-    def sections(self) -> list[str]:
+    def sections(self) -> typing.List[str]:
         """sections."""
         if not self._sections:
             self._sections = list(self.configparser.keys())  # type: ignore
@@ -45,7 +45,7 @@ class IniConfigProvider(ConfigProvider):
 
         return self.configparser[section].get(key)
 
-    def keys(self, section: str, **kwargs: typing.Any) -> list[str]:  # type: ignore
+    def keys(self, section: str, **kwargs: typing.Any) -> typing.List[str]:  # type: ignore
         """Get keys of section.
 
         :param section: section of ini file

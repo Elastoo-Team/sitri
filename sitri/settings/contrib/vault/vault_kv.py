@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict
 
 from hvac.exceptions import VaultError
 from pydantic import Field
@@ -22,7 +22,7 @@ class VaultKVSettings(BaseLocalModeSettings):
     """VaultKVSettings."""
 
     @property
-    def _local_provider_args(self) -> VaultKVLocalProviderArgs | dict[str, Any]:
+    def _local_provider_args(self) -> VaultKVLocalProviderArgs | Dict[str, Any]:
         """_local_provider_args."""
         args = self.__config__.local_provider_args
         if args:
@@ -51,9 +51,9 @@ class VaultKVSettings(BaseLocalModeSettings):
 
         return self.__config__.local_provider
 
-    def _build_local(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+    def _build_local(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """_build_local."""
-        d: dict[str, str | None] = {}
+        d: Dict[str, str | None] = {}
 
         for field in self.__fields__.values():
             value: str | None = None
@@ -79,9 +79,9 @@ class VaultKVSettings(BaseLocalModeSettings):
 
         return d
 
-    def _build_default(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+    def _build_default(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """_build_default."""
-        d: dict[str, str | None] = {}
+        d: Dict[str, str | None] = {}
 
         provider = self.__config__.provider
 
@@ -129,7 +129,7 @@ class VaultKVSettings(BaseLocalModeSettings):
         local_mode: bool = False
 
         local_mode_path_prefix: str | None = None
-        local_provider_args: VaultKVLocalProviderArgs | dict[str, Any] | None
+        local_provider_args: VaultKVLocalProviderArgs | Dict[str, Any] | None
 
         local_provider: JsonConfigProvider | None = None
 

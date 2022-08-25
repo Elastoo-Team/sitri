@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Dict, Type
 
 from pydantic import BaseConfig as PydanticBaseConfig
 from pydantic import BaseSettings as PydanticBaseSettings
@@ -15,13 +15,13 @@ from sitri.providers.base import ConfigProvider
 class BaseConfig(PydanticBaseConfig):
     """BaseConfig."""
 
-    provider: type[ConfigProvider] | ConfigProvider
+    provider: Type[ConfigProvider] | ConfigProvider
 
 
 class BaseLocalModeConfig(BaseConfig):
     """BaseLocalModeConfig."""
 
-    provider: type[ConfigProvider] | ConfigProvider
+    provider: Type[ConfigProvider] | ConfigProvider
 
     local_mode: bool | None
 
@@ -56,12 +56,12 @@ class BaseSettings(ABC, PydanticBaseSettings):
 
     def _build_values(
         self,
-        init_kwargs: dict[str, Any],
+        init_kwargs: Dict[str, Any],
         _env_file: Path | str | None = None,
         _env_file_encoding: str | None = None,
         _env_nested_delimiter: str | None = None,
         _secrets_dir: Path | str | None = None,
-    ) -> dict[str, Any]:
+    ) -> Dict[str, Any]:
         """_build_values.
 
         :param init_kwargs:
@@ -82,7 +82,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
         )
 
     @abstractmethod
-    def _build_default(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+    def _build_default(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """_build_default.
 
         :param args:
@@ -91,7 +91,7 @@ class BaseSettings(ABC, PydanticBaseSettings):
         """
         pass
 
-    __config__: type[BaseConfig]
+    __config__: Type[BaseConfig]
 
 
 class BaseLocalModeSettings(BaseSettings):
@@ -99,7 +99,7 @@ class BaseLocalModeSettings(BaseSettings):
 
     @property
     @abstractmethod
-    def local_provider(self) -> type[ConfigProvider] | ConfigProvider:
+    def local_provider(self) -> Type[ConfigProvider] | ConfigProvider:
         """local_provider.
 
         :rtype: Union[Type[ConfigProvider], ConfigProvider]
@@ -107,7 +107,7 @@ class BaseLocalModeSettings(BaseSettings):
         pass
 
     @abstractmethod
-    def _build_local(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+    def _build_local(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """_build_local.
 
         :param args:
@@ -118,12 +118,12 @@ class BaseLocalModeSettings(BaseSettings):
 
     def _build_values(
         self,
-        init_kwargs: dict[str, Any],
+        init_kwargs: Dict[str, Any],
         _env_file: Path | str | None = None,
         _env_file_encoding: str | None = None,
         _env_nested_delimiter: str | None = None,
         _secrets_dir: Path | str | None = None,
-    ) -> dict[str, Any]:
+    ) -> Dict[str, Any]:
         """_build_values.
 
         :param init_kwargs:
@@ -146,4 +146,4 @@ class BaseLocalModeSettings(BaseSettings):
         else:
             return deep_update(deep_update(self._build_local()), init_kwargs)
 
-    __config__: type[BaseLocalModeConfig]
+    __config__: Type[BaseLocalModeConfig]

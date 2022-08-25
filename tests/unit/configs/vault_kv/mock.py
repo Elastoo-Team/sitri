@@ -8,7 +8,7 @@ import hvac
 class VaultClientMock:
     """VaultClientMock."""
 
-    _env: dict[str, typing.Any] = {}
+    _env: typing.Dict[str, typing.Any] = {}
 
     def read_secret(self, mount_point: str, path: str) -> typing.Any | None:
         """read_secret.

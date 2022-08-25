@@ -69,7 +69,9 @@ class VaultKVConfigProvider(ConfigProvider):
 
         return response["data"].get(key)
 
-    def keys(self, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any) -> list[str]:
+    def keys(
+        self, mount_point: str | None = None, secret_path: str | None = None, **kwargs: typing.Any
+    ) -> typing.List[str]:
         """keys.
 
         :param mount_point:

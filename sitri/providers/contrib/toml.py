@@ -47,7 +47,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         self._default_path_mode_state = default_path_mode_state
 
     @staticmethod
-    def _get_toml_from_file(toml_path: str, found_file_error: bool) -> dict[str, typing.Any]:
+    def _get_toml_from_file(toml_path: str, found_file_error: bool) -> typing.Dict[str, typing.Any]:
         """_get_toml_from_file.
 
         :param toml_path:
@@ -113,7 +113,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
 
         return self._get_by_key(key)
 
-    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> list[str]:
+    def keys(self, path_mode: bool = False, separator: str = None, **kwargs: typing.Any) -> typing.List[str]:
         """Keys in json.
 
         :param path_mode: [future] path mode for keys list
@@ -127,7 +127,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
             raise NotImplementedError("Path-mode not implemented!")
 
     @property
-    def data(self) -> dict[str, typing.Any]:
+    def data(self) -> typing.Dict[str, typing.Any]:
         """Retrieve data as dict."""
 
         return self._toml

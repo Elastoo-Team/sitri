@@ -69,7 +69,7 @@ class RedisConfigProvider(ConfigProvider):
 
         return None
 
-    def keys(self, **kwargs: typing.Any) -> list[str]:
+    def keys(self, **kwargs: typing.Any) -> typing.List[str]:
         """keys.
 
         :param kwargs:

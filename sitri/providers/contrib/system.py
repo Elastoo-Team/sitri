@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any
+from typing import Any, List
 
 from sitri.providers.base import ConfigProvider
 
@@ -48,7 +48,7 @@ class SystemConfigProvider(ConfigProvider):
         """
         return os.getenv(self.prefixize(key), None)
 
-    def keys(self, **kwargs: Any) -> list[str]:
+    def keys(self, **kwargs: Any) -> List[str]:
         """Get keys list with prefix from system env."""
         var_list = []
 

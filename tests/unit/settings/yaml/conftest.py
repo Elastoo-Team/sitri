@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, TypeVar
+from typing import Callable, Type, TypeVar
 
 import pytest
 from pydantic import BaseModel, Field
@@ -31,7 +31,7 @@ def yaml_config(path_to_yaml: str) -> YamlConfigProvider:
 
 
 @pytest.fixture(scope="module")
-def yaml_settings_empty(yaml_config: YamlConfigProvider) -> type[T]:
+def yaml_settings_empty(yaml_config: YamlConfigProvider) -> Type[T]:
     """yaml_settings_empty.
 
     :param yaml_config:
@@ -49,10 +49,10 @@ def yaml_settings_empty(yaml_config: YamlConfigProvider) -> type[T]:
 
 
 @pytest.fixture(scope="module")
-def yaml_settings() -> Callable[[YamlConfigProvider], type[T]]:
+def yaml_settings() -> Callable[[YamlConfigProvider], Type[T]]:
     """yaml_settings."""
 
-    def wrapper(provider_instance: YamlConfigProvider) -> type[T]:
+    def wrapper(provider_instance: YamlConfigProvider) -> Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -76,10 +76,10 @@ def yaml_settings() -> Callable[[YamlConfigProvider], type[T]]:
 
 
 @pytest.fixture(scope="module")
-def yaml_settings_raise() -> Callable[[YamlConfigProvider], type[T]]:
+def yaml_settings_raise() -> Callable[[YamlConfigProvider], Type[T]]:
     """yaml_settings_raise."""
 
-    def wrapper(provider_instance: YamlConfigProvider) -> type[T]:
+    def wrapper(provider_instance: YamlConfigProvider) -> Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -101,10 +101,10 @@ def yaml_settings_raise() -> Callable[[YamlConfigProvider], type[T]]:
 
 
 @pytest.fixture(scope="module")
-def yaml_settings_complex() -> Callable[[YamlConfigProvider], type[T]]:
+def yaml_settings_complex() -> Callable[[YamlConfigProvider], Type[T]]:
     """yaml_settings_complex."""
 
-    def wrapper(provider_instance: YamlConfigProvider) -> type[T]:
+    def wrapper(provider_instance: YamlConfigProvider) -> Type[T]:
         """wrapper.
 
         :param provider_instance:
@@ -133,10 +133,10 @@ def yaml_settings_complex() -> Callable[[YamlConfigProvider], type[T]]:
 
 
 @pytest.fixture(scope="module")
-def yaml_settings_complex_raise() -> Callable[[YamlConfigProvider], type[T]]:
+def yaml_settings_complex_raise() -> Callable[[YamlConfigProvider], Type[T]]:
     """yaml_settings_complex_raise."""
 
-    def wrapper(provider_instance: YamlConfigProvider) -> type[T]:
+    def wrapper(provider_instance: YamlConfigProvider) -> Type[T]:
         """wrapper.
 
         :param provider_instance:

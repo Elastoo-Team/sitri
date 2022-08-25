@@ -37,7 +37,7 @@ class ConfigProvider(ABC):
         """
 
     @abstractmethod
-    def keys(self, **kwargs: typing.Any) -> list[str]:
+    def keys(self, **kwargs: typing.Any) -> typing.List[str]:
         """Get keys list in storage."""
 
     def fill(self, call: typing.Callable[[typing.Any], typing.Any], **kwargs: typing.Any) -> typing.Any:
@@ -59,7 +59,7 @@ class ConfigProviderManager:
     """Manager for children ConfigProvider classes."""
 
     @staticmethod
-    def get_by_code(code: str) -> type[ConfigProvider] | None:
+    def get_by_code(code: str) -> typing.Type[ConfigProvider] | None:
         """Get config provider by provider_code.
 
         :param code: provider_code for search config provider
