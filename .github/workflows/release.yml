@@ -22,10 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel attrs codecov pdm pre-commit
         pdm install --group :all
+        eval $(pdm venv activate)
     - name: Tests
       run: |
-        pre-commit run -a
-        pytest
+        pdm run pre-commit run -a
+        pdm run pytest
 
   deploy:
     runs-on: ubuntu-latest
