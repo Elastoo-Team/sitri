@@ -8,7 +8,7 @@ jobs:
   tests-n-lints:
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel attrs codecov pdm
+        pip install setuptools wheel attrs codecov pdm pre-commit
         pdm install --group :all
     - name: Tests
       run: |
