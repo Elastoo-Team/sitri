@@ -1,0 +1,70 @@
+site_name: Sitri
+site_url: https://sitri.rtfd.io/
+
+repo_name: egnod/sitri
+repo_url: https://github.com/egnod/sitri
+edit_uri: ''
+
+theme:
+  name: material
+  palette:
+
+    # Palette toggle for automatic mode
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+
+    # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+
+    # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to system preference
+
+  logo: logo.svg
+
+plugins:
+- mkdocstrings
+- search:
+    indexing: 'full'
+
+
+markdown_extensions:
+- pymdownx.highlight:
+    anchor_linenums: true
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.superfences
+- toc:
+    permalink: true
+
+nav:
+- "Overview": index.md
+- "Getting Started":
+  - "Overview": getting_started/index.md
+  - "Providers":
+    - "INI": getting_started/providers/ini.md
+    - "JSON": getting_started/providers/json.md
+    - "Redis": getting_started/providers/redis.md
+    - "Vedis": getting_started/providers/vedis.md
+    - "YAML": getting_started/providers/yaml.md
+    - "Vault":
+      - "KV": getting_started/providers/vault_kv.md
+- "Advanced Usage":
+  - "Strategy":
+    - "Single": advance/strategy/single.md
+    - "Index Priority": advance/strategy/index_priority.md
+  - "Settings":
+    - "Vault":
+      - "KV": advance/settings/vault/vault_kv.md
+    - "Examples":
+      - "Local Mode": advance/settings/examples/local_mode.md
+  - "Logging": advance/logging.md

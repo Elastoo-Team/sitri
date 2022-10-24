@@ -43,6 +43,9 @@ dev = [
     "pre-commit==2.20.0",
     "commitizen==2.29.5",
     "doq==0.9.1",
+    "mkdocs==1.4.1",
+    "mkdocs-material==8.5.7",
+    "mkdocstrings[python]==0.19.0"
 ]
 
 [tool.pdm.build]
