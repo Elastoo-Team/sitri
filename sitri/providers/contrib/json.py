@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import typing as t
+from pathlib import Path
 
 try:
     import orjson as json
@@ -54,8 +55,7 @@ class JsonConfigProvider(PathModeStateProvider, ConfigProvider):
         :type found_file_error: bool
         """
         try:
-            with open(os.path.abspath(json_path)) as f:
-                data = json.load(f)
+            data = json.loads(Path(os.path.abspath(json_path)).read_text())
 
             return data
 
