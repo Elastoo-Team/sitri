@@ -35,7 +35,7 @@ pip3 install sitri[all]
     4. hvac - for HashiCorp Vault provider.
     5. vedis - for vedis provider.
     6. pyyaml - for YAML provider.
-    7. ujson - speed-up your json provider (optional).
+    7. orjson - speed-up your json provider (optional).
 
 
 # Basics with SystemProvider
