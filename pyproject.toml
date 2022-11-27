@@ -1,6 +1,6 @@
 [project]
 name = "sitri"
-version = "2.2.7"
+version = "2.2.8"
 description = "Library for one endpoint config managment"
 authors = [
     {name = "Alexander Lavrov", email = "admin@egnod.dev"},
@@ -125,7 +125,7 @@ disable_error_code = ["valid-type", "call-arg"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2.2.7"
+version = "2.2.8"
 tag_format = "$major.$minor.$patch"
 version_files = [
     "sitri/__init__.py",
