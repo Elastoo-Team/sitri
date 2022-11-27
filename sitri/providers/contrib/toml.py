@@ -3,12 +3,9 @@ from __future__ import annotations
 import os
 import typing as t
 
-from sitri.providers.base import ConfigProvider, PathModeStateProvider
+import tomlkit as toml
 
-try:
-    import tomllib as toml
-except ImportError:
-    import toml
+from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
 
 class TomlConfigProvider(PathModeStateProvider, ConfigProvider):

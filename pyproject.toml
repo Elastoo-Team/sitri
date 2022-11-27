@@ -22,6 +22,7 @@ pyyaml = ["pyyaml>=6.0"]
 hvac = ["hvac>=0.11.2"]
 settings = ["pydantic[dotenv,email]>=1.9.1"]
 orjson = ["orjson>=3.8.1"]
+toml = ["tomlkit>=0.11.6"]
 all = [
     "redis>=4.3.4",
     "vedis>=0.7.1",

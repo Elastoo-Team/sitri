@@ -1,14 +1,9 @@
 from __future__ import annotations
 
 import pytest
-import toml
+import tomlkit as toml
 
 from sitri.providers.contrib.toml import TomlConfigProvider
-
-try:
-    pass
-except ImportError:
-    pass
 
 
 @pytest.fixture(scope="module")
