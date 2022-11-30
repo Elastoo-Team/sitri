@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pytest
-import tomlkit as toml
+import tomli_w
 
 from sitri.providers.contrib.toml import TomlConfigProvider
 
@@ -14,7 +14,7 @@ def toml_data() -> str:
     """
     data = {"test": {"test_key1": "1", "test_key2": "2", "test_key3": "3"}}
 
-    return toml.dumps(data)
+    return tomli_w.dumps(data)
 
 
 @pytest.fixture(scope="module")

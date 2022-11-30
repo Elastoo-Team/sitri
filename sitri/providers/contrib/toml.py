@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import typing as t
 
-import tomlkit as toml
+import tomli as toml
 
 from sitri.providers.base import ConfigProvider, PathModeStateProvider
 
@@ -51,7 +51,7 @@ class TomlConfigProvider(PathModeStateProvider, ConfigProvider):
         :type found_file_error: bool
         """
         try:
-            with open(os.path.abspath(toml_path)) as f:
+            with open(os.path.abspath(toml_path), "rb") as f:
                 data = toml.load(f)
 
             return data
