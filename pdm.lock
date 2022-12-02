@@ -137,12 +137,6 @@ version = "0.3.5"
 summary = "Distribution utilities"
 
 [[package]]
-name = "dnspython"
-version = "2.2.1"
-requires_python = ">=3.6,<4.0"
-summary = "DNS toolkit"
-
-[[package]]
 name = "doq"
 version = "0.9.1"
 summary = "Docstring generator"
@@ -150,16 +144,6 @@ dependencies = [
     "jinja2",
     "parso",
     "toml",
-]
-
-[[package]]
-name = "email-validator"
-version = "1.2.1"
-requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-summary = "A robust email syntax and deliverability validation library."
-dependencies = [
-    "dnspython>=1.15.0",
-    "idna>=2.0.0",
 ]
 
 [[package]]
@@ -428,18 +412,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pydantic"
-version = "1.9.2"
-extras = ["dotenv", "email"]
-requires_python = ">=3.6.1"
-summary = "Data validation and settings management using python type hints"
-dependencies = [
-    "email-validator>=1.0.3",
-    "pydantic==1.9.2",
-    "python-dotenv>=0.10.4",
-]
-
-[[package]]
 name = "pygments"
 version = "2.13.0"
 requires_python = ">=3.6"
@@ -521,12 +493,6 @@ summary = "Extensions to the standard Python datetime module"
 dependencies = [
     "six>=1.5",
 ]
-
-[[package]]
-name = "python-dotenv"
-version = "0.20.0"
-requires_python = ">=3.5"
-summary = "Read key-value pairs from a .env file and set them as environment variables"
 
 [[package]]
 name = "pyyaml"
@@ -675,7 +641,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:d733578d911b7a6bce2c5dd1bfd26b0a5afa81013f6b9c8f18b07d526bb85c6e"
+content_hash = "sha256:f1d95a65917cace165df9c64655c8315b5a75d728553d298ac82551afa3ac815"
 
 [metadata.files]
 "argcomplete 1.12.3" = [
@@ -822,16 +788,8 @@ content_hash = "sha256:d733578d911b7a6bce2c5dd1bfd26b0a5afa81013f6b9c8f18b07d526
     {url = "https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz", hash = "sha256:a7f75737c70be3b25e2bee06288cec4e4c221de18455b2dd037fe2a795cab2fe"},
     {url = "https://files.pythonhosted.org/packages/d5/94/db0229ff741c8ff2ff0ac5a8a58d142bd0f81c810701ad9eae2c4c718ede/distlib-0.3.5-py2.py3-none-any.whl", hash = "sha256:b710088c59f06338ca514800ad795a132da19fda270e3ce4affc74abf955a26c"},
 ]
-"dnspython 2.2.1" = [
-    {url = "https://files.pythonhosted.org/packages/99/fb/e7cd35bba24295ad41abfdff30f6b4c271fd6ac70d20132fa503c3e768e0/dnspython-2.2.1.tar.gz", hash = "sha256:0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e"},
-    {url = "https://files.pythonhosted.org/packages/9b/ed/28fb14146c7033ba0e89decd92a4fa16b0b69b84471e2deab3cc4337cc35/dnspython-2.2.1-py3-none-any.whl", hash = "sha256:a851e51367fb93e9e1361732c1d60dab63eff98712e503ea7d92e6eccb109b4f"},
-]
 "doq 0.9.1" = [
     {url = "https://files.pythonhosted.org/packages/b0/ba/919a02e73abf2ca1c7924ebed3d8c8f978b022a36dd2a71f296ae3b49c21/doq-0.9.1.tar.gz", hash = "sha256:baccc348ddf967c8bf32bfdf54da8326e1dc74f37865e2c176012ad0bc7eea1e"},
-]
-"email-validator 1.2.1" = [
-    {url = "https://files.pythonhosted.org/packages/58/be/886a3accc1082c5205e253bebf15a2207b3a5b0b23a5b110d968ea20a94e/email_validator-1.2.1.tar.gz", hash = "sha256:6757aea012d40516357c0ac2b1a4c31219ab2f899d26831334c5d069e8b6c3d8"},
-    {url = "https://files.pythonhosted.org/packages/6b/d2/c587a9cd8473041fd138b213fa12581a4e039d260cf24dfa07f5c9de78e4/email_validator-1.2.1-py2.py3-none-any.whl", hash = "sha256:c8589e691cf73eb99eed8d10ce0e9cbb05a0886ba920c8bcb7c82873f4c5789c"},
 ]
 "filelock 3.8.0" = [
     {url = "https://files.pythonhosted.org/packages/94/b3/ff2845971788613e646e667043fdb5f128e2e540aefa09a3c55be8290d6d/filelock-3.8.0-py3-none-any.whl", hash = "sha256:617eb4e5eedc82fc5f47b6d61e4d11cb837c56cb4544e39081099fa17ad109d4"},
@@ -1102,10 +1060,6 @@ content_hash = "sha256:d733578d911b7a6bce2c5dd1bfd26b0a5afa81013f6b9c8f18b07d526
 "python-dateutil 2.8.2" = [
     {url = "https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
     {url = "https://files.pythonhosted.org/packages/4c/c4/13b4776ea2d76c115c1d1b84579f3764ee6d57204f6be27119f13a61d0a9/python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
-]
-"python-dotenv 0.20.0" = [
-    {url = "https://files.pythonhosted.org/packages/02/ee/43e1c862a3e7259a1f264958eaea144f0a2fac9f175c1659c674c34ea506/python-dotenv-0.20.0.tar.gz", hash = "sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f"},
-    {url = "https://files.pythonhosted.org/packages/30/5f/2e5c564bd86349fe6b82ca840f46acf6f4bb76d79ba9057fce3d3e008864/python_dotenv-0.20.0-py3-none-any.whl", hash = "sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938"},
 ]
 "pyyaml 6.0" = [
     {url = "https://files.pythonhosted.org/packages/02/25/6ba9f6bb50a3d4fbe22c1a02554dc670682a07c8701d1716d19ddea2c940/PyYAML-6.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5"},
