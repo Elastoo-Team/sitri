@@ -51,6 +51,10 @@ class VaultKVConfigProvider(ConfigProvider):
     def _vault_kv(self) -> VaultApiBase:
         return self._vault.secrets.kv.v1 if self._version == 1 else self._vault.secrets.kv.v2
 
+    @property
+    def _read_secret(self) -> t.Callable[[t.Any], t.Any]:
+        return self._vault_kv.read_secret if self._version == 1 else self._vault_kv.read_secret_version
+
     def get(
         self, key: str, mount_point: str | None = None, secret_path: str | None = None, **kwargs: t.Any
     ) -> str | None:
@@ -70,7 +74,7 @@ class VaultKVConfigProvider(ConfigProvider):
             "mount_point": mount_point if mount_point else self._mount_point,
         }
 
-        response = self._vault_kv.read_secret(**request_params)
+        response = self._read_secret(**request_params)
 
         return response["data"].get(key)
 
@@ -89,6 +93,6 @@ class VaultKVConfigProvider(ConfigProvider):
             "mount_point": mount_point if mount_point else self._mount_point,
         }
 
-        response = self._vault_kv.read_secret(**request_params)
+        response = self._read_secret(**request_params)
 
         return list(response["data"].keys())
