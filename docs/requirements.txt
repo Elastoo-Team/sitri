@@ -36,7 +36,7 @@ pluggy==1.0.0
 pre-commit==2.20.0
 prompt-toolkit==3.0.30
 py==1.11.0
-pygments==2.13.0
+pygments==2.15.0
 pymdown-extensions==9.7
 pyparsing==3.0.9
 pytest==6.2.5
